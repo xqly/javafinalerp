@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../plugins/images/favicon.png">
+    <title>原料库日志</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="../../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="../css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="../css/colors/blue-dark.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        <!--
+        var count = 1;
+        var count2 = 1;
+        function add() {
+            var tbl = document.all.ci;
+            var rows = tbl.rows.length;
+            var tr = tbl.insertRow(rows);
+
+            var name = tr.insertCell(0);
+            name.innerHTML = '<input style="width: 70%;" type="text">';
+            var tel = tr.insertCell(1);
+            tel.innerHTML = '<input style="width: 70%;" type="text">';
+            var rdo = tr.insertCell(2);
+            rdo.innerHTML = '<input style="width: 70%;" type="text">';
+            var chk = tr.insertCell(3);
+            chk.innerHTML = '<input style="width: 70%;" type="text">';
+            var four= tr.insertCell(4);
+            four.innerHTML = '<input style="width: 70%;" type="text">';
+            var five= tr.insertCell(5);
+            five.innerHTML = '<input style="width: 70%;" type="text">';
+            var six= tr.insertCell(6);
+            six.innerHTML = '<input style="width: 70%;" type="text">';
+            var del = tr.insertCell(7);
+            del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
+            count++;
+        }
+
+        function add1() {
+            var tbl = document.all.ci2;
+            var rows = tbl.rows.length;
+            var tr = tbl.insertRow(rows);
+
+            var name = tr.insertCell(0);
+            name.innerHTML = '<input style="width: 70%;" type="text">';
+            var tel = tr.insertCell(1);
+            tel.innerHTML = '<input style="width: 70%;" type="text">';
+            var rdo = tr.insertCell(2);
+            rdo.innerHTML = '<input style="width: 70%;" type="text">';
+            var chk = tr.insertCell(3);
+            chk.innerHTML = '<input style="width: 70%;" type="text">';
+            var four= tr.insertCell(4)
+            four.innerHTML = '<input style="width: 70%;" type="text">';
+            var five= tr.insertCell(5)
+            five.innerHTML = '<input style="width: 70%;" type="text">';
+            var six= tr.insertCell(6)
+            six.innerHTML = '<input style="width: 70%;" type="text">';
+            var del = tr.insertCell(7);
+            del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
+            count2++;
+        }
+
+        function del(btn) {
+            var tr = btn.parentElement.parentElement;
+            var tbl = tr.parentElement;
+            tbl.deleteRow(tr.rowIndex-1);
+        }
+
+        //-->
+    </script>
+</head>
+
+<body>
+<!-- Preloader -->
+<div class="preloader">
+    <div class="cssload-speeding-wheel"></div>
+</div>
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <div class="navbar-header">
+            <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse">
+                <i class="fa fa-bars"></i>
+            </a>
+            <div class="top-left-part">
+                <a class="logo" href="index">
+                    <b><img src="../../plugins/images/pixeladmin-logo.png" alt="home" /></b>
+                    <span class="hidden-xs"><img src="../../plugins/images/pixeladmin-text.png" alt="home" /></span>
+                </a>
+            </div>
+            <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+                <li>
+                    <form role="search" class="app-search hidden-xs">
+                        <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a>
+                    </form>
+                </li>
+            </ul>
+            <ul class="nav navbar-top-links navbar-right pull-right">
+                <li>
+                    <a   href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                        <img src="../../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle">
+                        <b class="hidden-xs">Steave</b>
+                    </a>
+                    <ul class="dropdown-menu " >
+                        <li class="mt5">
+                            <a href="pswChange">
+                                <i class="fa fa-key"></i> 修改密码</a>
+                        </li>
+                        <li>
+                            <a href="profile">
+                                <i class="fa fa-home"></i> 个人中心
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index">
+                                <i class="fa fa-check-circle-o"></i> 主导航菜单
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="login" id="loginOut">
+                                <i class="fa fa-sign-out"></i> 退出登录</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /.navbar-header -->
+        <!-- /.navbar-top-links -->
+        <!-- /.navbar-static-side -->
+    </nav>
+    <!-- Left navbar-header -->
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+            <ul class="nav" id="side-menu">
+                <li style="padding: 10px 0 0;">
+                    <a href="index" class="waves-effect">
+                        <i class="fa fa-home fa-fw" aria-hidden="true"></i>
+                        <span class="hide-menu">主页</span></a>
+                </li>
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="fa fa-user fa-fw" aria-hidden="true" ></i>
+                        <span class="hide-menu" >员工管理</span></a>
+                    <ul class="nav nav-second-level"  >
+                        <li>
+                            <a href="add_financial_people">财务部</a>
+                        </li>
+                        <li>
+                            <a href="add_sale_people">销售部</a>
+                        </li>
+                        <li>
+                            <a href="add_product_people">成品部</a>
+                        </li>
+                        <li>
+                            <a href="add_materials_people">材料部</a>
+                        </li>
+                        <li>
+                            <a href="add_dept_people">生产车间部</a>
+                        </li>
+                        <li>
+                            <a href="add_plan_people">生产计划部</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="fa fa-glass fa-fw" aria-hidden="true"></i>
+                        <span class="hide-menu">原料管理</span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="materials_in_stock">原料入库</a>
+                        </li>
+                        <li>
+                            <a href="materials_out_stock">原料出库</a>
+                        </li>
+                        <li>
+                            <a href="materialDestroy">原料销毁</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="fa fa-outdent fa-fw" aria-hidden="true"></i>
+                        <span class="hide-menu">生产管理</span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="producePlan">生产计划</a>
+                        </li>
+                        <li>
+                            <a href="produceManage">生产管理</a>
+                        </li>
+                        <li>
+                            <a href="burdenSheet">配料单管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="fa fa-edit fa-fw" aria-hidden="true"></i>
+                        <span class="hide-menu">仓库管理</span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="produce_in_stock">商品入库</a>
+                        </li>
+                        <li>
+                            <a href="product_out_stock">商品出库</a>
+                        </li>
+                        <li>
+                            <a href="productDestroy">商品销毁</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="fa fa-file-photo-o fa-fw" aria-hidden="true"></i>
+                        <span class="hide-menu">销售管理</span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="now__sale">销售订单</a>
+                        </li>
+                        <li>
+                            <a href="advance_sale">销售预订单</a>
+                        </li>
+                        <li>
+                            <a href="re_goods">销售退货单</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="fa fa-book fa-fw" aria-hidden="true"></i>
+                        <span class="hide-menu">财务管理</span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="account_in">收款单</a>
+                        </li>
+                        <li>
+                            <a href="advance_money_in">预定收款单</a>
+                        </li>
+                        <li>
+                            <a href="money_out">退款出款单</a>
+                        </li>
+                        <li>
+                            <a href="money_in">收入单</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="fa fa-heart fa-fw" aria-hidden="true"></i>
+                        <span class="hide-menu">基本信息</span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="add_materials">原料信息</a>
+                        </li>
+                        <li>
+                            <a href="add_dept">原料库信息</a>
+                        </li>
+                        <li>
+                            <a href="materials_in_home">原料库存储信息</a>
+                        </li>
+                        <li>
+                            <a href="add_goods">商品信息</a>
+                        </li>
+                        <li>
+                            <a href="add_stock">仓库信息</a>
+                        </li>
+                        <li>
+                            <a href="product_in_home">仓库存储信息</a>
+                        </li>
+                        <li>
+                            <a href="add_product_acre">生产车间信息</a>
+                        </li>
+                        <li>
+                            <a href="add_custom">客户信息</a>
+                        </li>
+                        <li>
+                            <a href="add_member">会员信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="fa fa-qrcode fa-fw" aria-hidden="true"></i>
+                        <span class="hide-menu">日志查询</span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="materialsLog">原料库日志</a>
+                        </li>
+                        <li>
+                            <a href="productsLog">仓库日志</a>
+                        </li>
+                        <li>
+                            <a href="chejian_in_Log">入车间日志</a>
+                        </li>
+                        <li>
+                            <a href="chejian_out_Log">出车间日志</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
+                        <span class="hide-menu">系统管理</span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="role_manage">角色管理</a>
+                        </li>
+                        <li>
+                            <a href="role_manage">系统配置</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <div class="center p-20">
+                <span class="hide-menu"><a href="profile" class="btn btn-danger btn-block btn-rounded waves-effect waves-light">个人中心</a></span>
+            </div>
+        </div>
+    </div>
+    <!-- Left navbar-header end -->
+    <!-- Page Content -->
+    <!--添加资源弹出窗口-->
+    <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel" >
+        <div class="modal-dialog" role="document" style="width: 75%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">原料入库单</h4>
+
+                    <br><br>
+                        <label >原料库编号：</label>
+                            <input type="text" placeholder="201912020001" class="form-control-line" onfocus=this.blur() >
+                        <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出入库(销毁)单编号:</label>
+
+                            <input type="text" placeholder="201700800607" class=" form-control-line" onfocus=this.blur() >
+
+
+
+                    </div>
+
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form class="form-horizontal">
+                            <div class="table-responsive">
+                                <table class="table" id="ci2" name="ci2">
+                                    <thead>
+                                    <tr>
+                                        <th>原料编号</th>
+                                        <th>原料库编号</th>
+                                        <th>生产日期</th>
+                                        <th>数量(单位)</th>
+                                        <th>单价</th>
+                                        <th>总金额</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="button" onclick="del(this)" value="删除"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+        <!-- /.modal-dialog -->
+
+    <div class="modal fade" id="changeSource" role="dialog" aria-labelledby="gridSystemModalLabel" >
+        <div class="modal-dialog" role="document" style="width: 75%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">原料入库单</h4>
+                    <button class="btn btn-yellow btn-xs" onclick="add()" data-toggle="modal"  style="width: 10%;height:40px;" >添加原料</button>
+                    <div class="form-group">
+                        <label class="col-md-12">单据编号</label>
+                        <div class="col-md-12">
+                            <input type="text" placeholder="201912020001" class="form-control form-control-line" onfocus=this.blur() >
+                        </div>
+                        <label class="col-md-12">负责人编号</label>
+                        <div class="col-md-12">
+                            <input type="text" placeholder="201700800607" class="form-control form-control-line" onfocus=this.blur() >
+                        </div>
+                        <label class="col-md-12">原料入库时间</label>
+                        <div class="col-md-12">
+                            <input type="date" id="date_info" placeholder="原料入库时间" class="form-control form-control-line"  >
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form class="form-horizontal">
+                            <div class="table-responsive">
+                                <table class="table" id="ci" name="ci">
+                                    <thead>
+                                    <tr>
+                                        <th>原料编号</th>
+                                        <th>原料名称</th>
+                                        <th>原料库编号</th>
+                                        <th>生产日期</th>
+                                        <th>数量(单位)</th>
+                                        <th>单价</th>
+                                        <th>总金额</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="button" onclick="del(this)" value="删除"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal-dialog -->
+
+    <!-- /.modal -->
+    <!--弹出删除资源警告窗口-->
+    <div class="modal fade" id="deleteSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        确定要删除该资源？删除后不可恢复！
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                    <button type="button" class="btn btn-xs btn-danger">保 存</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">原料库日志</h4> </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="#" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">首页</a></li>
+                    <li class="active">原料库日志</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <h3 class="box-title">原料入库列表</h3>
+
+                    <form style="display: inline" method="post" action="/mlogquery_by_hid">
+                        <label style="margin-left: 100px;font-size: small" >原料库编号</label>
+                        <input type="text" name="QID" >
+                        <button>查询</button>
+                    </form>
+
+                    <form style="display: inline" method="post" action="/mlogquery_by_id">
+                        <label style="margin-left: 30px;font-size: small" >出入库(销毁)单编号</label>
+                        <input type="text" name="QID">
+                        <button>查询</button>
+                    </form>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>出入库(销毁)单编号</th>
+                                <th>原料库编号</th>
+                                <th>操作</th>
+                                <th>原料编号</th>
+                                <th>原料批次号</th>
+                                <th>原料数量</th>
+                                <th>负责人编号</th>
+                                <th>操作时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="log: ${logs}">
+                                <td scope="row" th:text="${logStat.index+1}"></td>
+                                <td th:text="${log.getMHLID()}"></td>
+                                <td th:text="${log.getMHID()}"></td>
+                                <td th:text="${log.getOper()}"></td>
+                                <td th:text="${log.getMID()}"></td>
+                                <td th:text="${log.getMPID()}"></td>
+                                <td th:text="${log.getMLNum()}"></td>
+                                <td th:text="${log.getMLMan()}"></td>
+                                <td th:text="${log.getMDate()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+    <footer class="footer text-center"> 食品企业生产管理系统 </footer>
+</div>
+<!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="../../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Menu Plugin JavaScript -->
+<script src="../../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+<!--slimscroll JavaScript -->
+<script src="../js/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="../js/waves.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../js/custom.min.js"></script>
+</body>
+<script>
+    $(document).ready(function () {
+        var time = new Date();
+        var day = ("0" + time.getDate()).slice(-2);
+        var month = ("0" + (time.getMonth() + 1)).slice(-2);
+        var today = time.getFullYear() + "-" + (month) + "-" + (day);
+        $('#date_info').val(today);
+    })
+</script>
+</html>
