@@ -108,7 +108,6 @@ public class StaffManageController {
                 break;
             }
         }
-        user.setUPassword("123456");
         userService.saveUser(user);
         return "redirect:"+URL[user.getUDept()];
     }

@@ -1,6 +1,8 @@
 package com.example.javafinalerp;
 
 import com.example.javafinalerp.Bean.User;
+import com.example.javafinalerp.Bean.UserInfo;
+import com.example.javafinalerp.Service.UserInfoService;
 import com.example.javafinalerp.Service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,13 +15,12 @@ class JavafinalerpApplicationTests {
     @Resource
     UserService userService;
 
+    @Resource
+    UserInfoService userInfoService;
+
     @Test
     void contextLoads() {
-        User user;
-        user = userService.loginCheck(12,"123qwe");
-        if(user==null){
-
-        }
+//        userInfoService.getpass("1");
     }
 
 }

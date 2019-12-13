@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="${base}/resource/front/js/jquery.js" language="javascript" type="text/javascript" ></script>
+    <script type="text/javascript">
+
+      //图片点击
+      function a() {
+          //赋值获取图片路径
+          var img = "";
+          img = $(this).attr('src');
+//判断图片路径是否匹配
+          if (img == "../../img/20190224185111.png") {
+//更改图片路径
+              $("#zhaopian").attr("src", "../plugins/images/users/genu.jpg")
+          }
+          else {
+//更改照片路径
+              $("#zhaopian").attr("src", "../plugins/images/users/genu.jpg")
+          }
+      }
+
+
+    </script>
+</head>
+<body>
+<div class="img-portrait" >
+    <input type="file" id="camera" multiple="multiple"capture="camera" accept="image/*" >
+    <img src="../plugins/images/users/genu.jpg" alt="" id="imgUrl">
+</div>
+
+
+
+
+
+</body>
+<script>
+
+    $("#camera").change(function(e) {
+        for (var i = 0; i < e.target.files.length; i++) {
+            var file = e.target.files.item(i);
+            var freader = new FileReader();
+            freader.readAsDataURL(file);
+            freader.onload = function(e) {
+                var src = e.target.result;
+                $("#imgUrl").attr("src",src);
+            }
+        }
+    });
+</script>
+
+</html>

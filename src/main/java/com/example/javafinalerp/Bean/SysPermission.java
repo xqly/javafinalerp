@@ -1,12 +1,13 @@
 package com.example.javafinalerp.Bean;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
-
 @Entity
-public class SysPermission {
-    @Id@GeneratedValue
+public class SysPermission implements Serializable {
+    @Id
+    @GeneratedValue
     private Integer id;//主键.
     private String name;//名称.
     @Column(columnDefinition="enum('menu','button')")
@@ -17,7 +18,7 @@ public class SysPermission {
     private String parentIds; //父编号列表
     private Boolean available = Boolean.FALSE;
     @ManyToMany
-    @JoinTable(name="SysPermission",joinColumns={@JoinColumn(name="permissionId")},inverseJoinColumns={@JoinColumn(name="roleId")})
+    @JoinTable(name="SysRolePermission",joinColumns={@JoinColumn(name="permissionId")},inverseJoinColumns={@JoinColumn(name="roleId")})
     private List<SysRole> roles;
 
     public Integer getId() {
