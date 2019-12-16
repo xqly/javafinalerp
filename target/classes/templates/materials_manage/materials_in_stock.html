@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -84,7 +84,23 @@
             tbl.deleteRow(tr.rowIndex-1);
         }
 
-        //-->
+        function xiala() {
+            var  myselect=document.getElementById("mater");
+            var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
+            var danjia=myselect.options[index].value;
+            var num1=document.getElementById("num").value;
+            document.getElementById("price").value=danjia;
+            document.getElementById("zong").value=danjia*num1;
+        }
+
+        function num_change() {
+            var  myselect=document.getElementById("mater");
+            var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
+            var danjia=myselect.options[index].value;
+            var num1=document.getElementById("num").value;
+            //      document.getElementById("price").value=danjia;
+            document.getElementById("zong").value=danjia*num1;
+        }
     </script>
 </head>
 
@@ -347,34 +363,34 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">原料入库单</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel1">原料入库单</h4>
                     <button class="btn btn-yellow btn-xs" onclick="add1()" data-toggle="modal"  style="width: 10%;height:40px;" >添加原料</button>
                     <br><br>
-                        <label >单据编号：</label>
-                            <input type="text" placeholder="201912020001" class="form-control-line" onfocus=this.blur() >
-                        <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负责人编号:</label>
+                    <label >单据编号：</label>
+                    <input type="text" placeholder="201912020001" class="form-control-line" onfocus=this.blur() >
+                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负责人编号:</label>
 
-                            <input type="text" placeholder="201700800607" class=" form-control-line" onfocus=this.blur() >
+                    <input type="text" placeholder="201700800607" class=" form-control-line" onfocus=this.blur() >
 
-                        <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原料入库时间:</label>
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原料入库时间:</label>
 
-                            <input type="date" id="date_info" placeholder="原料入库时间" class=" form-control-line"  >
+                    <input type="date" id="date_info1" placeholder="原料入库时间" class=" form-control-line"  >
 
-                        <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原料入库批次:</label>
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原料入库批次:</label>
 
-                        <input type="text"  placeholder="1111111111" class=" form-control-line"  >
+                    <input type="text"  placeholder="1111111111" class=" form-control-line"  >
 
-                    </div>
+                </div>
 
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="">
                             <div class="table-responsive">
                                 <table class="table" id="ci2" name="ci2">
                                     <thead>
                                     <tr>
-                                        <th>原料编号</th>
-                                        <th>原料库编号</th>
+                                        <th>原料名称</th>
+                                        <th>原料库</th>
                                         <th>生产日期</th>
                                         <th>数量(单位)</th>
                                         <th>单价</th>
@@ -395,13 +411,24 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
+                                        <td>
+                                            <select  name="mater" id="mater" style="width:100%;" onchange="xiala()">
+                                                <option th:text="请选择原料"></option>
+                                                <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <select  name="stu_profession" style="width:100%;">
+                                                <option th:text="请选择原料库"></option>
+                                                <option th:each="mhouse:${mhouse}" th:value="${mhouse.MHID}" th:text="${mhouse.MHName}" ></option>
+                                            </select>
+                                        </td>
+                                        <td><input type="date" style="width:100%;"></td>
+                                        <td><input type="number" value="1" style="width:70%;" id="num" name="num" onchange="num_change()"></td>
+                                        <td><input type="text" style="width:70%;" id="price" name="price" onfocus=this.blur()></td>
+                                        <td><input type="number" style="width:70%;" id="zong" name="zong" onfocus=this.blur()></td>
+                                        <td><input type="text" style="width:70%;" ></td>
                                         <td><input type="button" onclick="del(this)" value="删除"></td>
                                     </tr>
                                     </tbody>
@@ -419,7 +446,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-        <!-- /.modal-dialog -->
+    <!-- /.modal-dialog -->
 
     <div class="modal fade" id="changeSource" role="dialog" aria-labelledby="gridSystemModalLabel" >
         <div class="modal-dialog" role="document" style="width: 75%">
@@ -507,7 +534,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel1">提示</h4>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
