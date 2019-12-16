@@ -16,13 +16,21 @@ public class MaterialsManageController {
     MaterialsManageController materialsManageController;
 
     @RequestMapping("materialDestroy")
-    public String md(){
+    public String md(Model model)
+    {
         return "materials_manage/materialDestroy";
     }
 
     @RequestMapping("add_materials")
     public String amt(@RequestParam("materials_json") String x){
         return "redirect:materials_in_stock";
+    }
+
+    @RequestMapping("materialsfindbyid")
+    public String mfbid(Model model,@RequestParam("QID") Integer x){
+        List<MHouseLog> lists=null;
+        model.addAttribute("lists",lists);
+        return "materials_manage/materials_in_stock";
     }
 
     @RequestMapping("materials_in_stock")
