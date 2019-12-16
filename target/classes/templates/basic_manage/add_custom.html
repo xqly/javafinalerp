@@ -25,6 +25,117 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+        function fsubmit1(obj) {
+            obj.submit();
+        }
+        function fsubmit(obj) {
+            if(CheckPost()){
+                obj.submit();
+            }
+        }
+        function fsubmit2(obj) {
+            if(CheckPost2()){
+                obj.submit();
+            }
+        }
+
+
+        function CheckPost2 () {
+            var reg=/[^\x00-\x80]{2,5}/;
+            var reg1 = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            var reg2 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            var x=alterform.UName.value;
+            var x1=alterform.UTelephone.value;
+            var x2=alterform.UMail.value;
+            var x3=alterform.USal.value;
+            if ( alterform.UName.value==''||alterform.UName.value==null) {
+                alert("请填写用户名！");
+                document.alterform.UName.focus();
+                return false;
+            }
+            if(!reg.test(x)){
+                alert("用户名应为中文，且2-5个字符!");
+                document.alterform.UName.focus();
+                document.alterform.UName.value = "";
+                return false;
+            }
+            if ( alterform.UTelephone.value==''||alterform.UTelephone.value==null) {
+                alert("请填写手机号！");
+                document.alterform.UTelephone.focus();
+                return false;
+            }
+            if(!reg1.test(x1)){
+                alert("手机号格式错误!");
+                document.alterform.UTelephone.focus();
+                document.alterform.UTelephone.value = "";
+                return false;
+            }
+            if(x2!='' && !reg2.test(x2)){
+                alert("邮箱格式错误!");
+                document.alterform.UMail.focus();
+                document.alterform.UMail.value = "";
+                return false;
+            }
+            if(x3<1000||x3>100000){
+                alert("工资范围有误!");
+                document.alterform.USal.focus();
+                document.alterform.USal.value = "";
+                return false;
+            }
+
+            return true;
+
+        }
+
+        function CheckPost () {
+            var reg=/[^\x00-\x80]{2,5}/;
+            var reg1 = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            var reg2 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            var x=formadd.CName.value;
+            var x1=formadd.CTelephone.value;
+            var x2=formadd.CMail.value;
+            var x3=formadd.CPay.value;
+            if ( formadd.CName.value==''||formadd.CName.value==null) {
+                alert("请填写用户名！");
+                document.formadd.UName.focus();
+                return false;
+            }
+            if(!reg.test(x)){
+                alert("用户名应为中文，且2-5个字符!");
+                document.formadd.CName.focus();
+                document.formadd.CName.value = "";
+                return false;
+            }
+            if ( formadd.CTelephone.value==''||formadd.CTelephone.value==null) {
+                alert("请填写手机号！");
+                document.formadd.CTelephone.focus();
+                document.formadd.CTelephone.value = "";
+                return false;
+            }
+            if(!reg1.test(x1)){
+                alert("手机号格式错误!");
+                document.formadd.CTelephone.focus();
+                document.formadd.CTelephone.value = "";
+                return false;
+            }
+            if(x2!='' && !reg2.test(x2)){
+                alert("邮箱格式错误!");
+                document.formadd.CMail.focus();
+                document.formadd.CMail.value = "";
+                return false;
+            }
+            if(x3<1000||x3>100000){
+                alert("工资范围有误!");
+                document.formadd.USal.focus();
+                document.formadd.USal.value = "";
+                return false;
+            }
+
+            return true;
+
+        }
+    </script>
 </head>
 
 <body>
@@ -289,7 +400,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" name="formadd" id="formadd">
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
@@ -299,25 +410,25 @@
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">姓名：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="sLink" name="CName" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">联系方式：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="sKnot" name="CTelephone" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">E-mail：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="sKnot"  name="CMail" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">消费额度：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="sKnot"name="CPay" placeholder="">
                                 </div>
                             </div>
 
@@ -332,7 +443,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-xs btn-green" onclick="javascript:fsubmit(document.formadd)">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->

@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="email=no" name="format-detection"/>
+    <meta content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" name="viewport"/>
     <link rel="icon" type="image/png" sizes="16x16" href="../../plugins/images/favicon.png">
     <title>销售部</title>
     <!-- Bootstrap Core CSS -->
@@ -31,8 +37,123 @@
 
 <body>
 <script language="JavaScript">
-    function fsubmit(obj) {
+
+    function clearNoNum(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+        obj.value = obj.value.replace(/^\./g, "");  //验证第一个字符是数字而不是.
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的.
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+
+    }
+
+    function fsubmit1(obj) {
         obj.submit();
+    }
+    function fsubmit(obj) {
+        if(CheckPost()){
+            obj.submit();
+        }
+    }
+    function fsubmit2(obj) {
+        if(CheckPost2()){
+            obj.submit();
+        }
+    }
+
+
+    function CheckPost2 () {
+        var reg=/[^\x00-\x80]{2,5}/;
+        var reg1 = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        var reg2 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        var x=alterform.UName.value;
+        var x1=alterform.UTelephone.value;
+        var x2=alterform.UMail.value;
+        var x3=alterform.USal.value;
+        if ( alterform.UName.value==''||alterform.UName.value==null) {
+            alert("请填写用户名！");
+            document.alterform.UName.focus();
+            return false;
+        }
+        if(!reg.test(x)){
+            alert("用户名应为中文，且2-5个字符!");
+            document.alterform.UName.focus();
+            document.alterform.UName.value = "";
+            return false;
+        }
+        if ( alterform.UTelephone.value==''||alterform.UTelephone.value==null) {
+            alert("请填写手机号！");
+            document.alterform.UTelephone.focus();
+            return false;
+        }
+        if(!reg1.test(x1)){
+            alert("手机号格式错误!");
+            document.alterform.UTelephone.focus();
+            document.alterform.UTelephone.value = "";
+            return false;
+        }
+        if(x2!='' && !reg2.test(x2)){
+            alert("邮箱格式错误!");
+            document.alterform.UMail.focus();
+            document.alterform.UMail.value = "";
+            return false;
+        }
+        if(x3<1000||x3>100000){
+            alert("工资范围有误!");
+            document.alterform.USal.focus();
+            document.alterform.USal.value = "";
+            return false;
+        }
+
+        return true;
+
+    }
+
+    function CheckPost () {
+        var reg=/[^\x00-\x80]{2,5}/;
+        var reg1 = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        var reg2 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        var x=formadd.UName.value;
+        var x1=formadd.UTelephone.value;
+        var x2=formadd.UMail.value;
+        var x3=formadd.USal.value;
+        if ( formadd.UName.value==''||formadd.UName.value==null) {
+            alert("请填写用户名！");
+            document.formadd.UName.focus();
+            return false;
+        }
+        if(!reg.test(x)){
+            alert("用户名应为中文，且2-5个字符!");
+            document.formadd.UName.focus();
+            document.formadd.UName.value = "";
+            return false;
+        }
+        if ( formadd.UTelephone.value==''||formadd.UTelephone.value==null) {
+            alert("请填写手机号！");
+            document.formadd.UTelephone.focus();
+            document.formadd.UTelephone.value = "";
+            return false;
+        }
+        if(!reg1.test(x1)){
+            alert("手机号格式错误!");
+            document.formadd.UTelephone.focus();
+            document.formadd.UTelephone.value = "";
+            return false;
+        }
+        if(x2!='' && !reg2.test(x2)){
+            alert("邮箱格式错误!");
+            document.formadd.UMail.focus();
+            document.formadd.UMail.value = "";
+            return false;
+        }
+        if(x3<1000||x3>100000){
+            alert("工资范围有误!");
+            document.formadd.USal.focus();
+            document.formadd.USal.value = "";
+            return false;
+        }
+
+        return true;
+
     }
     function alterfun(butt) {
         var userid = butt.getAttribute("data-id");
@@ -43,6 +164,17 @@
         $("#uutime").attr("value",butt.getAttribute("data-time"));
         $("#uusal").attr("value",butt.getAttribute("data-sal"));
     }
+    function alterfun1(butt) {
+        var userid = butt.getAttribute("data-id");
+        $("#staffid1").attr("value",userid);
+        $("#fullname1").attr("value",butt.getAttribute("data-name"));
+        $("#phoneno1").attr("value",butt.getAttribute("data-tele"));
+        $("#email1").attr("value",butt.getAttribute("data-mail"));
+        $("#entrytime1").attr("value",butt.getAttribute("data-time"));
+        $("#sal1").attr("value",butt.getAttribute("data-sal"));
+        // $("#sal1").attr("value",butt.getAttribute("data-mess"));
+    }
+
     function deluser(butt) {
         $("#uid").attr("value",butt.getAttribute("data-id"));
     }
@@ -123,7 +255,7 @@
                         <span class="hide-menu" >员工管理</span></a>
                     <ul class="nav nav-second-level"  >
                         <li>
-                            <a href="add_financial_people">财务部</a>
+                            <a href="add_financial_people">财务部门</a>
                         </li>
                         <li>
                             <a href="add_sale_people">销售部</a>
@@ -309,55 +441,46 @@
                 </div>
                 <div class="modal-body" >
                     <div class="container-fluid" >
-                        <form class="form-horizontal" id="formadd" name="formadd" action="/saveinfo" method="post" >
-                            <!--                            <div class="form-group ">-->
-                            <!--                                <label for="sName" class="col-xs-3 control-label">员工编号：</label>-->
-                            <!--                                <div class="col-xs-8 ">-->
-                            <!--                                    <input type="email" class="form-control input-sm duiqi" id="sName" name="U_ID" placeholder="">-->
-                            <!--                                </div>-->
-                            <!--                            </div>-->
-                            <div class="form-group">
-                                <label for="sLink" class="col-xs-3 control-label">员工姓名：</label>
-                                <div class="col-xs-8 ">
-                                    <input type="" class="form-control input-sm duiqi" id="sLink" name="UName" placeholder="">
+                        <form class="form-horizontal" id="formadd"  data-form="ajax" name="formadd" action="/saveinfo" method="post" >
+                            <fieldset>
+                                <div class="form-group">
+                                    <label  for="sKnot" class="col-xs-3 control-label" data-mobile="true">员工姓名：</label>
+                                    <div class="col-xs-8 ">
+                                        <input type="text" data-required="参数不能为空" class="form-control input-sm duiqi" id="UName" name="UName" placeholder="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">手机号：</label>
-                                <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" name="UTelephone" placeholder="">
+                                <div class="form-group">
+                                    <label for="sKnot" class="col-xs-3 control-label" data-mobile="true">手机号：</label>
+                                    <div class="col-xs-8">
+                                        <input type="" class="form-control input-sm duiqi" name="UTelephone"   data-mobile="true" placeholder="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">E-Mail：</label>
-                                <div class="col-xs-8">
-                                    <input type="email" class="form-control input-sm duiqi" id="sKnot" name="UMail" placeholder="">
+                                <div class="form-group">
+                                    <label for="sKnot" class="col-xs-3 control-label">E-Mail：</label>
+                                    <div class="col-xs-8">
+                                        <input type="email" class="form-control input-sm duiqi"  name="UMail" data-email="true" >
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">入职时间：</label>
-                                <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="sKnot" name="UStartTime" placeholder="">
+                                <div class="form-group">
+                                    <label for="sKnot" class="col-xs-3 control-label">入职时间：</label>
+                                    <div class="col-xs-8">
+                                        <input type="date" class="date-picker form-control input-sm duiqi"  name="UStartTime" data-max="" placeholder="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">所属部门：</label>
-                                <div class="col-xs-8">
-                                    <input type="text" value="销售部" class="form-control input-sm duiqi" id="sKnot" name="SUDept" readonly placeholder="销售部">
+                                <div class="form-group">
+                                    <label for="sKnot" class="col-xs-3 control-label">所属部门：</label>
+                                    <div class="col-xs-8">
+                                        <input type="text" value="销售部" class="form-control input-sm duiqi" id="sKnot" name="SUDept" readonly placeholder="生产车间部">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">月薪：</label>
-                                <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" name="USal" placeholder="">
+                                <div class="form-group">
+                                    <label for="sKnot" class="col-xs-3 control-label">月薪：</label>
+                                    <div class="col-xs-8">
+                                        <input type="number" class="form-control input-sm duiqi" id="yuexin" name="USal" data-min="1000" data-max="100000" value="1000" >
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">备注：</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control input-sm duiqi" id="sKnot" placeholder=""></textarea>
-                                </div>
-                            </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
@@ -370,8 +493,101 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
 
+    <!-- /.modal -->
+    <div class="modal fade" id="jianjie1" name="jianjie1" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document" style="width: 40%">
+            <div class="modal-content">
+
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <div class="white-box">
+                            <div class="user-bg">
+                                <img width="100%" alt="user" src="../../plugins/images/large/img1.jpg">
+                                <div class="overlay-box">
+                                    <div class="user-content">
+                                        <a href="javascript:void(0)">
+                                            <img src="../../plugins/images/users/genu.jpg" class="thumb-lg img-circle" alt="img" id="avatar_file" onchange="prev(this)"/>
+                                        </a>
+                                        <h4 class="text-white">User Name</h4>
+                                        <h5 class="text-white">info@myadmin.com</h5> </div>
+                                </div>
+                            </div>
+                            <div class="user-btm-box">
+                                <div class="col-md-4 col-sm-4 text-center">
+                                    <p class="text-purple"><i class="ti-facebook"></i></p>
+                                </div>
+                                <div class="col-md-4 col-sm-4 text-center">
+                                    <p class="text-blue"><i class="ti-twitter"></i></p>
+                                </div>
+                                <div class="col-md-4 col-sm-4 text-center">
+                                    <p class="text-danger"><i class="ti-dribbble"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12">
+                        <div class="white-box">
+                            <form class="form-horizontal form-material">
+                                <div class="form-group">
+                                    <label class="col-md-12">Staff ID</label>
+                                    <div class="col-md-12">
+                                        <input type="text" id="staffid1" name="staffid1" class="form-control form-control-line"  onfocus=this.blur()> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Full Name</label>
+                                    <div class="col-md-12">
+                                        <input type="text" id="fullname1" name="fullname1" class="form-control form-control-line" onfocus=this.blur()> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Phone No</label>
+                                    <div class="col-md-12">
+                                        <input type="text" id="phoneno1" name="phoneno1" class="form-control form-control-line" onfocus=this.blur()> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="example-email" class="col-md-12">Email</label>
+                                    <div class="col-md-12">
+                                        <input type="email" id="email1" name="email1"  class="form-control form-control-line" onfocus=this.blur()> </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="col-md-12">Entry Time</label>
+                                    <div class="col-md-12">
+                                        <input type="date" id="entrytime1" name="entrytime1" value="2018-11-13" class="form-control form-control-line" style="cursor:hand" onfocus="this.blur()"> </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12">Your Dept</label>
+                                    <div class="col-md-12">
+                                        <input type="text" value="生产车间部" id="dept1" name="dept1" class="form-control form-control-line" onfocus=this.blur()>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Month Sal</label>
+                                    <div class="col-md-12">
+                                        <input type="text" id="sal1" name="sal1" class="form-control form-control-line" onfocus=this.blur()>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Message</label>
+                                    <div class="col-md-12">
+                                        <textarea rows="5" id="message1" name="message1" class="form-control form-control-line" onfocus=this.blur()></textarea>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
     <!--修改资源弹出窗口-->
     <div class="modal fade" id="changeSource" name="changeSource" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document" style="width: 40%">
@@ -392,7 +608,7 @@
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">员工姓名：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="" class="form-control input-sm duiqi" id="uuname" name="UName" placeholder="">
+                                    <input type=""  class="form-control input-sm duiqi" id="uuname" name="UName" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -416,19 +632,13 @@
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">所属部门：</label>
                                 <div class="col-xs-8">
-                                    <input type="" value="销售部" class="form-control input-sm duiqi" id="uudept" name="SUDept" readonly placeholder="销售部">
+                                    <input type="" value="销售部" class="form-control input-sm duiqi" id="uudept" name="SUDept" readonly placeholder="生产车间部">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">月薪：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="uusal" name="USal" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">备注：</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control input-sm duiqi" id="sKnot" placeholder=""></textarea>
+                                    <input type="number"  class="form-control input-sm duiqi" id="uusal" name="USal">
                                 </div>
                             </div>
 
@@ -437,7 +647,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green" onclick="fsubmit(document.alterform)">保 存222</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="fsubmit2(document.alterform)">保 存222</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -464,7 +674,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-danger" onclick="fsubmit(document.delform)" >确 定</button>
+                    <button type="button" class="btn btn-xs btn-danger" onclick="fsubmit1(document.delform)" >确 定</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -480,11 +690,11 @@
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">销售部门</h4> </div>
+                <h4 class="page-title">销售部</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="#" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
                 <ol class="breadcrumb">
                     <li><a href="../../../pix_zq/pixel-html/index.html">首页</a></li>
-                    <li class="active">销售部门</li>
+                    <li class="active">销售部</li>
                 </ol>
             </div>
             <!-- /.col-lg-12 -->
@@ -498,14 +708,14 @@
                     <form style="display: inline" method="post" action="/query_by_id">
                         <label style="margin-left: 100px;font-size: small" >员工编号</label>
                         <input type="text" name="QID" >
-                        <input type="hidden" value="2" name="deptment">
+                        <input type="hidden" value="5" name="deptment">
                         <button>查询</button>
                     </form>
 
                     <form style="display: inline" method="post" action="/query_by_name">
                         <label style="margin-left: 30px;font-size: small" >员工姓名</label>
                         <input type="text" name="QNAME">
-                        <input type="hidden" value="2" name="deptment">
+                        <input type="hidden" value="5" name="deptment">
                         <button>查询</button>
                     </form>
 
@@ -522,12 +732,12 @@
                                 <th>入职时间</th>
                                 <th>所属部门</th>
                                 <th>月薪</th>
-                                <th>备注</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="user : ${users}">
-                                <td scope="row" th:text="${userStat.index+1}" id="xqly"></td>
+                                <td scope="row" th:text="${userStat.index+1}" id="xqly"  data-toggle="modal" data-target="#jianjie1"  onclick="alterfun1()"></td>
                                 <td th:text="${user.getU_ID()}"></td>
                                 <td  th:text="${user.getUName()}"></td>
                                 <td  th:text="${user.getUTelephone()}"></td>
@@ -565,10 +775,37 @@
 <script src="../js/jquery.slimscroll.js"></script>
 <!--Wave Effects -->
 <script src="../js/waves.js"></script>
+<script src="../js/jquery.form.js"></script>
+<script src="../js/verJs.min.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="../js/custom.min.js"></script>
+<script src="../js/verjs.js"></script>
+<script>
+    function max_width() {
+        var max = 0;
+        $("dt").each(function () {
+            max = Math.max(max,$(this).width());
+        });
+        $("dt").width(max);
+    }
+    max_width();
+    new VerJs({
+        form:"#formadd",
+        success:function (d) {
+            alert(1)
+        },
+        fail:function (d) {
+            alert(2)
+        }
+    });
 
-
+</script>
+<script>
+    var defaultDate = document.querySelectorAll('.date-picker');
+    for (var i = 0; i<defaultDate.length; i++) {
+        defaultDate[i].valueAsDate = new Date();
+    }
+</script>
 </body>
 
 </html>
