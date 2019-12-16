@@ -21,7 +21,7 @@ public class MaterialsManageController {
         return "materials_manage/materialDestroy";
     }
 
-    @RequestMapping("add_materials")
+    @RequestMapping("add_realmaterials")
     public String amt(@RequestParam("materials_json") String x){
         return "redirect:materials_in_stock";
     }

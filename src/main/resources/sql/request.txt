@@ -1,10 +1,10 @@
 入库：
 显示入库日志基本信息(URL="materials_in_stock",name="lists");
-添加原料 json(name="materials_json") (URL="add_materials");
+添加原料 json(name="materials_json") (URL="add_realmaterials");
 查询单号(URL="materialsfindbyid",name="QID" model="lists");
 
 出库：
-显示计划信息
+显示计划信息 (URL="
 原料出库
 
 销毁：
