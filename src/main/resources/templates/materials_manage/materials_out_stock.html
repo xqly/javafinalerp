@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -19,12 +19,15 @@
     <link href="../css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="../css/colors/blue-dark.css" id="theme" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script>
+        function accptplan(butt) {
+            $("#QID").attr("value",butt.getAttribute("data-id"));
+        }
+    </script>
+
 </head>
 
 <body>
@@ -445,64 +448,24 @@
                             <tr>
                                 <th>#</th>
                                 <th>计划单号</th>
-                                <th>计划生产时间</th>
-
+                                <th>商品种类</th>
+                                <th>商品名称</th>
+                                <th>商品数量</th>
+                                <th>计划制定时间</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td  data-toggle="modal" data-target="#addSource">1</td>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
+                            <tr th:each="lists : ${lists}">
+                                <td scope="row" th:text="${listsStat.index+1}" id="xqly"></td>
+                                <td th:text="${lists.pid}"></td>
+                                <td  th:text="${lists.TypeName}"></td>
+                                <td  th:text="${lists.GName}"></td>
+                                <td  th:text="${lists.gnum}"></td>
+                                <td  th:text="${lists.ptime}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">接受</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">拒绝</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>
-                                    <!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>-->
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Sanghani</td>
-                                <td>Gusikowski</td>
-                                <td>
-                                    <!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>-->
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Roshan</td>
-                                <td>Rogahn</td>
-                                <td>
-                                    <!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>-->
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Joshi</td>
-                                <td>Hickle</td>
-                                <td>
-                                    <!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>-->
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Nigam</td>
-                                <td>Eichmann</td>
-                                <td>
-                                    <!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>-->
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>-->
+
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${lists.getPid()}" onclick="accptplan(this)">接受</button>
                                 </td>
                             </tr>
                             </tbody>
