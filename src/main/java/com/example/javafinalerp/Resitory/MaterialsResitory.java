@@ -13,6 +13,7 @@ public interface MaterialsResitory extends JpaRepository<Materials,Integer> {
     @Query("select m from Materials m where m.MName=?1")
     List<Materials> findbyname(String x);
 
-
+    @Query("select m from Materials m ")
+    List<Materials> findAll();
 
 }

@@ -13,4 +13,7 @@ public interface MHouseResitory extends JpaRepository<MHouse,Integer> {
 
     @Query("select m from MHouse m where m.MHName=?1")
     List<MHouse> findbyname(String name);
+
+    @Query("select m from MHouse m ")
+    List<MHouse> findAll();
 }
