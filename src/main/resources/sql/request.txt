@@ -1,12 +1,12 @@
 入库：
-显示入库日志基本信息(URL="materials_in_stock",name="lists");
-添加原料 json(name="materials_json") (URL="add_realmaterials");
+显示入库日志基本信息(URL="materials_in_stock",name="lists" = 入库日志);
+添加原料 json(name="materials_json") (URL="add_realmaterials");写完json格式跟我说一下
 查询单号(URL="materialsfindbyid",name="QID" model="lists");
 
 出库：
-显示计划信息 (URL="
-原料出库
+显示计划信息 (URL="materilas_out_stock",model="lists"= 生产计划);是否需要当前原料库信息?
+原料出库(URL="materialsoutbyid" ,name="QID");
 
 销毁：
-根据过期显示原料
-销毁
+根据过期显示原料(URL="materialDestroy",model="lists"=过期物品);
+销毁(URL="Destroymaterial",name="QID");
