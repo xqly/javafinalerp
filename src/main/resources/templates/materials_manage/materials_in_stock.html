@@ -26,47 +26,65 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
-        var materials_json={
-            in_id:'',
-            in_date:'',
-            in_man:'',
-        }
-
-
-
-        var materials_json = JSON.parse("{\"title\":\"\",\"data\":[]}");
-
-        //封装底部表格中的数据
-        var rows = document.getElementById("ci2").rows.length; //获得行数(包括thead)
-        if(rows > 1) {//
-            for (var i = 1; i < rows; i++) { //每行 从第二行开始因为第一行是表格的标题
-                var ins = new Object();//这里一定要new新的对象，要不然保存的都是一样的数据；都是最后一行的数据
-
-                ins.in_id = document.getElementById("ci2").rows[i].cells[0].innerHTML;
-                ins.in_date = document.getElementById("ci2").rows[i].cells[1].innerHTML;
-                ins.in_man = document.getElementById("ci2").rows[i].cells[2].innerHTML;
-                materials_json.data.add(ins);
+        function get_table_data() {
+            var tr = $("#ci2 tr");
+            var result = [];
+            for (var i = 1; i < tr.length; i++) {
+                var inputs2 = $(tr[i]).find("td").find("input");
+                var inputs1 = $(tr[i]).find("td").find("select");
+                if (inputs1.length > 0 && inputs2.length>0) {
+                    result.push({
+                        mid : inputs1[0].value,
+                        mhid : inputs1[1].value,
+                        mdate : inputs2[0].value,
+                        mnum : inputs2[1].value,
+                        mprice : inputs2[2].value,
+                        msum : inputs2[3].value
+                    });
+                }
             }
+            return result;
         }
-        //var obj=JSON.stringify(a);//这一行很关键
+        function send() {
 
-        /*var taskList = ["123","456"];*/
-        var params = {
-            materials_json: materials_json
-        };
-
+        var bisSuenDocuSacertCont = get_table_data();
+        // var json= {
+        //   //  agenGene : $("#agenGene").val(),
+        //     bisSuenDocuSacertCont : bisSuenDocuSacertCont
+        // };
+         var materials_in_stock=JSON.stringify(bisSuenDocuSacertCont);
+        alert(materials_in_stock);
         $.ajax({
-            type: "PUT",
-            dataType: "json",
-            url: "add_realmaterials",
-            data: params,
-            success: function (msg) {
-                alert(params)
+            url:"add_realmaterials",
+            type:"post",
+            dataType:"json",
+            contentType:"application/json",
+            data:materials_in_stock,
+            success:function(){
+                alert(materials_in_stock);
             }
         });
+        }
+
     </script>
     <script type="text/javascript">
-        <!--
+        function xiala1() {
+            var  myselect=document.getElementById("mater1");
+            var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
+            var danjia=myselect.options[index].value;
+            var num1=document.getElementById("num1").value;
+            document.getElementById("price1").value=danjia;
+            document.getElementById("zong1").value=danjia*num1;
+        }
+
+        function num_change1() {
+            var  myselect=document.getElementById("mater1");
+            var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
+            var danjia=myselect.options[index].value;
+            var num1=document.getElementById("num1").value;
+            //      document.getElementById("price").value=danjia;
+            document.getElementById("zong1").value=danjia*num1;
+        }
         var count = 1;
         var count2 = 1;
         function add() {
@@ -90,7 +108,7 @@
             six.innerHTML = '<input style="width: 70%;" type="text">';
             var del = tr.insertCell(7);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
-            count++;
+            count2++;
         }
 
         function add1() {
@@ -99,22 +117,32 @@
             var tr = tbl.insertRow(rows);
 
             var name = tr.insertCell(0);
-            name.innerHTML = '<input style="width: 70%;" type="text">';
+
+            // name.innerHTML = '<select name="mater1" id="mater1" style="width:100%;"> \
+            //                        <option value="请选择原料"> \
+            //                              </option> \
+            //                              </select> ';
+
+            name.innerHTML = '<select  name="mater1" id="mater1" style="width:100%;" onchange="xiala1()">\
+                <option th:text="请选择原料"></option>\
+                <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>\
+                </select>';
             var tel = tr.insertCell(1);
-            tel.innerHTML = '<input style="width: 70%;" type="text">';
+            tel.innerHTML = '<select  name="stu_profession" style="width:100%;">\n' +
+                '                                                <option th:text="请选择原料库"></option>\n' +
+                '                                                <option th:each="mhouse:${mhouse}" th:value="${mhouse.MHID}" th:text="${mhouse.MHName}" ></option>\n' +
+                '                                            </select>';
             var rdo = tr.insertCell(2);
-            rdo.innerHTML = '<input style="width: 70%;" type="text">';
+            rdo.innerHTML = '<input type="date" style="width:100%;">';
             var chk = tr.insertCell(3);
-            chk.innerHTML = '<input style="width: 70%;" type="text">';
-            var four= tr.insertCell(4)
-            four.innerHTML = '<input style="width: 70%;" type="text">';
-            var five= tr.insertCell(5)
-            five.innerHTML = '<input style="width: 70%;" type="text">';
-            var six= tr.insertCell(6)
-            six.innerHTML = '<input style="width: 70%;" type="text">';
-            var del = tr.insertCell(7);
+            chk.innerHTML = '<input type="number" value="1" style="width:70%;" id="num1" name="num1" onchange="num_change1()">';
+            var four= tr.insertCell(4);
+            four.innerHTML = '<input type="text" style="width:70%;" id="price1" name="price1" onfocus=this.blur()>';
+            var five= tr.insertCell(5);
+            five.innerHTML = '<input type="number" style="width:70%;" id="zong1" name="zong1" onfocus=this.blur()>';
+            var del = tr.insertCell(6);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
-            count2++;
+            count++;
         }
 
         function del(btn) {
@@ -403,19 +431,6 @@
                     <h4 class="modal-title" id="gridSystemModalLabel1">原料入库单</h4>
                     <button class="btn btn-yellow btn-xs" onclick="add1()" data-toggle="modal"  style="width: 10%;height:40px;" >添加原料</button>
                     <br><br>
-                    <label >单据编号：</label>
-                    <input type="text" placeholder="201912020001" class="form-control-line" onfocus=this.blur() >
-                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负责人编号:</label>
-
-                    <input type="text" placeholder="201700800607" class=" form-control-line" onfocus=this.blur() >
-
-                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原料入库时间:</label>
-
-                    <input type="date" id="date_info1" placeholder="原料入库时间" class=" form-control-line"  >
-
-                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原料入库批次:</label>
-
-                    <input type="text"  placeholder="1111111111" class=" form-control-line"  >
 
                 </div>
 
@@ -432,7 +447,7 @@
                                         <th>数量(单位)</th>
                                         <th>单价</th>
                                         <th>总金额</th>
-                                        <th>备注</th>
+
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -444,10 +459,10 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    <tr >
                                         <td>
                                             <select  name="mater" id="mater" style="width:100%;" onchange="xiala()">
                                                 <option th:text="请选择原料"></option>
@@ -465,7 +480,6 @@
                                         <td><input type="number" value="1" style="width:70%;" id="num" name="num" onchange="num_change()"></td>
                                         <td><input type="text" style="width:70%;" id="price" name="price" onfocus=this.blur()></td>
                                         <td><input type="number" style="width:70%;" id="zong" name="zong" onfocus=this.blur()></td>
-                                        <td><input type="text" style="width:70%;" ></td>
                                         <td><input type="button" onclick="del(this)" value="删除"></td>
                                     </tr>
                                     </tbody>
@@ -476,7 +490,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="send()">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -522,7 +536,7 @@
                                         <th>数量(单位)</th>
                                         <th>单价</th>
                                         <th>总金额</th>
-                                        <th>备注</th>
+
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -534,7 +548,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+
                                         <td></td>
                                     </tr>
                                     <tr>
@@ -544,7 +558,7 @@
                                         <td><input type="text" style="width:70%;"></td>
                                         <td><input type="text" style="width:70%;"></td>
                                         <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
+
                                         <td><input type="button" onclick="del(this)" value="删除"></td>
                                     </tr>
                                     </tbody>
@@ -611,17 +625,13 @@
                 <div class="white-box">
                     <h3 class="box-title">原料入库列表</h3>
                     <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">入库商品</button>
+                    <form style="display: inline" method="post" action="/materialsfindbyid">
                     <label style="margin-left: 100px;font-size: small" >入库单号</label>
-                    <input type="text" >
+                    <input type="text" name="QID">
                     <button>查询</button>
+                    </form>
 
-                    <label style="margin-left: 30px;font-size: small" >入库时间</label>
-                    <input type="text">
-                    <button>查询</button>
 
-                    <label style="margin-left: 30px;font-size: small" >负责人</label>
-                    <input type="text">
-                    <button>查询</button>
 
                     <div class="table-responsive">
                         <table class="table">
@@ -631,58 +641,14 @@
                                 <th>入库单号</th>
                                 <th>负责人</th>
                                 <th>入库时间</th>
-                                <th>备注</th>
-
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>@Ritesh</td>
-                                <td>She is a excellent worker.</td>
-
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Sanghani</td>
-                                <td>Gusikowski</td>
-                                <td>@Govinda</td>
-                                <td>She is a excellent worker.</td>
-
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Roshan</td>
-                                <td>Rogahn</td>
-                                <td>@Hritik</td>
-                                <td>She is a excellent worker.</td>
-
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Joshi</td>
-                                <td>Hickle</td>
-                                <td>@Maruti</td>
-                                <td>She is a excellent worker.</td>
-
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Nigam</td>
-                                <td>Eichmann</td>
-                                <td>@Sonu</td>
-                                <td>She is a excellent worker.</td>
-
+                            <tr th:each="lists:${lists}">
+                                <td th:text="${listsStat.index+1}"></td>
+                                <td th:text="${lists.getMHLID()}"></td>
+                                <td th:text="${lists.getMLMan()}"></td>
+                                <td th:text="${lists.getMDate()}"></td>
                             </tr>
                             </tbody>
                         </table>
