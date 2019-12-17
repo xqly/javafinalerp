@@ -3,6 +3,7 @@ package com.example.javafinalerp.Controller;
 import com.example.javafinalerp.Bean.*;
 import com.example.javafinalerp.Service.BasicManageService;
 import com.example.javafinalerp.Service.MHouseService;
+import com.example.javafinalerp.Service.PlanService;
 import com.example.javafinalerp.tempclass.Materialsandname;
 import com.example.javafinalerp.tempclass.Planandname;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,16 @@ public class MaterialsManageController {
     @Resource
     BasicManageService basicManageService;
 
+    @Resource
+    PlanService planService;
+
     @Autowired
     MaterialsManageController materialsManageController;
 
     @RequestMapping("materials_in_stock")
     public String mis(Model model)
     {
-        List<MHouseLog> lists =null;
+        List<MHouseLog> lists =mHouseService.getinsertLog();
         List<MHouse> mhouse=mHouseService.getmhouse();
         List<Materials> materials = basicManageService.getmaterlist();
         model.addAttribute("materials",materials);
@@ -38,12 +42,13 @@ public class MaterialsManageController {
 
     @RequestMapping("add_realmaterials")
     public String amt(@RequestParam("materials_json") String x){
+        mHouseService.addMaterialsbyjson(x);
         return "redirect:materials_in_stock";
     }
 
     @RequestMapping("materialsfindbyid")
     public String mfbid(Model model,@RequestParam("QID") Integer x){
-        List<MHouseLog> lists=null;
+        List<MHouseLog> lists=mHouseService.findinsertbyid(x);
         model.addAttribute("lists",lists);
         return "materials_manage/materials_in_stock";
     }
@@ -52,27 +57,28 @@ public class MaterialsManageController {
     @RequestMapping("materials_out_stock")
     public String mst(Model model)
     {
-        List<Planandname> lists =null;
+        List<Planandname> lists =planService.getunplannamelist();
         model.addAttribute("lists",lists);
         return "materials_manage/materials_out_stock";
     }
 
     @RequestMapping("materialsoutbyid")
     public String mobi(@RequestParam("QID") Integer x){
+        planService.outMaterialsbyPlanid(x);
         return "redirect:materials_manage/materials_out_stock";
     }
 
     @RequestMapping("materialDestroy")
     public String md(Model model)
     {
-
-        List<Materialsandname> lists=null;
+        List<Materialsandname> lists=mHouseService.getoutdatedmaterials();
         model.addAttribute("lists",lists);
         return "materials_manage/materialDestroy";
     }
 
     @RequestMapping("Destroymaterial")
     public String dm(@RequestParam("QID") Integer x){
+        mHouseService.Destroybymhsid(x);
         return "redirect:materials_manage/materialDestroy";
     }
 }

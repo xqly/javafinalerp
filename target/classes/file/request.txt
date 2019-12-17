@@ -10,3 +10,8 @@
 销毁：
 根据过期显示原料(URL="materialDestroy",model="lists"=过期物品);
 销毁(URL="Destroymaterial",name="QID");
+
+原料日志：
+入库 1
+出库 2
+销毁 3
