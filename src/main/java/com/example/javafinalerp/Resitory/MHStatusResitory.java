@@ -15,4 +15,7 @@ public interface MHStatusResitory extends JpaRepository<MHStatus,Integer> {
 
     @Query("select m from MHStatus m where m.MHPID=?1")
     List<MHStatus> findbypid(Integer x);
+
+    @Query("select m from MHStatus m where m.MHSID=?1")
+    MHStatus findbysid(Integer x);
 }

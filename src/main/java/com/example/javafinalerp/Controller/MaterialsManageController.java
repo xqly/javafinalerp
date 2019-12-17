@@ -43,6 +43,7 @@ public class MaterialsManageController {
     @RequestMapping("add_realmaterials")
     public String amt(@RequestParam("materials_json") String x){
         mHouseService.addMaterialsbyjson(x);
+        //xqly
         return "redirect:materials_in_stock";
     }
 
@@ -52,8 +53,6 @@ public class MaterialsManageController {
         model.addAttribute("lists",lists);
         return "materials_manage/materials_in_stock";
     }
-
-
 
     @RequestMapping("materials_out_stock")
     public String mst(Model model)

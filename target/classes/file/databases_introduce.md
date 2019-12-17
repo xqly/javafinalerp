@@ -31,7 +31,7 @@
 | MHLID | 原料库日志ID |
 | MHID | 操作原料库名称 |
 | Oper | 操作方式 |
-| MID | 操作原料ID |
+| MPID | 操作原料批次号ID |
 | MDate | 操作日期 |
 | MLNum | 操作数量 |
 | MLMan | 主要负责人 |
@@ -42,7 +42,23 @@
 | ---- | ---- |
 | MID | 原料ID |
 | MName | 原料名称 |
-| MPrice | 原料单价 |
 | MExpDate | 原料保质期 |
 | MRemark | 原料备注 |
+| MPrice | 原料单价 |
 
+## Method
+| 字段名 | 含义 |
+| ---- | ---- |
+| MeID | 方法ID |
+| GID | 物品ID |
+| MID | 原料ID |
+| MNum | 所需原料数量 |
+
+## ProducePlan 
+| 字段名 | 含义 |
+| ---- | ---- |
+| pid | 计划ID |
+| ptime | 截止时间 |
+| goodid | 货物ID |
+| gnum | 货物数量 |
+| pworkshop | 车间 |

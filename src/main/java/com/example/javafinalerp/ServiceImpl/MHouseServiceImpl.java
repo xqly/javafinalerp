@@ -40,6 +40,7 @@ public class MHouseServiceImpl implements MHouseService {
 
     @Override
     public void Destroybymhsid(Integer x) {
+//        System.out.println(x);
         mhStatusResitory.deleteById(x);
     }
 
@@ -58,6 +59,7 @@ public class MHouseServiceImpl implements MHouseService {
     @Override
     public void addMaterialsbyjson(String s) {
         //xqly
+        System.out.println(s);
     }
 
     @Override

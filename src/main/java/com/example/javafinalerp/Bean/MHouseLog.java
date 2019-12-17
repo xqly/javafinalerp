@@ -11,7 +11,6 @@ public class MHouseLog {
     private Integer MHLID;
     private Integer MHID;
     private Integer Oper;
-    private Integer MID;
     private Integer MPID;
     private String MDate;
     private Integer MLNum;
@@ -48,15 +47,6 @@ public class MHouseLog {
 
     public void setMHID(Integer MHID) {
         this.MHID = MHID;
-    }
-
-
-    public Integer getMID() {
-        return MID;
-    }
-
-    public void setMID(Integer MID) {
-        this.MID = MID;
     }
 
     public Integer getMPID() {

@@ -6,6 +6,7 @@ import com.example.javafinalerp.Bean.Materials;
 public class Materialsandname extends MHStatus {
     private String name;
     private Integer expdate;
+    private Double MPrice;
 
     public Materialsandname(MHStatus x){
         this.setMHID(x.getMHID());
@@ -14,6 +15,14 @@ public class Materialsandname extends MHStatus {
         this.setMHSID(x.getMHSID());
         this.setMHTime(x.getMHTime());
         this.setMID(x.getMID());
+    }
+
+    public Double getMPrice() {
+        return MPrice;
+    }
+
+    public void setMPrice(Double MPrice) {
+        this.MPrice = MPrice;
     }
 
     public String getName() {

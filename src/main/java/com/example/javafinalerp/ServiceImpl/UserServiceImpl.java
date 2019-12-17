@@ -3,11 +3,13 @@ package com.example.javafinalerp.ServiceImpl;
 import com.example.javafinalerp.Bean.User;
 import com.example.javafinalerp.Resitory.UserResitory;
 import com.example.javafinalerp.Service.UserService;
+import com.example.javafinalerp.tempfunc.Myfunc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserResitory userResitory;
 
+    @Resource
+    Myfunc myfunc;
+
     @Override
     public User loginCheck(Integer ID, String Password) {
         User user = userResitory.loginFind(ID,Password);
@@ -29,7 +34,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getListByDept(Integer x){
         List<User> users = userResitory.gdeptList(x);
+//        List<User> users = myfunc.getlistbyid(x);
         return users;
+
     }
 
 

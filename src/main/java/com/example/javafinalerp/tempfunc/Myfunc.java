@@ -1,9 +1,17 @@
 package com.example.javafinalerp.tempfunc;
 
+import com.example.javafinalerp.Bean.User;
+import com.example.javafinalerp.Resitory.UserResitory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+@Component
 public class Myfunc {
+
 
     private static Integer TimetoI(String x){
         String s2;

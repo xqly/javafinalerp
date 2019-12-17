@@ -4,6 +4,7 @@ import com.example.javafinalerp.Service.MHouseService;
 import com.example.javafinalerp.Service.UserInfoService;
 import com.example.javafinalerp.Service.UserService;
 import com.example.javafinalerp.tempclass.Materialsandname;
+import com.example.javafinalerp.tempfunc.Materfunc;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,9 +23,12 @@ class JavafinalerpApplicationTests {
     @Resource
     MHouseService mHouseService;
 
+    @Resource
+    Materfunc materfunc;
+
     @Test
     void contextLoads() {
-        userService.getListByDept(1);
+        materfunc.OutMaterialbyPlan(1);
     }
 
 }
