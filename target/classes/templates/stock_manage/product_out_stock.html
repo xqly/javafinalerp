@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -26,6 +26,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <![endif]-->
+    <script>
+        function accptplan(butt) {
+            var ret = window.confirm("确定出库?");
+            if(ret){
+                $("#QID").attr("value",butt.getAttribute("data-id"));
+            }
+        }
+    </script>
 
 </head>
 
@@ -425,7 +433,7 @@
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">商品出库管理</h4> </div>
-            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="#" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 <ol class="breadcrumb">
                     <li><a href="index.html">首页</a></li>
                     <li class="active">商品出库管理</li>
@@ -438,7 +446,6 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3 class="box-title">商品出库列表</h3>
-
                     <br><br>
                     <div class="table-responsive">
                         <table class="table">
@@ -451,64 +458,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td  data-toggle="modal" data-target="#addSource">1</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
 
+                            <tr th:each="lists : ${lists}">
+                                <td scope="row" th:text="${listsStat.index+1}" id="xqly"></td>
+                                <td th:text="${lists.id}"></td>
+                                <td  th:text="${lists.time}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">接受</button>
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">拒绝</button>-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Deshmukh</td>
-                                <td>admin</td>
-                                <td>已接收</td>
-                                <td>
-                                    <!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>-->
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>@Genelia</td>
-                                <td>@Genelia</td>
-                                <td>未答复</td>
-                                <td>
-                                    <!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>-->
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Roshan</td>
-                                <td>supporter</td>
-                                <td>已拒绝</td>
-                                <td>
-                                    <!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>-->
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>@Genelia</td>
-                                <td>Hickle</td>
-                                <td>生产完成</td>
-                                <td>
-                                    <!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>-->
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Nigam</td>
-                                <td>Eichmann</td>
-                                <td>@Genelia</td>
-                                <td>
-                                    <!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>-->
-                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>-->
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal"  th:data-id="${lists.getid()}" onclick="accptplan(this)">接受出库</button>
                                 </td>
                             </tr>
                             </tbody>
