@@ -8,14 +8,31 @@ import javax.persistence.Id;
 public class MHouseLog {
     @Id
     @GeneratedValue
-    private Integer MHLID;    //日志编号
-    private Integer MHID;  // 原料库id
-    private String Oper;   //操作
-    private Integer MID;  //原料id
-    private Integer MPID;   // 车间id
-    private String MDate;  //时间
-    private Integer MLNum;  //数量
-    private Integer MLMan;  //负责人id
+    private Integer MHLID;
+    private Integer MHID;
+    private Integer Oper;
+    private Integer MID;
+    private Integer MPID;
+    private String MDate;
+    private Integer MLNum;
+    private Integer MLMan;
+    private Integer MLWMan;
+
+    public Integer getOper() {
+        return Oper;
+    }
+
+    public void setOper(Integer oper) {
+        Oper = oper;
+    }
+
+    public Integer getMLWMan() {
+        return MLWMan;
+    }
+
+    public void setMLWMan(Integer MLWMan) {
+        this.MLWMan = MLWMan;
+    }
 
     public Integer getMHLID() {
         return MHLID;
@@ -33,13 +50,6 @@ public class MHouseLog {
         this.MHID = MHID;
     }
 
-    public String getOper() {
-        return Oper;
-    }
-
-    public void setOper(String oper) {
-        Oper = oper;
-    }
 
     public Integer getMID() {
         return MID;
