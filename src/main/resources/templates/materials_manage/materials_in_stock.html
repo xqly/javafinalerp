@@ -26,12 +26,11 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
-        var materials_json={
+        var a={
             in_id:'',
             in_date:'',
             in_man:'',
         }
-
 
 
         var materials_json = JSON.parse("{\"title\":\"\",\"data\":[]}");
@@ -69,32 +68,38 @@
         <!--
         var count = 1;
         var count2 = 1;
-        function add() {
-            var tbl = document.all.ci;
+        function add1() {
+            var tbl = document.all.ci2;
             var rows = tbl.rows.length;
             var tr = tbl.insertRow(rows);
 
             var name = tr.insertCell(0);
-            name.innerHTML = '<input style="width: 70%;" type="text">';
+            name.innerHTML = '<select  name="mater" id="mater" style="width:100%;" onchange="xiala()">\n' +
+                '                                                <option th:text="请选择原料"></option>\n' +
+                '                                                <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>\n' +
+                '                                            </select>';
             var tel = tr.insertCell(1);
-            tel.innerHTML = '<input style="width: 70%;" type="text">';
+            tel.innerHTML = '<select  name="stu_profession" style="width:100%;">\n' +
+                '                                                <option th:text="请选择原料库"></option>\n' +
+                '                                                <option th:each="mhouse:${mhouse}" th:value="${mhouse.MHID}" th:text="${mhouse.MHName}" ></option>\n' +
+                '                                            </select>';
             var rdo = tr.insertCell(2);
-            rdo.innerHTML = '<input style="width: 70%;" type="text">';
+            rdo.innerHTML = '<input type="date" style="width:100%;">';
             var chk = tr.insertCell(3);
-            chk.innerHTML = '<input style="width: 70%;" type="text">';
+            chk.innerHTML = '<input type="number" value="1" style="width:70%;" id="num" name="num" onchange="num_change()">';
             var four= tr.insertCell(4);
-            four.innerHTML = '<input style="width: 70%;" type="text">';
+            four.innerHTML = '<input type="text" style="width:70%;" id="price" name="price" onfocus=this.blur()>';
             var five= tr.insertCell(5);
-            five.innerHTML = '<input style="width: 70%;" type="text">';
+            five.innerHTML = '<input type="number" style="width:70%;" id="zong" name="zong" onfocus=this.blur()>';
             var six= tr.insertCell(6);
-            six.innerHTML = '<input style="width: 70%;" type="text">';
+            six.innerHTML = '<input type="text" style="width:70%;" >';
             var del = tr.insertCell(7);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
             count++;
         }
 
-        function add1() {
-            var tbl = document.all.ci2;
+        function add() {
+            var tbl = document.all.ci;
             var rows = tbl.rows.length;
             var tr = tbl.insertRow(rows);
 
