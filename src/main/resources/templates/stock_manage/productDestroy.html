@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -26,7 +26,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <![endif]-->
-
+    <script>
+        function accptplan(butt) {
+            var ret = window.confirm("确定销毁?");
+            if(ret){
+                $("#QID").attr("value",butt.getAttribute("data-id"));
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -358,7 +365,7 @@
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">商品销毁</h4> </div>
-            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="#" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 <ol class="breadcrumb">
                     <li><a href="index.html">首页</a></li>
                     <li class="active">商品销毁</li>
@@ -389,93 +396,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
+                            <tr th:each="lists : ${lists}">
+                                <td scope="row" th:text="${listsStat.index+1}" id="xqly"></td>
+                                <td th:text="${lists.GID}"></td>
+                                <td  th:text="${lists.Gname}"></td>
+                                <td  th:text="${lists.GHPID}"></td>  <!--批次号-->
+                                <td  th:text="${lists.GHTime}"></td><!--生产日期-->
+                                <td  th:text="${lists.expdate}"></td><!--保质期-->
+                                <td  th:text="${lists.GHNum}"></td>
+                                <td  th:text="${lists.GHID}"></td><!--仓库id-->
+                                <td  th:text="${lists.GHBZ}"></td><!--备注？？？？？要不要？？？？-->
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">销毁</button>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>@Ritesh</td>
-                                <td>member</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">销毁</button>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Sanghani</td>
-                                <td>Gusikowski</td>
-                                <td>@Govinda</td>
-                                <td>developer</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">销毁</button>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Roshan</td>
-                                <td>Rogahn</td>
-                                <td>@Hritik</td>
-                                <td>supporter</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">销毁</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Joshi</td>
-                                <td>Hickle</td>
-                                <td>@Maruti</td>
-                                <td>member</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">销毁</button>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Nigam</td>
-                                <td>Eichmann</td>
-                                <td>@Sonu</td>
-                                <td>supporter</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">销毁</button>
-
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal"  onclick="accptplan(this)" th:data-id="${lists.getGID()}" >销毁</button>
                                 </td>
                             </tr>
                             </tbody>
