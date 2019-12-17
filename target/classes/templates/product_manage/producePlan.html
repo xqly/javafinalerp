@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" xmlns:th="http://www.thymeleaf.org">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -19,12 +19,124 @@
     <link href="../css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="../css/colors/blue-dark.css" id="theme" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
+    <script>
+
+        function fsubmit1(obj) {
+            obj.submit();
+        }
+        function fsubmit(obj) {
+            if(CheckPost()){
+                obj.submit();
+            }
+        }
+        function fsubmit2(obj) {
+            if(CheckPost2()){
+                obj.submit();
+            }
+        }
+
+
+        function CheckPost2 () {
+            var reg=/[^\x00-\x80]{2,5}/;
+            var reg1 = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            var reg2 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            var x=alterform.UName.value;
+            var x1=alterform.UTelephone.value;
+            var x2=alterform.UMail.value;
+            var x3=alterform.USal.value;
+            if ( alterform.UName.value==''||alterform.UName.value==null) {
+                alert("请填写用户名！");
+                document.alterform.UName.focus();
+                return false;
+            }
+            if(!reg.test(x)){
+                alert("用户名应为中文，且2-5个字符!");
+                document.alterform.UName.focus();
+                document.alterform.UName.value = "";
+                return false;
+            }
+            if ( alterform.UTelephone.value==''||alterform.UTelephone.value==null) {
+                alert("请填写手机号！");
+                document.alterform.UTelephone.focus();
+                return false;
+            }
+            if(!reg1.test(x1)){
+                alert("手机号格式错误!");
+                document.alterform.UTelephone.focus();
+                document.alterform.UTelephone.value = "";
+                return false;
+            }
+            if(x2!='' && !reg2.test(x2)){
+                alert("邮箱格式错误!");
+                document.alterform.UMail.focus();
+                document.alterform.UMail.value = "";
+                return false;
+            }
+            if(x3<1000||x3>100000){
+                alert("工资范围有误!");
+                document.alterform.USal.focus();
+                document.alterform.USal.value = "";
+                return false;
+            }
+
+            return true;
+
+        }
+
+        function CheckPost () {
+            var date = new Date();
+            var seperator1 = "-";
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = year + seperator1 + month + seperator1 + strDate;
+
+
+            var reg=/[^\x00-\x80]{2,5}/;
+            var reg1 = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            var reg2 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+
+            var x1=formadd.num0.value;//当前时间
+            var x2=formadd.time0.value;
+
+
+            if ( x1<0 ||x1>10000) {
+                alert("商品数量区间有误！");
+                document.formadd.gnum.focus();
+                return false;
+            }
+            /*if (x1<currentdate) {
+                alert("时间不应晚于当前时间！");
+                return false;
+            }*/
+            return true;
+        }
+    </script>
+    <script>
+        function alterfun(butt) {
+            $("#kid").attr("value",butt.getAttribute("data-pid"));
+            $("#gid").attr("value",butt.getAttribute("data-goodid"));
+            $("#gnum").attr("value",butt.getAttribute("data-gnum"));
+            $("#time").attr("value",butt.getAttribute("data-ptime"));
+            $("#chejian").attr("value",butt.getAttribute("data-pworkshop"));
+        }
+        function fsubmit(obj) {
+                obj.submit();
+        }
+        function fsubmit2(obj) {
+                obj.submit();
+        }
+    </script>
 </head>
 
 <body>
@@ -136,6 +248,9 @@
                         <li>
                             <a href="materialDestroy">原料销毁</a>
                         </li>
+                        <li>
+                            <a href="materials_in_home">原料库存储信息</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -145,9 +260,6 @@
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="producePlan">生产计划</a>
-                        </li>
-                        <li>
-                            <a href="produceManage">生产管理</a>
                         </li>
                         <li>
                             <a href="burdenSheet">配料单管理</a>
@@ -216,9 +328,7 @@
                         <li>
                             <a href="add_dept">原料库信息</a>
                         </li>
-                        <li>
-                            <a href="materials_in_home">原料库存储信息</a>
-                        </li>
+
                         <li>
                             <a href="add_goods">商品信息</a>
                         </li>
@@ -289,61 +399,60 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
-                            <div class="form-group ">
+                        <form class="form-horizontal" id="formadd"  data-form="ajax" name="formadd" action="/saveinfo" method="post" >
+                            <!--<div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">计划单号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="sName" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sLink" class="col-xs-3 control-label">商品批次号：</label>
-                                <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="kid0" name="kid0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">商品编号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi"  id="gid0" name="gid0"  readonly>
+                                </div>
+                            </div>-->
+
+                            <div class="form-group">
+                                <select class="form-control input-sm duiqi" >
+                                    <option>商品编号</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="sLink" class="col-xs-3 control-label">商品数量：</label>
+                                <div class="col-xs-8 ">
+                                    <input type="number" class="form-control input-sm duiqi"   id="num0" name="num0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sOrd" class="col-xs-3 control-label">商品数量：</label>
+                                <label for="sOrd" class="col-xs-3 control-label">计划制定时间：</label>
                                 <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                    <input type="date" class="form-control input-sm duiqi"  id="time0" name="time0" placeholder="">
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">计划生产时间：</label>
-                                <div class="col-xs-8">
-                                    <input type="date" class="date-picker form-control input-sm duiqi" id="sKnot" placeholder="">
-                                </div>
+                                <select class="form-control input-sm duiqi" >
+                                    <option>商品编号</option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">计划完成时间：</label>
+
+                           <!-- <div class="form-group">
+                                <label for="sKnot" class="col-xs-3 control-label">负责车间：</label>
                                 <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="text" class="date-picker form-control input-sm duiqi"  placeholder=""  id="chejian0" name="chejian0">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
-                                <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">状态：</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control input-sm duiqi" id="sKnot" placeholder=""></textarea>
-                                </div>
-                            </div>
+                            </div>-->
+
+
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-xs btn-green"  onclick="javascript:fsubmit(document.formadd)">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -362,61 +471,45 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <<form class="form-horizontal" action="/alterplan" method="post" id="alterform" name="alterform">>
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">计划单号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="kid" name="kid" placeholder="" readonly>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="sLink" class="col-xs-3 control-label">商品批次号：</label>
-                                <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="sLink" placeholder="">
-                                </div>
-                            </div>
+
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">商品编号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="gid" name="gid" placeholder="" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sOrd" class="col-xs-3 control-label">商品数量：</label>
                                 <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                    <input type="number" class="form-control input-sm duiqi" id="gnum" name="gnum" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">计划生产时间：</label>
+                                <label for="sKnot" class="col-xs-3 control-label">计划制定时间：</label>
                                 <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="date" class="form-control input-sm duiqi" id="time" name="time" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">计划完成时间：</label>
+                                <label for="sKnot" class="col-xs-3 control-label">负责车间：</label>
                                 <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="chejian" name="chejian" placeholder="">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
-                                <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">状态：</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control input-sm duiqi" id="sKnot" placeholder=""></textarea>
-                                </div>
-                            </div>
+
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="fsubmit2(document.alterform)">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -471,26 +564,21 @@
                 <div class="white-box">
                     <h3 class="box-title">生产计划列表</h3>
                     <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加商品</button>
+
+                    <form style="display: inline" method="post" action="/query_by_kid">
                     <label style="margin-left: 80px;font-size: small" >计划单号</label>
-                    <input type="text"  style="width: 150px">
+                    <input type="text"  style="width: 150px" name="KID" >
                     <button>查询</button>
+                    </form>
 
+                    <form style="display: inline" method="post" action="/query_by_gid">
                     <label style="margin-left: 30px;font-size: small" >商品编号</label>
-                    <input type="text" style="width: 150px">
+                    <input type="text" style="width: 150px"  name="GID">
                     <button>查询</button>
+                    </form>
 
-                    <label style="margin-left: 30px;font-size: small" >负责人</label>
-                    <input type="text" style="width: 150px">
-                    <button>查询</button>
                     <br><br>
 
-                    <label style="margin-left: 118px;font-size: small" >计划生产时间</label>
-                    <input type="date" style="width: 150px">
-                    <button>查询</button>
-
-                    <label style="margin-left: 278px;font-size: small" >计划完成时间</label>
-                    <input type="date" style="width: 150px">
-                    <button>查询</button>
                     <br><br>
                     <div class="table-responsive">
                         <table class="table">
@@ -498,105 +586,23 @@
                             <tr>
                                 <th>#</th>
                                 <th>计划单号</th>
-                                <th>商品批次号</th>
                                 <th>商品编号</th>
                                 <th>商品数量</th>
-                                <th>计划生产时间</th>
-                                <th>计划完成时间</th>
-                                <th>负责人</th>
-                                <th>状态</th>
+                                <th>计划制定时间</th>
+                                <th>负责车间</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Deshmukh</td>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
+                            <tr th:each="lists:${lists}">
+                                <td th:text="${listsStat.index+1}"></td>
+                                <td th:text="${lists.getPid()}"></td>
+                                <td th:text="${lists.getGoodid()}"></td>
+                                <td th:text="${lists.getGnum()}"></td>
+                                <td th:text="${lists.getPtime()}"></td>
+                                <td th:text="${lists.getPworkshop()}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Deshmukh</td>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>@Ritesh</td>
-                                <td>member</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>已接收</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Sanghani</td>
-                                <td>Gusikowski</td>
-                                <td>Deshmukh</td>
-                                <td>@Govinda</td>
-                                <td>developer</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>未答复</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Roshan</td>
-                                <td>Rogahn</td>
-                                <td>Deshmukh</td>
-                                <td>@Hritik</td>
-                                <td>supporter</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>已拒绝</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Joshi</td>
-                                <td>Hickle</td>
-                                <td>@Maruti</td>
-                                <td>Deshmukh</td>
-                                <td>member</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>生产完成</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Nigam</td>
-                                <td>Eichmann</td>
-                                <td>Deshmukh</td>
-                                <td>@Sonu</td>
-                                <td>supporter</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-pid="${lists.getPid()}" th:data-goodid="${lists.getGoodid()}" th:data-gnum="${lists.getGnum()}" th:data-ptime="${lists.getPtime()}" th:data-pworkshop="${lists.getPworkshop()}"  onclick="alterfun(this)">修改</button>
                                 </td>
                             </tr>
                             </tbody>

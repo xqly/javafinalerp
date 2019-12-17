@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,13 +18,60 @@
     <link href="../css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="../css/colors/blue-dark.css" id="theme" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
+
+    <script>
+        function alterfun(butt) {
+            $("#ugid").attr("value",butt.getAttribute("data-gid"));
+            $("#ugname").attr("value",butt.getAttribute("data-gname"));
+        }
+
+        function delsheet(butt) {
+            $("#sid").attr("value",butt.getAttribute("data-id"));
+        }
+        function get_table_data() {
+            var tr = $("#ci2 tr");
+            var result = [];
+            for (var i = 0; i < tr.length; i++) {
+                var inputs2 = $(tr[i]).find("td").find("input");
+                var inputs1 = $(tr[i]).find("td").find("select");
+                if (inputs1.length > 0 && inputs2.length>0) {
+                    result.push({
+                        mid : inputs1[0].value,
+                        mdate : inputs2[0].value
+
+                    });
+                }
+            }
+            return result;
+        }
+        function send() {
+
+
+            var bisSuenDocuSacertCont = get_table_data();
+            var json= {
+                goods : document.getElementById("goods5").value,
+                peiliao : bisSuenDocuSacertCont
+            };
+
+            var burden=JSON.stringify(json);
+            alert(burden);
+            $.ajax({
+                url:"burdenSheet",
+                type:"post",
+                dataType:"json",
+                contentType:"application/json",
+                data:burden,
+                success:function(){
+                    alert(burden);
+                }
+            });
+        }
+
+    </script>
     <script type="text/javascript">
         <!--
         var count = 1;
@@ -36,14 +82,16 @@
             var tr = tbl.insertRow(rows);
 
             var name = tr.insertCell(0);
-            name.innerHTML = '<input style="width: 70%;" type="text">';
+            name.innerHTML = '                                        <td>\n' +
+                '                                            <select  name="mater1" id="mater1" style="width:100%;" >\n' +
+                '                                                <option th:text="请选择原料"></option>\n' +
+                '                                                <option th:each="materials:${materials}" th:value="${materials.MID}" th:text="${materials.MName}" ></option>\n' +
+                '                                            </select>\n' +
+                '                                        </td>';
             var tel = tr.insertCell(1);
-            tel.innerHTML = '<input style="width: 70%;" type="text">';
-            var rdo = tr.insertCell(2);
-            rdo.innerHTML = '<input style="width: 70%;" type="text">';
-            var chk = tr.insertCell(3);
-            chk.innerHTML = '<input style="width: 70%;" type="text">';
-            var del = tr.insertCell(4);
+            tel.innerHTML = '<input style="width: 70%;" type="number">';
+
+            var del = tr.insertCell(2);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
             count++;
         }
@@ -54,14 +102,16 @@
             var tr = tbl.insertRow(rows);
 
             var name = tr.insertCell(0);
-            name.innerHTML = '<input style="width: 70%;" type="text">';
+            name.innerHTML = '                                        <td>\n' +
+                '                                            <select  name="mater2" id="mater2" style="width:100%;" >\n' +
+                '                                                <option th:text="请选择原料"></option>\n' +
+                '                                                <option th:each="materials:${materials}" th:value="${materials.MID}" th:text="${materials.MName}" ></option>\n' +
+                '                                            </select>\n' +
+                '                                        </td>';
             var tel = tr.insertCell(1);
-            tel.innerHTML = '<input style="width: 70%;" type="text">';
-            var rdo = tr.insertCell(2);
-            rdo.innerHTML = '<input style="width: 70%;" type="text">';
-            var chk = tr.insertCell(3);
-            chk.innerHTML = '<input style="width: 70%;" type="text">';
-            var del = tr.insertCell(4);
+            tel.innerHTML = '<input style="width: 70%;" type="number">';
+
+            var del = tr.insertCell(2);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
             count2++;
         }
@@ -185,6 +235,9 @@
                         <li>
                             <a href="materialDestroy">原料销毁</a>
                         </li>
+                        <li>
+                            <a href="materials_in_home">原料库存储信息</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -194,9 +247,6 @@
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="producePlan">生产计划</a>
-                        </li>
-                        <li>
-                            <a href="produceManage">生产管理</a>
                         </li>
                         <li>
                             <a href="burdenSheet">配料单管理</a>
@@ -265,9 +315,7 @@
                         <li>
                             <a href="add_dept">原料库信息</a>
                         </li>
-                        <li>
-                            <a href="materials_in_home">原料库存储信息</a>
-                        </li>
+
                         <li>
                             <a href="add_goods">商品信息</a>
                         </li>
@@ -283,9 +331,6 @@
                         <li>
                             <a href="add_custom">客户信息</a>
                         </li>
-                        <li>
-                            <a href="add_member">会员信息</a>
-                        </li>
                     </ul>
                 </li>
                 <li>
@@ -298,12 +343,6 @@
                         </li>
                         <li>
                             <a href="productsLog">仓库日志</a>
-                        </li>
-                        <li>
-                            <a href="chejian_in_Log">入车间日志</a>
-                        </li>
-                        <li>
-                            <a href="chejian_out_Log">出车间日志</a>
                         </li>
                     </ul>
                 </li>
@@ -337,12 +376,15 @@
                     <h4 class="modal-title" id="gridSystemModalLabel">配料表</h4>
                     <button class="btn btn-yellow btn-xs" onclick="add1()" data-toggle="modal"  style="width: 10%;height:40px;" >添加配料项</button>
                     <br><br>
-                        <label >商品编号：</label>
-                            <input type="text" placeholder="201912020001" class="form-control-line">
+                        <!--<label >商品编号：</label>-->
+                            <!--<input type="text" placeholder="201912020001" class="form-control-line">-->
                          <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品名称：</label>
-                            <input type="text" placeholder="牛奶" class="form-control-line" >
-                        <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负责人编号:</label>
-                            <input type="text" placeholder="201700800607" class=" form-control-line" onfocus=this.blur() >
+                        <select  name="goods5" id="goods5" style="width:100%;" >
+                                    <option th:text="请选择商品"></option>
+                                    <option th:each="goods:${goods}" th:value="${goods.getG_ID()}" th:text="${goods.getGName()}" ></option>
+                        </select>
+
+
                     </div>
 
                 <div class="modal-body">
@@ -352,27 +394,27 @@
                                 <table class="table" id="ci2" name="ci2">
                                     <thead>
                                     <tr>
-                                        <th>原料编号</th>
                                         <th>原料名称</th>
                                         <th>数量(单位)</th>
-                                        <th>备注</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
+
                                         <td></td>
                                         <td></td>
                                         <td></td>
 
                                     </tr>
                                     <tr>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
+                                        <td>
+                                            <select  name="mater" id="mater" style="width:100%;" >
+                                                <option th:text="请选择原料"></option>
+                                                <option th:each="materials:${materials}" th:value="${materials.MID}" th:text="${materials.MName}" ></option>
+                                            </select>
+                                        </td>
+                                        <td><input type="number" style="width:70%;"></td>
                                         <td><input type="button" onclick="del(this)" value="删除"></td>
                                     </tr>
                                     </tbody>
@@ -383,7 +425,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="send()">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -400,12 +442,10 @@
                     <h4 class="modal-title" id="gridSystemModalLabel">配料单</h4>
                     <button class="btn btn-yellow btn-xs" onclick="add()" data-toggle="modal"  style="width: 10%;height:40px;" >添加配料项</button>
                     <br><br>
+                    <form style="display: inline" method="post" action="/query_by_id">
                     <label >商品编号：</label>
-                    <input type="text" placeholder="201912020001" class="form-control-line">
-                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品名称：</label>
-                    <input type="text" placeholder="牛奶" class="form-control-line" >
-                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负责人编号:</label>
-                    <input type="text" placeholder="201700800607" class=" form-control-line" onfocus=this.blur() >
+                    <input type="text" placeholder="201912020001" class="form-control-line" name="GID">
+                    </form>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -414,10 +454,10 @@
                                 <table class="table" id="ci" name="ci">
                                     <thead>
                                     <tr>
-                                        <th>原料编号</th>
+
                                         <th>原料名称</th>
                                         <th>数量(单位)</th>
-                                        <th>备注</th>
+
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -426,15 +466,12 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
-                                        <td></td>
+
 
                                     </tr>
                                     <tr>
                                         <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="text" style="width:70%;"></td>
+                                        <td><input type="number" style="width:70%;"></td>
                                         <td><input type="button" onclick="del(this)" value="删除"></td>
                                     </tr>
                                     </tbody>
@@ -487,7 +524,7 @@
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">配料单</h4> </div>
-            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="#" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 <ol class="breadcrumb">
                     <li><a href="index.html">首页</a></li>
                     <li class="active">配料单</li>
@@ -515,78 +552,23 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>商品大类编号</th>
-                                <th>商品细类编号</th>
+
+                                <th>商品编号</th>
                                 <th>商品名称</th>
-                                <th>备注</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
-                                <td>Deshmukh</td>
-                                <td>She is a excellent worker.</td>
+
+                            <tr th:each="sheet : ${sheets}">
+                                <td scope="row" th:text="${sheetStat.index+1}" id="xqly"></td>
+
+                                <td  th:text="${sheet.getG_SID()}"></td>
+                                <td  th:text="${sheet.getG_NAME()}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>Deshmukh</td>
-                                <td>She is a excellent worker.</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Sanghani</td>
-                                <td>Gusikowski</td>
-                                <td>Deshmukh</td>
-                                <td>She is a excellent worker.</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Roshan</td>
-                                <td>Rogahn</td>
-                                <td>Deshmukh</td>
-                                <td>She is a excellent worker.</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Joshi</td>
-                                <td>Hickle</td>
-                                <td>Deshmukh</td>
-                                <td>She is a excellent worker.</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Nigam</td>
-                                <td>Eichmann</td>
-                                <td>Deshmukh</td>
-                                <td>She is a excellent worker.</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${sheet.getG_SID()}" >查看</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-gid="${sheet.getG_SID()}" th:data-gname="${sheet.getG_NAME()}"   onclick="alterfun(this)">修改</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${sheet.getG_SID()}" onclick="delsheet(this)">删除</button>
                                 </td>
                             </tr>
                             </tbody>

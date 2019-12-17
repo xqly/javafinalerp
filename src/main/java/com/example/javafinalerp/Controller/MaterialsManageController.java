@@ -54,6 +54,7 @@ public class MaterialsManageController {
     }
 
 
+
     @RequestMapping("materials_out_stock")
     public String mst(Model model)
     {
