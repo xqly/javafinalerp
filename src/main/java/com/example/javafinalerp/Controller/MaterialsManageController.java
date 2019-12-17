@@ -3,6 +3,8 @@ package com.example.javafinalerp.Controller;
 import com.example.javafinalerp.Bean.*;
 import com.example.javafinalerp.Service.BasicManageService;
 import com.example.javafinalerp.Service.MHouseService;
+import com.example.javafinalerp.tempclass.Materialsandname;
+import com.example.javafinalerp.tempclass.Planandname;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +52,7 @@ public class MaterialsManageController {
     @RequestMapping("materials_out_stock")
     public String mst(Model model)
     {
-        List<ProducePlan> lists =null;
+        List<Planandname> lists =null;
         model.addAttribute("lists",lists);
         return "materials_manage/materials_out_stock";
     }
@@ -63,7 +65,8 @@ public class MaterialsManageController {
     @RequestMapping("materialDestroy")
     public String md(Model model)
     {
-        List<MHStatus> lists=null;
+
+        List<Materialsandname> lists=null;
         model.addAttribute("lists",lists);
         return "materials_manage/materialDestroy";
     }
@@ -72,5 +75,4 @@ public class MaterialsManageController {
     public String dm(@RequestParam("QID") Integer x){
         return "redirect:materials_manage/materialDestroy";
     }
-
 }

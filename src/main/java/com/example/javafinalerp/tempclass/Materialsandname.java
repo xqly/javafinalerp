@@ -1,4 +1,34 @@
 package com.example.javafinalerp.tempclass;
 
-public class materialsandname {
+import com.example.javafinalerp.Bean.MHStatus;
+import com.example.javafinalerp.Bean.Materials;
+
+public class Materialsandname extends MHStatus {
+    private String name;
+    private Integer expdate;
+
+    public Materialsandname(MHStatus x){
+        this.setMHID(x.getMHID());
+        this.setMHNum(x.getMHNum());
+        this.setMHPID(x.getMHPID());
+        this.setMHSID(x.getMHSID());
+        this.setMHTime(x.getMHTime());
+        this.setMID(x.getMID());
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getExpdate() {
+        return expdate;
+    }
+
+    public void setExpdate(Integer expdate) {
+        this.expdate = expdate;
+    }
 }

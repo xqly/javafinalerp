@@ -10,12 +10,29 @@ public class MHouseLog {
     @GeneratedValue
     private Integer MHLID;
     private Integer MHID;
-    private String Oper;
+    private Integer Oper;
     private Integer MID;
     private Integer MPID;
     private String MDate;
     private Integer MLNum;
     private Integer MLMan;
+    private Integer MLWMan;
+
+    public Integer getOper() {
+        return Oper;
+    }
+
+    public void setOper(Integer oper) {
+        Oper = oper;
+    }
+
+    public Integer getMLWMan() {
+        return MLWMan;
+    }
+
+    public void setMLWMan(Integer MLWMan) {
+        this.MLWMan = MLWMan;
+    }
 
     public Integer getMHLID() {
         return MHLID;
@@ -33,13 +50,6 @@ public class MHouseLog {
         this.MHID = MHID;
     }
 
-    public String getOper() {
-        return Oper;
-    }
-
-    public void setOper(String oper) {
-        Oper = oper;
-    }
 
     public Integer getMID() {
         return MID;
