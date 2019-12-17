@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -30,6 +30,155 @@
 </head>
 
 <body>
+<script language="JavaScript">
+
+    function clearNoNum(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+        obj.value = obj.value.replace(/^\./g, "");  //验证第一个字符是数字而不是.
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的.
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+
+    }
+
+    function fsubmit1(obj) {
+        obj.submit();
+    }
+    function fsubmit(obj) {
+       /* if(CheckPost()){
+            obj.submit();
+        }*/
+        obj.submit();
+    }
+    function fsubmit2(obj) {
+        if (CheckPost2()) {
+            obj.submit();
+        }
+    }
+
+/*
+    function CheckPost2 () {
+        var reg=/[^\x00-\x80]{2,5}/;
+        var reg1 = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        var reg2 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        var x=alterform.UName.value;
+        var x1=alterform.UTelephone.value;
+        var x2=alterform.UMail.value;
+        var x3=alterform.USal.value;
+        if ( alterform.UName.value==''||alterform.UName.value==null) {
+            alert("请填写用户名！");
+            document.alterform.UName.focus();
+            return false;
+        }
+        if(!reg.test(x)){
+            alert("用户名应为中文，且2-5个字符!");
+            document.alterform.UName.focus();
+            document.alterform.UName.value = "";
+            return false;
+        }
+        if ( alterform.UTelephone.value==''||alterform.UTelephone.value==null) {
+            alert("请填写手机号！");
+            document.alterform.UTelephone.focus();
+            return false;
+        }
+        if(!reg1.test(x1)){
+            alert("手机号格式错误!");
+            document.alterform.UTelephone.focus();
+            document.alterform.UTelephone.value = "";
+            return false;
+        }
+        if(x2!='' && !reg2.test(x2)){
+            alert("邮箱格式错误!");
+            document.alterform.UMail.focus();
+            document.alterform.UMail.value = "";
+            return false;
+        }
+        if(x3<1000||x3>100000){
+            alert("工资范围有误!");
+            document.alterform.USal.focus();
+            document.alterform.USal.value = "";
+            return false;
+        }
+
+        return true;
+
+    }
+
+    function CheckPost () {
+        var reg=/[^\x00-\x80]{2,5}/;
+        var reg1 = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        var reg2 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        var x=formadd.UName.value;
+        var x1=formadd.UTelephone.value;
+        var x2=formadd.UMail.value;
+        var x3=formadd.USal.value;
+        if ( formadd.UName.value==''||formadd.UName.value==null) {
+            alert("请填写用户名！");
+            document.formadd.UName.focus();
+            return false;
+        }
+        if(!reg.test(x)){
+            alert("用户名应为中文，且2-5个字符!");
+            document.formadd.UName.focus();
+            document.formadd.UName.value = "";
+            return false;
+        }
+        if ( formadd.UTelephone.value==''||formadd.UTelephone.value==null) {
+            alert("请填写手机号！");
+            document.formadd.UTelephone.focus();
+            document.formadd.UTelephone.value = "";
+            return false;
+        }
+        if(!reg1.test(x1)){
+            alert("手机号格式错误!");
+            document.formadd.UTelephone.focus();
+            document.formadd.UTelephone.value = "";
+            return false;
+        }
+        if(x2!='' && !reg2.test(x2)){
+            alert("邮箱格式错误!");
+            document.formadd.UMail.focus();
+            document.formadd.UMail.value = "";
+            return false;
+        }
+        if(x3<1000||x3>100000){
+            alert("工资范围有误!");
+            document.formadd.USal.focus();
+            document.formadd.USal.value = "";
+            return false;
+        }
+
+        return true;
+
+    }*/
+
+    function alterfun1(butt) {
+        var userid = butt.getAttribute("data-id");
+        $("#sName").attr("value",userid);
+        $("#sLink").attr("value",butt.getAttribute("data-FID"));
+        $("#sOrd").attr("value",butt.getAttribute("data-GID"));
+        $("#sKnot").attr("value",butt.getAttribute("data-LID"));
+        $("#sKnot0").attr("value",butt.getAttribute("data-Oper"));
+        $("#sKnot1").attr("value",butt.getAttribute("data-WID"));
+        $("#sKnot2").attr("value",butt.getAttribute("data-LTime"));
+        $("#sKnot3").attr("value",butt.getAttribute("data-LMan"));
+    }
+    function alterfun(butt) {
+        var userid = butt.getAttribute("data-id");
+        $("#sName").attr("value",userid);
+        $("#sLink").attr("value",butt.getAttribute("data-FID"));
+        $("#sOrd").attr("value",butt.getAttribute("data-GID"));
+        $("#sKnot").attr("value",butt.getAttribute("data-LID"));
+        $("#sKnot0").attr("value",butt.getAttribute("data-Oper"));
+        $("#sKnot1").attr("value",butt.getAttribute("data-WID"));
+        $("#sKnot2").attr("value",butt.getAttribute("data-LTime"));
+        $("#sKnot3").attr("value",butt.getAttribute("data-LMan"));
+        // $("#sal1").attr("value",butt.getAttribute("data-mess"));
+    }
+
+    function deluser(butt) {
+        $("#uid").attr("value",butt.getAttribute("data-id"));
+    }
+</script>
 <!-- Preloader -->
 <div class="preloader">
     <div class="cssload-speeding-wheel"></div>
@@ -310,19 +459,19 @@
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">商品批次号：</label>
                                 <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="sKnot" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">仓库编号：</label>
                                 <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="sKnot0" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="sKnot0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">数量(单位)：</label>
                                 <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sKnot1" placeholder="">
+                                    <input type="number" class="form-control input-sm duiqi" id="sKnot1" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -342,7 +491,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-xs btn-green"onclick="javascript:fsubmit(document.formadd)">保 存111</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -352,7 +501,7 @@
     <!-- /.modal -->
 
     <!--修改资源弹出窗口-->
-    <div class="modal fade" id="changeSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+   <!-- <div class="modal fade" id="changeSource" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -365,49 +514,49 @@
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">入库单号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="sName0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">生产单号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="sLink0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sOrd" class="col-xs-3 control-label">商品编号：</label>
                                 <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="sOrd0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">商品批次号：</label>
                                 <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="date" class="form-control input-sm duiqi" id="sKnot0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">仓库编号：</label>
                                 <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="sKnot0" placeholder="">
+                                    <input type="date" class="form-control input-sm duiqi" id="sKnot00" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">数量(单位)：</label>
                                 <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sKnot1" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="sKnot10" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">入库时间：</label>
                                 <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="sKnot2" placeholder="">
+                                    <input type="date" class="form-control input-sm duiqi" id="sKnot20" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
                                 <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sKnot3" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="sKnot30" placeholder="">
                                 </div>
                             </div>
                         </form>
@@ -421,7 +570,7 @@
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-    </div>
+    </div>-->
 
     <!-- /.modal -->
     <!--弹出删除资源警告窗口-->
@@ -489,99 +638,26 @@
                                 <th>数量(单位)</th>
                                 <th>入库时间</th>
                                 <th>负责人</th>
-                                <th>操作</th>
+                                <!--<th>操作</th>-->
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>@Ritesh</td>
-                                <td>member</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>已接收</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Sanghani</td>
-                                <td>Gusikowski</td>
-                                <td>@Govinda</td>
-                                <td>developer</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>未答复</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Roshan</td>
-                                <td>Rogahn</td>
-                                <td>@Hritik</td>
-                                <td>supporter</td>
-                                <td>admin</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>已拒绝</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Joshi</td>
-                                <td>Hickle</td>
-                                <td>@Maruti</td>
-                                <td>admin</td>
-                                <td>member</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>生产完成</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Nigam</td>
-                                <td>Eichmann</td>
-                                <td>@Sonu</td>
-                                <td>supporter</td>
-                                <td>@Genelia</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
+                            <tr th:each="lists : ${lists}">
+                                <td th:text="${listStat.index+1}"></td>
+                                <td th:text="${lists.getGPID()}"></td>
+                                <td th:text="${lists.getFID()}"></td>
+                                <td th:text="${lists.getGID()}"></td>
+                                <td th:text="${lists.getLID()}"></td>
+                                <td th:text="${lists.getOper()}"></td>
+                                <td th:text="${lists.getWID()}"></td>
+                                <td th:text="${lists.getLTime()}"></td>
+                                <td th:text="${lists.getLMan()}"></td>
+                               <!--<td>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${lists.getGPID()}"
+                                            th:data-FID="${lists.getFID()}" th:data-GID="${lists.getGID()}" th:data-LID="${lists.getLID()}" th:data-Oper="${lists.getOper()}"
+                                            th:data-LTime="${lists.getLTime()}" th:data-LMan="${lists.getLMan()}" onclick="alterfun(this)">修改</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${lists.getGPID()}" onclick="deluser(this)">删除</button>
+                                </td>-->
                             </tr>
                             </tbody>
                         </table>
