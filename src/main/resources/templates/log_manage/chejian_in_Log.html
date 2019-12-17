@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -293,9 +292,6 @@
                         <li>
                             <a href="add_custom">客户信息</a>
                         </li>
-                        <li>
-                            <a href="add_member">会员信息</a>
-                        </li>
                     </ul>
                 </li>
                 <li>
@@ -308,12 +304,6 @@
                         </li>
                         <li>
                             <a href="productsLog">仓库日志</a>
-                        </li>
-                        <li>
-                            <a href="chejian_in_Log">入车间日志</a>
-                        </li>
-                        <li>
-                            <a href="chejian_out_Log">出车间日志</a>
                         </li>
                     </ul>
                 </li>
@@ -524,7 +514,7 @@
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">入车间日志信息</h4> </div>
-            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="#" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 <ol class="breadcrumb">
                     <li><a href="index.html">首页</a></li>
                     <li class="active">入车间日志信息</li>
@@ -561,55 +551,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
 
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>@Ritesh</td>
-                                <td>@Ritesh</td>
-                                <td>Deshmukh</td>
-
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Sanghani</td>
-                                <td>Gusikowski</td>
-                                <td>@Govinda</td>
-                                <td>Gusikowski</td>
-                                <td>@Govinda</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Roshan</td>
-                                <td>Rogahn</td>
-                                <td>@Hritik</td>
-                                <td>Rogahn</td>
-                                <td>@Hritik</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Joshi</td>
-                                <td>Hickle</td>
-                                <td>@Maruti</td>
-                                <td>Rogahn</td>
-                                <td>@Hritik</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Nigam</td>
-                                <td>Eichmann</td>
-                                <td>@Sonu</td>
-                                <td>Rogahn</td>
-                                <td>@Hritik</td>
+                            <tr th:each="log: ${logs}">
+                                <td scope="row" th:text="${logStat.index+1}"></td>
+                                <td th:text="${log.getINID()}"></td>
+                                <td th:text="${log.getDID()}"></td>
+                                <td th:text="${log.getOutID()}"></td>
+                                <td th:text="${log.getMLMan()}"></td>
+                                <td th:text="${log.getMDate()}"></td>
                             </tr>
                             </tbody>
                         </table>
