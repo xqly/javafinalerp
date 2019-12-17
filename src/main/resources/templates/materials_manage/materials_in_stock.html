@@ -47,23 +47,23 @@
         }
         function send() {
 
-        var bisSuenDocuSacertCont = get_table_data();
-        // var json= {
-        //   //  agenGene : $("#agenGene").val(),
-        //     bisSuenDocuSacertCont : bisSuenDocuSacertCont
-        // };
-         var materials_in_stock=JSON.stringify(bisSuenDocuSacertCont);
-        alert(materials_in_stock);
-        $.ajax({
-            url:"add_realmaterials",
-            type:"post",
-            dataType:"json",
-            contentType:"application/json",
-            data:materials_in_stock,
-            success:function(){
-                alert(materials_in_stock);
-            }
-        });
+            var bisSuenDocuSacertCont = get_table_data();
+            // var json= {
+            //   //  agenGene : $("#agenGene").val(),
+            //     bisSuenDocuSacertCont : bisSuenDocuSacertCont
+            // };
+            var materials_in_stock=JSON.stringify(bisSuenDocuSacertCont);
+            alert(materials_in_stock);
+            $.ajax({
+                url:"add_realmaterials",
+                type:"post",
+                dataType:"json",
+                contentType:"application/json",
+                data:materials_in_stock,
+                success:function(){
+                    alert(materials_in_stock);
+                }
+            });
         }
 
     </script>
@@ -626,9 +626,9 @@
                     <h3 class="box-title">原料入库列表</h3>
                     <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">入库商品</button>
                     <form style="display: inline" method="post" action="/materialsfindbyid">
-                    <label style="margin-left: 100px;font-size: small" >入库单号</label>
-                    <input type="text" name="QID">
-                    <button>查询</button>
+                        <label style="margin-left: 100px;font-size: small" >入库单号</label>
+                        <input type="text" name="QID">
+                        <button>查询</button>
                     </form>
 
 
