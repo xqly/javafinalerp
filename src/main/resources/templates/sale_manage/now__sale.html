@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -27,7 +27,14 @@
     <![endif]-->
 
     <script type="text/javascript">
-        <!--
+        function alterfun(butt) {
+            $("#kid").attr("value",butt.getAttribute("data-pid"));
+            $("#gid").attr("value",butt.getAttribute("data-goodid"));
+            $("#gnum").attr("value",butt.getAttribute("data-gnum"));
+            $("#time").attr("value",butt.getAttribute("data-ptime"));
+            $("#chejian").attr("value",butt.getAttribute("data-pworkshop"));
+        }
+
         var count = 1;
         var count2 = 1;
         function add() {
@@ -53,11 +60,15 @@
             var tr = tbl.insertRow(rows);
 
             var name = tr.insertCell(0);
-            name.innerHTML = '<input style="width: 80%;" type="text">';
+            name.innerHTML = '                                            <select   style="width:100%;" >\n' +
+                '                                                <option th:text="请选择商品"></option>\n' +
+                '                                                <option th:each="goods:${goods}" th:value="${goods.getG_ID()}" th:text="${goods.getGName()}" ></option>\n' +
+                '                                            </select>';
             var tel = tr.insertCell(1);
-            tel.innerHTML = '<input style="width: 80%;" type="text">';
-            var rdo = tr.insertCell(2);
-            rdo.innerHTML = '<input style="width: 80%;" type="text">';
+            tel.innerHTML = '<input style="width: 80%;" type="number">';
+
+            var tel1 = tr.insertCell(2);
+            tel1.innerHTML = '<input style="width: 80%;" type="text">';
 
             var del = tr.insertCell(3);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
@@ -70,7 +81,42 @@
             tbl.deleteRow(tr.rowIndex-1);
         }
 
-        //-->
+        function get_table_data() {
+            var tr = $("#ci2 tr");
+            var result = [];
+            for (var i = 0; i < tr.length; i++) {
+                var inputs2 = $(tr[i]).find("td").find("input");
+                var inputs1 = $(tr[i]).find("td").find("select");
+                if (inputs1.length > 0 && inputs2.length>0) {
+                    result.push({
+                        mid : inputs1[0].value,
+                        mnum : inputs2[0].value,
+                        request : inputs2[1].value
+                    });
+                }
+            }
+            return result;
+        }
+        function send() {
+            var bisSuenDocuSacertCont = get_table_data();
+            var json= {
+                goods : document.getElementById("customer1").value,
+                peiliao : bisSuenDocuSacertCont
+            };
+
+            var burden=JSON.stringify(json);
+            alert(burden);
+            $.ajax({
+                url:"burdenSheet",
+                type:"post",
+                dataType:"json",
+                contentType:"application/json",
+                data:burden,
+                success:function(){
+                    alert(burden);
+                }
+            });
+        }
     </script>
 </head>
 
@@ -331,19 +377,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">销售订单</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel2">销售订单</h4>
                     <button class="btn btn-yellow btn-xs" onclick="add1()" data-toggle="modal"  style="width: 10%;height:40px;" >添加商品</button>
                     <br><br>
-                    <label >销售订单编号：</label>
-                    <input type="text" placeholder="201912020001" class="form-control-line" onfocus=this.blur() >
-                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负责人编号:</label>
 
-                    <input type="text" placeholder="201700800607" class=" form-control-line" onfocus=this.blur() >
-                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客户编号:</label>
+                    <label>客户编号:</label>
+                    <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer1" id="customer1" >
 
-                    <input type="text" placeholder="201700800607" class=" form-control-line"  >
-                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单时间:</label>
-
+                    <label style="margin-left: 100px">订单时间:</label>
                     <input type="date" id="date_info" placeholder="原料入库时间" class=" form-control-line"  >
 
                 </div>
@@ -354,8 +395,7 @@
                                 <table class="table" id="ci2" name="ci2">
                                     <thead>
                                     <tr>
-
-                                        <th>商品编号</th>
+                                        <th>商品名称</th>
                                         <th>商品数量</th>
                                         <th>备注</th>
                                         <th>操作</th>
@@ -371,8 +411,13 @@
                                     </tr>
                                     <tr>
 
-                                        <td><input type="text" style="width:80%;"></td>
-                                        <td><input type="text" style="width:80%;"></td>
+                                        <td>
+                                            <select  name="mater" id="mater" style="width:100%;" >
+                                                <option th:text="请选择商品"></option>
+                                                <option th:each="goods:${goods}" th:value="${goods.getG_ID()}" th:text="${goods.getGName()}" ></option>
+                                            </select>
+                                        </td>
+                                        <td><input type="number" style="width:80%;"></td>
                                         <td><input type="text" style="width:80%;"></td>
                                         <td><input type="button" onclick="del(this)" value="删除"></td>
                                     </tr>
@@ -384,7 +429,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="send()">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -401,6 +446,8 @@
                     <h4 class="modal-title" id="gridSystemModalLabel">销售订单</h4>
                     <button class="btn btn-yellow btn-xs" onclick="add()" data-toggle="modal"  style="width: 10%;height:40px;" >添加订单</button>
                     <br><br>
+
+
                     <label >销售订单编号：</label>
                     <input type="text" placeholder="201912020001" class="form-control-line" onfocus=this.blur() >
                     <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负责人编号:</label>
@@ -506,17 +553,18 @@
                 <div class="white-box">
                     <h3 class="box-title">订单列表</h3>
                     <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加订单</button>
+
+                    <form style="display: inline" method="post" action="/query_by_oid">
                     <label style="margin-left: 100px;font-size: small" >销售订单编号</label>
-                    <input type="text" >
+                    <input type="text" name="OID" >
                     <button>查询</button>
+                    </form>
 
+                    <form style="display: inline" method="post" action="/query_by_cid">
                     <label style="margin-left: 30px;font-size: small" >客户编号</label>
-                    <input type="text">
+                    <input type="text" name="CID">
                     <button>查询</button>
-
-                    <label style="margin-left: 30px;font-size: small" >负责人</label>
-                    <input type="text">
-                    <button>查询</button>
+                    </form>
 
                     <div class="table-responsive">
                         <table class="table">
@@ -524,8 +572,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>销售订单编号</th>
-                                <th>客户编号</th>
-
+                                <th>客户账号</th>
                                 <th>订单日期</th>
                                 <th>负责人</th>
                                 <th>备注</th>
@@ -533,82 +580,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Deshmukh</td>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-
+                            <tr th:each="order:${order}">
+                                <td th:text="${orderStat.index+1}"></td>
+                                <td th:text="${order.getOID()}"></td>
+                                <td th:text="${order.getCID()}"></td>
+                                <td th:text="${order.getOTime()}"></td>
+                                <td th:text="${order.getOMID()}"></td>
+                                <td th:text="${order.getremark()}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Deshmukh</td>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>@Ritesh</td>
-                                <td>She is a excellent worker.</td>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-pid="${order.getOID()}" th:data-goodid="${order.getCID()}" th:data-gnum="${order.getOTime()}" th:data-ptime="${order.getOMID()}" th:data-pworkshop="${order.getremark()}"  onclick="alterfun(this)">修改</button>
 
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Sanghani</td>
-                                <td>Deshmukh</td>
-                                <td>Gusikowski</td>
-                                <td>@Govinda</td>
-                                <td>She is a excellent worker.</td>
-
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Roshan</td>
-                                <td>Deshmukh</td>
-                                <td>Rogahn</td>
-                                <td>@Hritik</td>
-                                <td>She is a excellent worker.</td>
-
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Joshi</td>
-                                <td>Hickle</td>
-                                <td>Deshmukh</td>
-                                <td>@Maruti</td>
-                                <td>She is a excellent worker.</td>
-
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>ANAN</td>
-                                <td>Nigam</td>
-                                <td>Nigam</td>
-                                <td>Deshmukh</td>
-                                <td>Eichmann</td>
-
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
                                 </td>
                             </tr>
                             </tbody>

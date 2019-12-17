@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -328,58 +328,64 @@
     <!-- Left navbar-header end -->
     <!-- Page Content -->
     <!--添加资源弹出窗口-->
-    <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel" >
+        <div class="modal-dialog" role="document" style="width: 75%">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">添加退货单</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel2">销售订单</h4>
+                    <button class="btn btn-yellow btn-xs" onclick="add1()" data-toggle="modal"  style="width: 10%;height:40px;" >添加商品</button>
+                    <br><br>
+
+                    <label>客户编号:</label>
+                    <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer1" id="customer1" >
+
+                    <label style="margin-left: 100px">订单时间:</label>
+                    <input type="date" id="date_info" placeholder="原料入库时间" class=" form-control-line"  >
+
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <form class="form-horizontal">
-                            <div class="form-group ">
-                                <label for="sName" class="col-xs-3 control-label">退货单号：</label>
-                                <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="sName" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sLink" class="col-xs-3 control-label">(预)订单号：</label>
-                                <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="sLink" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sOrd" class="col-xs-3 control-label">退货原因：</label>
-                                <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sOrd" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">退款日期：</label>
-                                <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
-                                <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">备注：</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control input-sm duiqi" id="sKnot" placeholder=""></textarea>
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table" id="ci2" name="ci2">
+                                    <thead>
+                                    <tr>
+                                        <th>商品名称</th>
+                                        <th>商品数量</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            <select  name="mater" id="mater" style="width:100%;" >
+                                                <option th:text="请选择商品"></option>
+                                                <option th:each="goods:${goods}" th:value="${goods.getG_ID()}" th:text="${goods.getGName()}" ></option>
+                                            </select>
+                                        </td>
+                                        <td><input type="number" style="width:80%;"></td>
+                                        <td><input type="text" style="width:80%;"></td>
+                                        <td><input type="button" onclick="del(this)" value="删除"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="send()">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -508,86 +514,26 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>退货单号</th>
-                                <th>(预)订单号</th>
-                                <th>退货原因</th>
-                                <th>退货日期</th>
+                                <th>#</th>
+                                <th>销售订单编号</th>
+                                <th>客户账号</th>
+                                <th>订单日期</th>
                                 <th>负责人</th>
                                 <th>备注</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Deshmukh</td>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
+                            <tr th:each="order:${order}">
+                                <td th:text="${orderStat.index+1}"></td>
+                                <td th:text="${order.getOID()}"></td>
+                                <td th:text="${order.getCID()}"></td>
+                                <td th:text="${order.getOTime()}"></td>
+                                <td th:text="${order.getOMID()}"></td>
+                                <td th:text="${order.getremark()}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Deshmukh</td>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>@Ritesh</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Sanghani</td>
-                                <td>Deshmukh</td>
-                                <td>Gusikowski</td>
-                                <td>@Govinda</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Roshan</td>
-                                <td>Deshmukh</td>
-                                <td>Rogahn</td>
-                                <td>@Hritik</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Joshi</td>
-                                <td>Hickle</td>
-                                <td>Deshmukh</td>
-                                <td>@Maruti</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Nigam</td>
-                                <td>Nigam</td>
-                                <td>Deshmukh</td>
-                                <td>Eichmann</td>
-                                <td>@Sonu</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#addSource" th:data-pid="${order.getOID()}" th:data-goodid="${order.getCID()}" th:data-gnum="${order.getOTime()}" th:data-ptime="${order.getOMID()}" th:data-pworkshop="${order.getremark()}"  onclick="alterfun(this)">退货</button>
+
                                 </td>
                             </tr>
                             </tbody>
