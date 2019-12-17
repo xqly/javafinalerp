@@ -24,7 +24,10 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script>
         function accptplan(butt) {
-            $("#QID").attr("value",butt.getAttribute("data-id"));
+            var ret = window.confirm("确定出库?");
+            if(ret){
+                $("#QID").attr("value",butt.getAttribute("data-id"));
+            }
         }
     </script>
 
@@ -401,11 +404,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel1">提示</h4>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        确定要拒绝该原料出库请求吗？拒绝后不可修改！
+                        确定要接收该原料出库请求吗？
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -448,7 +451,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>计划单号</th>
-                                <th>商品种类</th>
                                 <th>商品名称</th>
                                 <th>商品数量</th>
                                 <th>计划制定时间</th>
@@ -459,13 +461,11 @@
                             <tr th:each="lists : ${lists}">
                                 <td scope="row" th:text="${listsStat.index+1}" id="xqly"></td>
                                 <td th:text="${lists.pid}"></td>
-                                <td  th:text="${lists.TypeName}"></td>
                                 <td  th:text="${lists.GName}"></td>
                                 <td  th:text="${lists.gnum}"></td>
                                 <td  th:text="${lists.ptime}"></td>
                                 <td>
-
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${lists.getPid()}" onclick="accptplan(this)">接受</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal"  th:data-id="${lists.getPid()}" onclick="accptplan(this)">接受出库</button>
                                 </td>
                             </tr>
                             </tbody>
