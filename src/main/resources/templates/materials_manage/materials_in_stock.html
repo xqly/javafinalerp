@@ -25,7 +25,46 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+        var materials_json={
+            in_id:'',
+            in_date:'',
+            in_man:'',
+        }
 
+
+
+        var materials_json = JSON.parse("{\"title\":\"\",\"data\":[]}");
+
+        //封装底部表格中的数据
+        var rows = document.getElementById("ci2").rows.length; //获得行数(包括thead)
+        if(rows > 1) {//
+            for (var i = 1; i < rows; i++) { //每行 从第二行开始因为第一行是表格的标题
+                var ins = new Object();//这里一定要new新的对象，要不然保存的都是一样的数据；都是最后一行的数据
+
+                ins.in_id = document.getElementById("ci2").rows[i].cells[0].innerHTML;
+                ins.in_date = document.getElementById("ci2").rows[i].cells[1].innerHTML;
+                ins.in_man = document.getElementById("ci2").rows[i].cells[2].innerHTML;
+                materials_json.data.add(ins);
+            }
+        }
+        //var obj=JSON.stringify(a);//这一行很关键
+
+        /*var taskList = ["123","456"];*/
+        var params = {
+            materials_json: materials_json
+        };
+
+        $.ajax({
+            type: "PUT",
+            dataType: "json",
+            url: "add_realmaterials",
+            data: params,
+            success: function (msg) {
+                alert(params)
+            }
+        });
+    </script>
     <script type="text/javascript">
         <!--
         var count = 1;
@@ -225,9 +264,6 @@
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="producePlan">生产计划</a>
-                        </li>
-                        <li>
-                            <a href="produceManage">生产管理</a>
                         </li>
                         <li>
                             <a href="burdenSheet">配料单管理</a>
