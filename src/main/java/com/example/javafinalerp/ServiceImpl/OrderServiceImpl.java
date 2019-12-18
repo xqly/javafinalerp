@@ -4,9 +4,11 @@ import com.example.javafinalerp.Bean.Order;
 import com.example.javafinalerp.Resitory.OrderResitory;
 import com.example.javafinalerp.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
