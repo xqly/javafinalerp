@@ -36,4 +36,9 @@ public class FinancialManageController {
         return "financial_manage/money_out";
     }
 
+    @RequestMapping("account_wait")
+    public String acwt(){
+        return "financial_manage/account_wait";
+    }
+
 }
