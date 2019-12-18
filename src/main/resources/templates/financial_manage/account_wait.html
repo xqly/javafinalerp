@@ -349,6 +349,48 @@
             <!-- /.col-lg-12 -->
         </div>
 
+
+        <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">待处理订单</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form class="form-horizontal">
+                                <div class="form-group ">
+                                    <label for="sName" class="col-xs-3 control-label">收款单编号：</label>
+                                    <div class="col-xs-8 ">
+                                        <input type="text" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sKnot" class="col-xs-3 control-label">收款日期：</label>
+                                    <div class="col-xs-8">
+                                        <input type="date" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
+                                    <div class="col-xs-8">
+                                        <input type="text" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
+                        <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
         <!-- /.modal -->
         <!--弹出删除资源警告窗口-->
         <div class="modal fade" id="deleteSource" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -380,18 +422,27 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="white-box">
-                    <h3 class="box-title">收款款项列表</h3>
-                    <label style="margin-left: 100px;font-size: small" >单据编号</label>
-                    <input type="text" >
-                    <button>查询</button>
+                    <h3 class="box-title">待收款订单列表</h3>
 
-                    <label style="margin-left: 30px;font-size: small" >订单号</label>
-                    <input type="text">
-                    <button>查询</button>
+                    <form style="display: inline;margin-left: 0px" method="post" action="/query_by_sid">
+                        <label style="margin-left: 100px;font-size: small" >单据编号</label>
+                        <input type="text" name="QSID" >
+                        <button>查询</button>
+                    </form>
 
-                    <label style="margin-left: 30px;font-size: small" >负责人</label>
-                    <input type="text">
-                    <button>查询</button>
+
+                    <form style="display: inline" method="post" action="/query_by_did">
+                        <label style="margin-left: 100px;font-size: small" >订单号</label>
+                        <input type="text" name="QDID" >
+                        <button>查询</button>
+                    </form>
+
+                    <form style="display: inline" method="post" action="/query_by_man">
+                        <label style="margin-left: 100px;font-size: small" >负责人</label>
+                        <input type="text" name="QMan" >
+                        <button>查询</button>
+                    </form>
+
 
                     <div class="table-responsive">
                         <table class="table">
@@ -413,8 +464,7 @@
                                 <td  th:text="${list.getMan()}"></td><!--负责人-->
                                 <td  th:text="${list.getBZ()}"></td><!--备注-->
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#addSource" th:data-id="${list.getDID()}" th:data-money="${list.getMoney()}"
-                                            th:data-man="${list.getMan()}" th:data-bz="${list.getBZ()}"  onclick="dealgood(this)">处理</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#addSource"  >处理</button>
                                 </td>
                             </tr>
                             </tbody>
