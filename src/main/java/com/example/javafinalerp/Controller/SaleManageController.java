@@ -24,8 +24,7 @@ public class SaleManageController {
     BasicManageService basicManageService;
     @Resource
     OrderService orderService;
-    @Resource
-    Orderandname orderandname;
+
     @Autowired
     SaleManageController saleManageController;
 
