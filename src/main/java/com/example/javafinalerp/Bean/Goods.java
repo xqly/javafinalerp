@@ -13,6 +13,7 @@ public class Goods {
     private Integer GType;
     private Integer GExpDate;
     private String GRemark;
+    private Double MPrice; //商品价格
 
     public Integer getG_ID() {
         return G_ID;
@@ -52,5 +53,14 @@ public class Goods {
 
     public void setGRemark(String GRemark) {
         this.GRemark = GRemark;
+    }
+
+
+    public Double getMPrice() {
+        return MPrice;
+    }
+
+    public void setMPrice(Double MPrice) {
+        MPrice = MPrice;
     }
 }

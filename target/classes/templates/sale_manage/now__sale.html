@@ -68,9 +68,12 @@
             tel.innerHTML = '<input style="width: 80%;" type="number">';
 
             var tel1 = tr.insertCell(2);
-            tel1.innerHTML = '<input style="width: 80%;" type="text">';
+            tel1.innerHTML = '<input style="width: 80%;" type="number">';
 
-            var del = tr.insertCell(3);
+            var tel2 = tr.insertCell(2);
+            tel2.innerHTML = '<input style="width: 80%;" type="number">';
+
+            var del = tr.insertCell(4);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
             count2++;
         }
@@ -81,6 +84,23 @@
             tbl.deleteRow(tr.rowIndex-1);
         }
 
+        function calusum() {
+            var tr = $("#ci2 tr");
+            var sum=0;
+            for (var i = 0; i < tr.length; i++) {
+                var inputs = $(tr[i]).find("td").find("input");
+                if (inputs.length>0) {
+                   sum+=parseInt(inputs[2].value);
+                }
+            }
+            $("#before").attr("value",sum);
+        }
+
+        function calend() {
+           var price= parseInt(document.getElementById("before").value);
+            var zhekou= parseFloat(document.getElementById("zhekou").value);
+            document.getElementById("sum").value= price*zhekou;
+        }
         function get_table_data() {
             var tr = $("#ci2 tr");
             var result = [];
@@ -97,6 +117,7 @@
             }
             return result;
         }
+
         function send() {
             var bisSuenDocuSacertCont = get_table_data();
             var json= {
@@ -116,6 +137,24 @@
                     alert(burden);
                 }
             });
+        }
+
+        function xiala() {
+            var  myselect=document.getElementById("mater");
+            var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
+            var danjia=myselect.options[index].value;
+            var num1=document.getElementById("num").value;
+            document.getElementById("price").value=danjia;
+            document.getElementById("zong").value=danjia*num1;
+        }
+
+        function num_change() {
+            var  myselect=document.getElementById("mater");
+            var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
+            var danjia=myselect.options[index].value;
+            var num1=document.getElementById("num").value;
+            //      document.getElementById("price").value=danjia;
+            document.getElementById("zong").value=danjia*num1;
         }
     </script>
 </head>
@@ -376,8 +415,19 @@
                     <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer1" id="customer1" >
 
                     <label style="margin-left: 100px">订单时间:</label>
-                    <input type="date" id="date_info" placeholder="原料入库时间" class=" form-control-line"  >
+                    <input type="date" id="date_info1" placeholder="原料入库时间" class=" form-control-line"  >
 
+                    <label style="margin-left: 100px">原价总计:</label>
+                    <input type="number" id="before" name="before" value="0" class=" form-control-line"  onchange="calend()" onfocus=this.blur()>
+
+                    <label style="margin-left: 100px">折扣:</label>
+                    <input type="number" id="zhekou" name="zhekou" placeholder="1.0" class=" form-control-line"  step = "0.1" onchange="calend()">
+
+                    <br><br>
+                    <label>折扣后总计:</label>
+                    <input type="number" id="sum" name="sum"  class=" form-control-line"  >
+                    <label  style="margin-left: 100px">备注:</label>
+                    <input type="text" id="require" placeholder="备注" class=" form-control-line" >
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -388,13 +438,14 @@
                                     <tr>
                                         <th>商品名称</th>
                                         <th>商品数量</th>
-                                        <th>备注</th>
+                                        <th>单价</th>
+                                        <th>总计</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -403,13 +454,14 @@
                                     <tr>
 
                                         <td>
-                                            <select  name="mater" id="mater" style="width:100%;" >
+                                            <select  name="mater" id="mater" style="width:100%;" onchange="xiala()">
                                                 <option th:text="请选择商品"></option>
-                                                <option th:each="goods:${goods}" th:value="${goods.getG_ID()}" th:text="${goods.getGName()}" ></option>
+                                                <option th:each="goods:${goods}" th:value="${goods.getMPrice()}" th:text="${goods.getGName()}" ></option>
                                             </select>
                                         </td>
-                                        <td><input type="number" style="width:80%;"></td>
-                                        <td><input type="text" style="width:80%;"></td>
+                                        <td><input type="number" style="width:80%;" id="num" name="num" onchange="num_change()" value="1"></td>
+                                        <td><input type="text" style="width:80%;"  id="price" name="price"  onfocus=this.blur()></td>
+                                        <td><input type="number" style="width:80%;" id="zong" name="zong" onfocus=this.blur()></td>
                                         <td><input type="button" onclick="del(this)" value="删除"></td>
                                     </tr>
                                     </tbody>
@@ -421,6 +473,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
                     <button type="button" class="btn btn-xs btn-green" onclick="send()">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="calusum()">生成</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -458,10 +511,9 @@
                                 <table class="table" id="ci" name="ci">
                                     <thead>
                                     <tr>
-
                                         <th>商品编号</th>
                                         <th>商品数量</th>
-                                        <th>备注</th>
+                                        <th>商品价格</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -476,8 +528,8 @@
                                     <tr>
 
                                         <td><input type="text" style="width:80%;"></td>
-                                        <td><input type="text" style="width:80%;"></td>
-                                        <td><input type="text" style="width:80%;"></td>
+                                        <td><input type="number" style="width:80%;"></td>
+                                        <td><input type="number" style="width:80%;"></td>
                                         <td><input type="button" onclick="del(this)" value="删除"></td>
                                     </tr>
                                     </tbody>
