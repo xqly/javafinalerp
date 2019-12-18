@@ -13,4 +13,27 @@ public class Orderandname extends Ordergoods {
 
     }
 
+    public List<OWname> getoWnames() {
+        return oWnames;
+    }
+
+    public void setoWnames(List<OWname> oWnames) {
+        this.oWnames = oWnames;
+    }
+
+    public double getPrice1() {
+        return price1;
+    }
+
+    public void setPrice1(double price1) {
+        this.price1 = price1;
+    }
+
+    public double getPrice2() {
+        return price2;
+    }
+
+    public void setPrice2(double price2) {
+        this.price2 = price2;
+    }
 }

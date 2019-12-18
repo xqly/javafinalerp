@@ -10,6 +10,9 @@ public class Ordergoods {
     @Id
     @GeneratedValue
     private Integer OID;  //订货号
+
+
+
     private Integer CID;  //客户账号
     private String OTime;  //订单时间
     private Integer OMID; //负责人id
@@ -92,5 +95,13 @@ public class Ordergoods {
 
     public void setOLTime(String OLTime) {
         this.OLTime = OLTime;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 }
