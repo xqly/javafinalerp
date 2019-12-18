@@ -1,7 +1,7 @@
 package com.example.javafinalerp.Controller;
 
 import com.example.javafinalerp.Bean.Goods;
-import com.example.javafinalerp.Bean.Order;
+import com.example.javafinalerp.Bean.Ordergoods;
 import com.example.javafinalerp.Bean.WHouseLog;
 import com.example.javafinalerp.Service.BasicManageService;
 import com.example.javafinalerp.Service.OrderService;
@@ -33,7 +33,7 @@ public class SaleManageController {
 
     @RequestMapping("now__sale")
     public String ns(Model model){
-        List<Order> order=orderService.getorderlist();
+        List<Ordergoods> order=orderService.getorderlist();
         List<Goods> goods=basicManageService.getgoodslist();
         model.addAttribute("order",order);
         model.addAttribute("goods",goods);
@@ -42,21 +42,21 @@ public class SaleManageController {
 
     @RequestMapping(value = "query_by_oid",method = RequestMethod.POST)
     public String crk(@RequestParam("OID") Integer id,  Model model){
-        List<Order> order = orderService.getorderlistbyid(id);
+        List<Ordergoods> order = orderService.getorderlistbyid(id);
         model.addAttribute("order",order);
         return "sale_manage/now__sale";
     }
 
     @RequestMapping(value = "query_by_cid",method = RequestMethod.POST)
     public String crk1(@RequestParam("CID") Integer id,  Model model){
-        List<Order> order = orderService.getorderlistbyid(id);
+        List<Ordergoods> order = orderService.getorderlistbyid(id);
         model.addAttribute("order",order);
         return "sale_manage/now__sale";
     }
 
     @RequestMapping("add_realorders")
     public String amt(@RequestParam("orders_json") String x){
-        orderService.addOrder(x);
+        orderService.addOrder();
         //xqly
         return "redirect:now__sale";
     }

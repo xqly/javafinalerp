@@ -98,7 +98,7 @@
 | GTime | 批次生成日期 |
 | GShop | 批次生成车间 |
 
-## Order 
+## Ordergoods
 | 字段名 | 含义 |
 | ---- | ---- |
 | OID | 订货号 |
@@ -109,6 +109,7 @@
 | OLTime | 取货时间 |
 | OState | 订单状态 |
 | type | 订单类型 |
+| discount | 折扣 |
 
 
 ## OW 
