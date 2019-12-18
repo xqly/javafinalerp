@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class Order {
+public class Ordergoods {
     @Id
     @GeneratedValue
     private Integer OID;  //订货号

@@ -64,24 +64,6 @@
 | pworkshop | 车间 |
 | pstate | 计划状态 |
 
-## Order 
-| 字段名 | 含义 |
-| ---- | ---- |
-| OID | 订货号 |
-| CID | 客户账号 |
-| OTime | 订单时间 |
-| OMID | 负责人id |
-| remark | 备注 |
-| OLTime | 取货时间 |
-
-## OW 
-| 字段名 | 含义 |
-| ---- | ---- |
-| OID | 订货号 |
-| WID | 商品号 |
-| num | 商品数量 |
-
-
 ## Client
 | 字段名 | 含义 |
 | ---- | ---- |
@@ -168,7 +150,7 @@
 | GID | 商品ID |
 | GPID | 原料批次ID |
 | WHTime | 操作时间 |
-| GNum | 操作数量 |
+| GNum | 数量 |
 
 ## WorkShop
 | 字段名 | 含义 |

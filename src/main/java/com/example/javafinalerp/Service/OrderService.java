@@ -1,14 +1,14 @@
 package com.example.javafinalerp.Service;
-import com.example.javafinalerp.Bean.Order;
+import com.example.javafinalerp.Bean.Ordergoods;
 import java.util.List;
 
 public interface OrderService {
-    List<Order> getorderlist();
+    List<Ordergoods> getorderlist();
     void addOrder();
-    List<Order> getorderlistbyid(Integer x);
-    List<Order> getorderlistbyclient(Integer x);
-    List<Order> getpreorderlist();
+    List<Ordergoods> getorderlistbyid(Integer x);
+    List<Ordergoods> getorderlistbyclient(Integer x);
+    List<Ordergoods> getpreorderlist();
     void addpreorder();
-    List<Order> getpreorderlistbyid(Integer x);
-    List<Order> getpreoderlistbyclient(Integer x);
+    List<Ordergoods> getpreorderlistbyid(Integer x);
+    List<Ordergoods> getpreoderlistbyclient(Integer x);
 }

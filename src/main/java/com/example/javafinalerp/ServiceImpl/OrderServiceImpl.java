@@ -1,7 +1,7 @@
 package com.example.javafinalerp.ServiceImpl;
 
-import com.example.javafinalerp.Bean.Order;
-import com.example.javafinalerp.Resitory.OrderResitory;
+import com.example.javafinalerp.Bean.Ordergoods;
+import com.example.javafinalerp.Resitory.OrdergoodsResitory;
 import com.example.javafinalerp.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +12,11 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    OrderResitory orderResitory;
+    OrdergoodsResitory ordergoodsResitory;
 
     @Override
-    public List<Order> getorderlist() {
-        return orderResitory.findlistbytype(0);
+    public List<Ordergoods> getorderlist() {
+        return ordergoodsResitory.findlistbytype(0);
     }
 
     @Override
@@ -25,18 +25,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getorderlistbyid(Integer x) {
-        return orderResitory.findlistbyid(0,x);
+    public List<Ordergoods> getorderlistbyid(Integer x) {
+        return ordergoodsResitory.findlistbyid(0,x);
     }
 
     @Override
-    public List<Order> getorderlistbyclient(Integer x) {
-        return orderResitory.findlistbyid(0,x);
+    public List<Ordergoods> getorderlistbyclient(Integer x) {
+        return ordergoodsResitory.findlistbyid(0,x);
     }
 
     @Override
-    public List<Order> getpreorderlist() {
-        return orderResitory.findlistbytype(1);
+    public List<Ordergoods> getpreorderlist() {
+        return ordergoodsResitory.findlistbytype(1);
     }
 
     @Override
@@ -45,12 +45,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getpreorderlistbyid(Integer x) {
-        return orderResitory.findlistbyid(1,x);
+    public List<Ordergoods> getpreorderlistbyid(Integer x) {
+        return ordergoodsResitory.findlistbyid(1,x);
     }
 
     @Override
-    public List<Order> getpreoderlistbyclient(Integer x) {
-        return orderResitory.findlistbyclient(1,x);
+    public List<Ordergoods> getpreoderlistbyclient(Integer x) {
+        return ordergoodsResitory.findlistbyclient(1,x);
     }
 }
