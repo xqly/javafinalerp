@@ -23,11 +23,11 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script>
-        function accptplan(butt) {
-            var ret = window.confirm("确定销毁?");
-            if(ret){
-                $("#QID").attr("value",butt.getAttribute("data-id"));
-            }
+        function deluser(butt) {
+            $("#QID").attr("value",butt.getAttribute("data-id"));
+        }
+        function fsubmit1(obj) {
+            obj.submit();
         }
     </script>
 </head>
@@ -331,10 +331,13 @@
                     <div class="container-fluid">
                         确定要销毁该原料？销毁后不可恢复！
                     </div>
+                    <form hidden method="post" action="/Destroymaterial" name="delform" id="delform" >
+                        <input type="text"  id="QID" name="QID">
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-danger">保 存</button>
+                    <button type="button" class="btn btn-xs btn-danger"  onclick="fsubmit1(document.delform)">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -391,7 +394,7 @@
                                 <td  th:text="${lists.expdate}"></td><!--保质期-->
                                 <td  th:text="${lists.MHNum}"></td>
                                 <td>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal"  onclick="accptplan(this)" th:data-id="${lists.getMHSID()}" >销毁</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" th:data-id="${lists.getMHSID()}"  data-target="#deleteSource" onclick="deluser(this)" >销毁</button>
                                 </td>
                             </tr>
                             </tbody>
