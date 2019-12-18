@@ -33,8 +33,10 @@
                 var inputs2 = $(tr[i]).find("td").find("input");
                 var inputs1 = $(tr[i]).find("td").find("select");
                 if (inputs1.length > 0 && inputs2.length>0) {
+                    var sel=inputs1[0];
+                    // alert(sel.options[sel.selectedIndex].text);
                     result.push({
-                        mid : inputs1[0].value,
+                        mname : sel.options[sel.selectedIndex].text,
                         mhid : inputs1[1].value,
                         mdate : inputs2[0].value,
                         mnum : inputs2[1].value,
@@ -615,7 +617,7 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3 class="box-title">原料入库列表</h3>
-                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">入库商品</button>
+                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">入库原料</button>
                     <form style="display: inline" method="post" action="/materialsfindbyid">
                         <label style="margin-left: 100px;font-size: small" >入库单号</label>
                         <input type="text" name="QID">

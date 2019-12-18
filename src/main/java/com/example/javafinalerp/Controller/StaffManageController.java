@@ -4,6 +4,7 @@ package com.example.javafinalerp.Controller;
 import com.example.javafinalerp.Bean.User;
 import com.example.javafinalerp.Resitory.UserResitory;
 import com.example.javafinalerp.Service.UserService;
+import com.example.javafinalerp.tempfunc.Myfunc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,10 @@ public class StaffManageController {
 
     @Resource
     UserService userService;
+
+    @Resource
+    Myfunc myfunc;
+
 
     String []temp = new String[10];
     String []URL = new String[10];
