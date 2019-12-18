@@ -16,6 +16,7 @@ import java.util.*;
 @Service
 public class PlanServiceImpl implements PlanService {
 
+
     @Autowired
     ProducePlanResitory producePlanResitory;
 
@@ -56,5 +57,11 @@ public class PlanServiceImpl implements PlanService {
         materfunc.OutMaterialbyPlan(x);
         plan.setPstate(2);
         producePlanResitory.save(plan);
+    }
+
+    @Override
+    public List<Integer> getMethodmygoods(Integer x) {
+        return null;//xqly
+
     }
 }
