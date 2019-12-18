@@ -11,12 +11,20 @@ public class WHouseLog {
     private Integer LID;
     private Integer WID;
     private String LOper;
-    private Integer LFID;
     private Integer LMan;
+    private Integer LMan2;
     private String LTime;
     private Integer LGId;
     private Integer GPID;
     private Integer LNum;
+
+    public Integer getLMan2() {
+        return LMan2;
+    }
+
+    public void setLMan2(Integer LMan2) {
+        this.LMan2 = LMan2;
+    }
 
     public Integer getLID() {
         return LID;
