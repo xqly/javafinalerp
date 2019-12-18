@@ -454,10 +454,9 @@
                                 <td th:text="${mater.getMName()}"></td>
                                 <td th:text="${mater.getMPrice()}"></td>
                                 <td th:text="${mater.getMExpDate()}"></td>
-                                <td th:text="${mater.getMRemark()}"></td>
                                 <td>
                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${mater.getMID()}"
-                                            th:data-name="${mater.getMName()}" th:data-price="${mater.getMPrice()}" th:data-date="${mater.getMExpDate()}" th:data-mark="${mater.getMRemark()}"
+                                            th:data-name="${mater.getMName()}" th:data-price="${mater.getMPrice()}" th:data-date="${mater.getMExpDate()}"
                                             onclick="alterfun(this)">修改</button>
                                     <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
                                 </td>
