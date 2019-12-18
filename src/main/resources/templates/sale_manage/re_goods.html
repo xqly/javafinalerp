@@ -91,25 +91,25 @@
                     sum+=parseInt(inputs[2].value);
                 }
             }
-            $("#before").attr("value",sum);
+            var zhekou=parseFloat(document.getElementById("zhekou5").value);
+            sum = sum*zhekou;
+            $("#reSum").attr("value",sum);
         }
 
         function calend() {
-            var price= parseInt(document.getElementById("before").value);
-            var zhekou= parseFloat(document.getElementById("zhekou").value);
-            document.getElementById("sum").value= price*zhekou;
+            var price= parseInt(document.getElementById("reSum").value);
+            var zhekou= parseFloat(document.getElementById("reDiscount").value);
+            document.getElementById("rerealSum").value= price*zhekou;
         }
         function get_table_data() {
             var tr = $("#ci2 tr");
             var result = [];
             for (var i = 0; i < tr.length; i++) {
-                var inputs2 = $(tr[i]).find("td").find("input");
-                var inputs1 = $(tr[i]).find("td").find("select");
-                if (inputs1.length > 0 && inputs2.length>0) {
-                    var sel=inputs1[0];
+                var inputs = $(tr[i]).find("td").find("input");
+                if (inputs.length > 0) {
                     result.push({
-                        mname : sel.options[sel.selectedIndex].text,
-                        mnum : inputs2[0].value
+                        mname : inputs[0].value,
+                        mnum : inputs[1].value
                     });
                 }
             }
@@ -119,9 +119,9 @@
         function send() {
             var bisSuenDocuSacertCont = get_table_data();
             var json= {
-                customer : document.getElementById("customer1").value,
-                discount :document.getElementById("zhekou").value,
-                beizhu :document.getElementById("require").value,
+                dingdan : document.getElementById("uid").value,
+                money :document.getElementById("rerealSum").value,
+                beizhu :document.getElementById("require5").value,
                 peiliao : bisSuenDocuSacertCont
             };
 
@@ -139,23 +139,12 @@
             });
         }
 
-        function xiala() {
-            var  myselect=document.getElementById("mater");
-            var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
-            var danjia=myselect.options[index].value;
-            var num1=document.getElementById("num").value;
-            document.getElementById("price").value=danjia;
-            document.getElementById("zong").value=danjia*num1;
-        }
 
-        function num_change() {
-            var  myselect=document.getElementById("mater");
-            var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
-            var danjia=myselect.options[index].value;
-            var num1=document.getElementById("num").value;
-            //      document.getElementById("price").value=danjia;
-            document.getElementById("zong").value=danjia*num1;
-        }
+        $('input[name="xh"]:checked').each(function () {
+            var tr = $(this).closest('tr'), tds = tr.find('td');
+            tds[1].find('input').eq(0).value=0;
+
+        });
 
         // var data =[<c:forEach items="${array}" var="childArray" >
         // [
@@ -413,84 +402,84 @@
     <!-- Left navbar-header end -->
     <!-- Page Content -->
     <!--添加资源弹出窗口-->
-    <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel" >
-        <div class="modal-dialog" role="document" style="width: 75%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel2">销售订单</h4>
-                    <button class="btn btn-yellow btn-xs" onclick="add1()" data-toggle="modal"  style="width: 10%;height:40px;" >添加商品</button>
-                    <br><br>
+    <!--<div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel" >-->
+        <!--<div class="modal-dialog" role="document" style="width: 75%">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                    <!--<h4 class="modal-title" id="gridSystemModalLabel2">销售订单</h4>-->
+                    <!--<button class="btn btn-yellow btn-xs" onclick="add1()" data-toggle="modal"  style="width: 10%;height:40px;" >添加商品</button>-->
+                    <!--<br><br>-->
 
-                    <label>客户编号:</label>
-                    <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer1" id="customer1" >
+                    <!--<label>客户编号:</label>-->
+                    <!--<input type="text" placeholder="201700800607" class=" form-control-line"  name="customer1" id="customer1" >-->
 
-                    <label style="margin-left: 100px">订单时间:</label>
-                    <input type="date" id="date_info1" placeholder="原料入库时间" class=" form-control-line"  >
+                    <!--<label style="margin-left: 100px">订单时间:</label>-->
+                    <!--<input type="date" id="date_info1" placeholder="原料入库时间" class=" form-control-line"  >-->
 
-                    <label style="margin-left: 100px">原价总计:</label>
-                    <input type="number" id="before" name="before" value="0" class=" form-control-line"  onchange="calend()" onfocus=this.blur()>
+                    <!--<label style="margin-left: 100px">原价总计:</label>-->
+                    <!--<input type="number" id="before" name="before" value="0" class=" form-control-line"  onchange="calend()" onfocus=this.blur()>-->
 
-                    <label style="margin-left: 100px">折扣:</label>
-                    <input type="number" id="zhekou" name="zhekou" placeholder="1.0" class=" form-control-line"  step = "0.1" onchange="calend()">
+                    <!--<label style="margin-left: 100px">折扣:</label>-->
+                    <!--<input type="number" id="zhekou" name="zhekou" placeholder="1.0" class=" form-control-line"  step = "0.1" onchange="calend()">-->
 
-                    <br><br>
-                    <label>折扣后总计:</label>
-                    <input type="number" id="sum" name="sum"  class=" form-control-line"  >
-                    <label  style="margin-left: 100px">备注:</label>
-                    <input type="text" id="require" name="require" placeholder="备注" class=" form-control-line" >
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <form class="form-horizontal">
-                            <div class="table-responsive">
-                                <table class="table" id="ci2" name="ci2">
-                                    <thead>
-                                    <tr>
-                                        <th>商品名称</th>
-                                        <th>商品数量</th>
-                                        <th>单价</th>
-                                        <th>总计</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
+                    <!--<br><br>-->
+                    <!--<label>折扣后总计:</label>-->
+                    <!--<input type="number" id="sum" name="sum"  class=" form-control-line"  >-->
+                    <!--<label  style="margin-left: 100px">备注:</label>-->
+                    <!--<input type="text" id="require" name="require" placeholder="备注" class=" form-control-line" >-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--<div class="container-fluid">-->
+                        <!--<form class="form-horizontal">-->
+                            <!--<div class="table-responsive">-->
+                                <!--<table class="table" id="ci2" name="ci2">-->
+                                    <!--<thead>-->
+                                    <!--<tr>-->
+                                        <!--<th>商品名称</th>-->
+                                        <!--<th>商品数量</th>-->
+                                        <!--<th>单价</th>-->
+                                        <!--<th>总计</th>-->
+                                        <!--<th>操作</th>-->
+                                    <!--</tr>-->
+                                    <!--</thead>-->
+                                    <!--<tbody>-->
+                                    <!--<tr>-->
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
 
-                                        <td>
-                                            <select  name="mater" id="mater" style="width:100%;" onchange="xiala()">
-                                                <option th:text="请选择商品"></option>
-                                                <option th:each="goods:${goods}" th:value="${goods.getMPrice()}" th:text="${goods.getGName()}" ></option>
-                                            </select>
-                                        </td>
-                                        <td><input type="number" style="width:80%;" id="num" name="num" onchange="num_change()" value="1"></td>
-                                        <td><input type="text" style="width:80%;"  id="price" name="price"  onfocus=this.blur()></td>
-                                        <td><input type="number" style="width:80%;" id="zong" name="zong" onfocus=this.blur()></td>
-                                        <td><input type="button" onclick="del(this)" value="删除"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green" onclick="send()">保 存</button>
-                    <button type="button" class="btn btn-xs btn-green" onclick="calusum()">生成</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
+                                        <!--<td>-->
+                                            <!--<select  name="mater" id="mater" style="width:100%;" onchange="xiala()">-->
+                                                <!--<option th:text="请选择商品"></option>-->
+                                                <!--<option th:each="goods:${goods}" th:value="${goods.getMPrice()}" th:text="${goods.getGName()}" ></option>-->
+                                            <!--</select>-->
+                                        <!--</td>-->
+                                        <!--<td><input type="number" style="width:80%;" id="num" name="num" onchange="num_change()" value="1"></td>-->
+                                        <!--<td><input type="text" style="width:80%;"  id="price" name="price"  onfocus=this.blur()></td>-->
+                                        <!--<td><input type="number" style="width:80%;" id="zong" name="zong" onfocus=this.blur()></td>-->
+                                        <!--<td><input type="button" onclick="del(this)" value="删除"></td>-->
+                                    <!--</tr>-->
+                                    <!--</tbody>-->
+                                <!--</table>-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>-->
+                    <!--<button type="button" class="btn btn-xs btn-green" onclick="send()">保 存</button>-->
+                    <!--<button type="button" class="btn btn-xs btn-green" onclick="calusum()">生成</button>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+    <!--</div>-->
     <!-- /.modal-dialog -->
 
     <div class="modal fade" id="changeSource" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -501,41 +490,44 @@
                     <h4 class="modal-title" id="gridSystemModalLabel5">销售订单</h4>
 
                     <br><br>
+
+                    <label style="margin-left: 100px">订单编号:</label>
+                    <input type="text" id="uid" name="uid"  class=" form-control-line"  onfocus=this.blur() >
+
                     <label>客户编号:</label>
-                    <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer5" id="customer5" >
+                    <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer5" id="customer5"  onfocus=this.blur()>
 
                     <label style="margin-left: 100px">订单时间:</label>
-                    <input type="date" id="date_info5" name="date_info5" placeholder="原料入库时间" class=" form-control-line"  >
+                    <input type="date" id="date_info5" name="date_info5" class=" form-control-line"  onfocus=this.blur() >
 
 
                     <label style="margin-left: 100px">此订单折扣:</label>
-                    <input type="number" id="zhekou5" name="zhekou5" placeholder="1.0" class=" form-control-line"  step = "0.1" onchange="calend()">
+                    <input type="number" id="zhekou5" name="zhekou5" placeholder="1.0" class=" form-control-line"  step = "0.1" onfocus=this.blur()>
 
                     <br><br>
 
                     <label  style="margin-left: 100px">退款全额:</label>
-                    <input type="text" id="reSum" name="reSum" placeholder="备注" class=" form-control-line">
+                    <input type="number" id="reSum" name="reSum" class=" form-control-line"  onfocus=this.blur()>
 
                     <label  style="margin-left: 100px">退款比例:</label>
-                    <input type="text" id="reDiscount" name="reDiscount"  class=" form-control-line">
+                    <input type="number" id="reDiscount" name="reDiscount"  class=" form-control-line" value="0" step = "0.1" onchange="calend()">
 
                     <label  style="margin-left: 100px">实际退款金额:</label>
-                    <input type="text" id="rerealSum" name="rerealSum"  class=" form-control-line">
-
+                    <input type="number" id="rerealSum" name="rerealSum"  class=" form-control-line"  onfocus=this.blur()>
+                    <br><br>
                     <label  style="margin-left: 100px">备注:</label>
                     <input type="text" id="require5" name="require5" placeholder="备注" class=" form-control-line">
 
-                    <form hidden method="post" action="/lookorder" name="delform" id="delform" >
-                        <input type="text" id="uid" name="uid">
-                    </form>
+
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <form class="form-horizontal">
                             <div class="table-responsive">
-                                <table class="table" id="ci" name="ci">
+                                <table class="table" id="ci2" name="ci2">
                                     <thead>
                                     <tr>
+                                        <th>选择</th>
                                         <th>商品名称</th>
                                         <th>退货数量</th>
                                         <th>单价</th>
@@ -548,9 +540,16 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr th:each="goods1:${goods1}">
-                                        <td th:text="${goods1.getWID()}"></td>
+                                        <td>
+                                            <span class="radio_wrap">
+                                                <input type="radio" id="xh" name="xh"/>
+                                                <label for="xh" class="check"></label>
+                                            </span>
+                                        </td>
+                                        <td><input th:value="${goods1.getWID()}"></td>
                                         <td><input th:value="${goods1.getnum()}"></td>
                                         <td th:text="${goods1.getMPrice()}"></td>
                                         <td th:text="${goods1.getsum()}"></td>
@@ -605,11 +604,11 @@
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">销售订单</h4> </div>
+                <h4 class="page-title">退货处理</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="#" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
                 <ol class="breadcrumb">
                     <li><a href="../../../pix_zq/pixel-html/index.html">首页</a></li>
-                    <li class="active">销售订单</li>
+                    <li class="active">退货处理</li>
                 </ol>
             </div>
             <!-- /.col-lg-12 -->
@@ -618,20 +617,20 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="white-box">
-                    <h3 class="box-title">订单列表</h3>
-                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加订单</button>
+                    <h3 class="box-title">退货处理</h3>
+                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#changeSource">添加订单</button>
 
-                    <form style="display: inline" method="post" action="/query_by_oid">
-                        <label style="margin-left: 100px;font-size: small" >销售订单编号</label>
-                        <input type="text" name="OID" >
-                        <button>查询</button>
-                    </form>
+                    <!--<form style="display: inline" method="post" action="/query_by_oid">-->
+                        <!--<label style="margin-left: 100px;font-size: small" >销售订单编号</label>-->
+                        <!--<input type="text" name="OID" >-->
+                        <!--<button>查询</button>-->
+                    <!--</form>-->
 
-                    <form style="display: inline" method="post" action="/query_by_cid">
-                        <label style="margin-left: 30px;font-size: small" >客户编号</label>
-                        <input type="text" name="CID">
-                        <button>查询</button>
-                    </form>
+                    <!--<form style="display: inline" method="post" action="/query_by_cid">-->
+                        <!--<label style="margin-left: 30px;font-size: small" >客户编号</label>-->
+                        <!--<input type="text" name="CID">-->
+                        <!--<button>查询</button>-->
+                    <!--</form>-->
 
                     <div class="table-responsive">
                         <table class="table">
@@ -666,7 +665,7 @@
                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource"
                                             th:data-oid="${order.getOID()}" th:data-cid="${order.getCID()}" th:data-otime="${order.getOTime()}"
                                             th:data-before="${order.getBefore()}" th:data-discount="${order.getDiscount()}" th:data-after="${order.getAfter()}"
-                                            th:data-omid="${order.getOMID()}" th:data-remark="${order.getremark()}"  onclick="alterfun(this)">查看</button>
+                                            th:data-omid="${order.getOMID()}" th:data-remark="${order.getremark()}"  onclick="alterfun(this)">进行退货</button>
 
                                 </td>
                             </tr>
