@@ -62,3 +62,4 @@
 | goodid | 货物ID |
 | gnum | 货物数量 |
 | pworkshop | 车间 |
+| pstate | 计划状态 |

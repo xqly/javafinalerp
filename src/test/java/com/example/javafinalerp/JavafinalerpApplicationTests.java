@@ -1,6 +1,7 @@
 package com.example.javafinalerp;
 
 import com.example.javafinalerp.Service.MHouseService;
+import com.example.javafinalerp.Service.PlanService;
 import com.example.javafinalerp.Service.UserInfoService;
 import com.example.javafinalerp.Service.UserService;
 import com.example.javafinalerp.tempclass.Materialsandname;
@@ -24,11 +25,14 @@ class JavafinalerpApplicationTests {
     MHouseService mHouseService;
 
     @Resource
+    PlanService planService;
+
+    @Resource
     Materfunc materfunc;
 
     @Test
     void contextLoads() {
-        materfunc.OutMaterialbyPlan(1);
+        mHouseService.getoutdatedmaterials();
     }
 
 }

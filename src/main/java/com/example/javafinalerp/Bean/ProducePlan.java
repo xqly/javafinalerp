@@ -13,6 +13,15 @@ public class ProducePlan {
     private Integer goodid;
     private Integer gnum;
     private Integer pworkshop;
+    private Integer pstate;
+
+    public Integer getPstate() {
+        return pstate;
+    }
+
+    public void setPstate(Integer pstate) {
+        this.pstate = pstate;
+    }
 
     public Integer getPid() {
         return pid;

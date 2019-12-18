@@ -6,9 +6,11 @@ import com.example.javafinalerp.Resitory.GoodsResitory;
 import com.example.javafinalerp.Resitory.ProducePlanResitory;
 import com.example.javafinalerp.Service.PlanService;
 import com.example.javafinalerp.tempclass.Planandname;
+import com.example.javafinalerp.tempfunc.Materfunc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 @Service
@@ -19,6 +21,9 @@ public class PlanServiceImpl implements PlanService {
 
     @Autowired
     GoodsResitory goodsResitory;
+
+    @Resource
+    Materfunc materfunc;
 
     @Override
     public List<Planandname> getunplannamelist() {
@@ -32,10 +37,14 @@ public class PlanServiceImpl implements PlanService {
             m1.put(temp.getG_ID(),temp.getGName());
         }
         Iterator<ProducePlan> iter2 = plist.iterator();
-        while(iter.hasNext()){
+//        System.out.println(plist.size());
+        while(iter2.hasNext()){
             Planandname temp = new Planandname(iter2.next());
             temp.setName(m1.get(temp.getGoodid()));
-            lists.add(temp);
+            if(temp.getPstate()==1){
+                lists.add(temp);
+            }
+//            System.out.println(111);
         }
         return lists;
     }
@@ -43,7 +52,9 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public void outMaterialsbyPlanid(Integer x) {
         ProducePlan plan =  producePlanResitory.findppbypid(x);
-        //xqly
-
+//        System.out.println(2);
+        materfunc.OutMaterialbyPlan(x);
+        plan.setPstate(2);
+        producePlanResitory.save(plan);
     }
 }

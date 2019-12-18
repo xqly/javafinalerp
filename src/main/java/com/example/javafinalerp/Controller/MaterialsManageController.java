@@ -64,8 +64,9 @@ public class MaterialsManageController {
 
     @RequestMapping("materialsoutbyid")
     public String mobi(@RequestParam("QID") Integer x){
+        System.out.println(1);
         planService.outMaterialsbyPlanid(x);
-        return "redirect:materials_manage/materials_out_stock";
+        return "redirect:materials_out_stock";
     }
 
     @RequestMapping("materialDestroy")
@@ -79,6 +80,6 @@ public class MaterialsManageController {
     @RequestMapping("Destroymaterial")
     public String dm(@RequestParam("QID") Integer x){
         mHouseService.Destroybymhsid(x);
-        return "redirect:materials_manage/materialDestroy";
+        return "redirect:materialDestroy";
     }
 }
