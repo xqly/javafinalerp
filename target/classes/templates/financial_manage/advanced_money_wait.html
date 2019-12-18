@@ -454,7 +454,7 @@
                                 <th>#</th>
                                 <th>预订单号</th>
                                 <th>应收金额</th>
-                                <th>预收金额</th>
+                                <!--<th>预收金额</th>-->
                                 <th>负责人</th>
                                 <th>备注</th>
                                 <th>操作</th>
@@ -463,14 +463,12 @@
                             <tbody>
                             <tr th:each="list : ${lists}">
                                 <td scope="row" th:text="${listStat.index+1}" id="xqly"  data-toggle="modal" data-target="#jianjie1"  onclick="alterfun1()"></td>
-                                <td  th:text="${list.getDID()}"></td><!--预订单号-->
-                                <td  th:text="${list.getMoney()}"></td><!--应收金额-->
-                                <td  th:text="${list.getRMoney()}"></td><!--预收金额-->
-                                <td  th:text="${list.getMan()}"></td><!--负责人-->
-                                <td  th:text="${list.getBZ()}"></td><!--备注-->
+                                <td  th:text="${list.getOID()}"></td><!--预订单号-->
+                                <td  th:text="${list.getOMoney()}"></td><!--应收金额-->
+                                <td  th:text="${list.getOMID()}"></td><!--负责人-->
+                                <td  th:text="${list.getremark()}"></td><!--备注-->
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#addSource" th:data-id="${list.getDID()}" th:data-money="${list.getMoney()}"
-                                            th:data-man="${list.getMan()}" th:data-bz="${list.getBZ()}" th:data-rmoney="${list.getRMoney()}" onclick="dealgood(this)">处理</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#addSource"  >处理</button>
                                 </td>
                             </tr>
                             </tbody>

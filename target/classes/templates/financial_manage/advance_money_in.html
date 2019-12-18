@@ -506,8 +506,8 @@
                             <tr>
                                 <th>预定收款单编号</th>
                                 <th>预定订单号</th>
-                                <th>应收金额</th>
-                                <th>实收金额</th>
+                                <th>收取金额</th>
+                                <!--<th>实收金额</th>-->
                                 <th>收款日期</th>
                                 <th>负责人</th>
                                 <th>备注</th>
@@ -517,19 +517,14 @@
                             <tbody>
                             <tr th:each="list : ${lists}">
                                 <td scope="row" th:text="${listStat.index+1}" id="xqly"  data-toggle="modal" data-target="#jianjie1"  onclick="alterfun1()"></td>
-                                <td th:text="${list.getSID()}"></td><!--预收款单号-->
-                                <td  th:text="${list.getDID()}"></td><!--预订单号-->
-                                <td  th:text="${list.getMoney()}"></td><!--应收金额-->
+                                <td th:text="${list.getPID()}"></td><!--收款单号-->
+                                <td  th:text="${list.getOID()}"></td><!--订单号-->
                                 <td  th:text="${list.getRMoney()}"></td><!--实收金额-->
-                                <td  th:text="${list.getDate()}"></td><!--收款日期-->
-                                <td  th:text="${list.getMan()}"></td><!--负责人-->
-                                <td  th:text="${list.getBZ()}"></td><!--备注-->
-                                <!--<td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${list.getSID()}"
-                                            th:data-did="${list.getDID()}" th:data-money="${list.getMoney()}" th:data-time="${list.getDate()}"
-                                            th:data-man="${list.getMan()}" th:data-rmoney="${list.getRMoney()}" th:data-bz="${list.getBZ()}" onclick="alterfun(this)">处理</button>
-                                </td>-->
+                                <td  th:text="${list.getTime()}"></td><!--收款日期-->
+                                <td  th:text="${list.getPMan()}"></td><!--负责人-->
+                                <td  th:text="${list.getRemark()}"></td><!--备注-->
                             </tr>
+
                             </tbody>
                         </table>
                     </div>

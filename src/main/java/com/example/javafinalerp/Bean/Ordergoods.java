@@ -16,11 +16,19 @@ public class Ordergoods {
     private Integer CID;  //客户账号
     private String OTime;  //订单时间
     private Integer OMID; //负责人id
+    private Integer OMoney; //应收金额
     private String remark;  //备注
     private String OLTime;  //取货时间
     private Integer type;
     private double discount;
 
+    public Integer getOMoney() {
+        return OMoney;
+    }
+
+    public void setOMoney(Integer OMoney) {
+        this.OMoney = OMoney;
+    }
 
     public String getRemark() {
         return remark;

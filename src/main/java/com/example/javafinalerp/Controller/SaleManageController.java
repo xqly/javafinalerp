@@ -39,7 +39,7 @@ public class SaleManageController {
 
     @RequestMapping("now__sale")
     public String ns(Model model){
-        List<Orderandname> order=null;
+        List<Orderandname> order=orderService.getorderlist();
         List<Goods> goods=basicManageService.getgoodslist();
         model.addAttribute("order",order);
         model.addAttribute("goods",goods);
@@ -53,7 +53,8 @@ public class SaleManageController {
 
     @RequestMapping(value = "select_by_oid",method = RequestMethod.POST)
     public String crk2(@RequestParam("uid") Integer id,  Model model){
-        List<OWname> goods1 = null;
+        System.out.println("ID:"+id.toString());
+        List<OWname> goods1 = orderService.getlistbyoid(id);
         model.addAttribute("goods1",goods1);
         return "sale_manage/children";
     }

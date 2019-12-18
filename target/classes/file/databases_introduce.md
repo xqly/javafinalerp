@@ -103,6 +103,7 @@
 | ---- | ---- |
 | OID | 订货号 |
 | CID | 客户账号 |
+| OMoney | 应收金额 |
 | OTime | 订单时间 |
 | OMID | 负责人id |
 | remark | 备注 |

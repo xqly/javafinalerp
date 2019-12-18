@@ -10,7 +10,15 @@ public class Orderandname extends Ordergoods {
     double price1;
     double price2;
     public Orderandname(Ordergoods x){
-
+        this.setCID(x.getCID());
+        this.setDiscount(x.getDiscount());
+        this.setOID(x.getOID());
+        this.setOLTime(x.getOLTime());
+        this.setOMID(x.getOMID());
+        this.setOTime(x.getOTime());
+        this.setRemark(x.getRemark());
+        this.setremark(x.getRemark());
+        this.setType(x.getType());
     }
 
     public List<OWname> getoWnames() {

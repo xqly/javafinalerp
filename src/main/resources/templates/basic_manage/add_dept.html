@@ -25,6 +25,16 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script>
+        function alterfun(butt) {
+            var userid = butt.getAttribute("data-id");
+            $("#did").attr("value",userid);
+            $("#dname").attr("value",butt.getAttribute("data-name"));
+            $("#dsite").attr("value",butt.getAttribute("data-site"));
+            $("#dman").attr("value",butt.getAttribute("data-man"));
+        }
+    </script>
 </head>
 
 <body>
@@ -302,12 +312,7 @@
                                     <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">备注：</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control input-sm duiqi" id="sKnot" placeholder=""></textarea>
-                                </div>
-                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -336,35 +341,28 @@
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                    <input type="email" class="form-control input-sm duiqi" id="did" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">名称：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="dname" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sOrd" class="col-xs-3 control-label">地址：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="dsite" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="dman" placeholder="">
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">备注：</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control input-sm duiqi" id="sKnot" placeholder=""></textarea>
-
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -448,7 +446,6 @@
                                 <th>原料库名称</th>
                                 <th>地址</th>
                                 <th>负责人</th>
-                                <th>备注</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -459,9 +456,10 @@
                                 <td th:text="${mh.getMHName()}"></td>
                                 <td th:text="${mh.getMHSite()}"></td>
                                 <td th:text="${mh.getMHMan()}"></td>
-                                <td th:text="${mh.getMRemark()}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${mh.getMHID()}"
+                                            th:data-name="${mh.getMHName()}" th:data-site="${mh.getMHSite()}" th:data-man="${mh.getMHMan()}"
+                                            onclick="alterfun(this)">修改</button>
                                     <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
                                 </td>
                             </tr>

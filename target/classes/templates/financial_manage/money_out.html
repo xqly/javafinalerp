@@ -513,14 +513,15 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             <tr th:each="list : ${lists}">
                                 <td scope="row" th:text="${listStat.index+1}" id="xqly"  data-toggle="modal" data-target="#jianjie1"  onclick="alterfun1()"></td>
-                                <td th:text="${list.getSID()}"></td><!--退款单号-->
-                                <td  th:text="${list.getDID()}"></td><!--退货单号-->
-                                <td  th:text="${list.getMoney()}"></td><!--退款金额-->
-                                <td  th:text="${list.getDate()}"></td><!--退款日期-->
-                                <td  th:text="${list.getMan()}"></td><!--负责人-->
-                                <td  th:text="${list.getBZ()}"></td><!--备注-->
+                                <td th:text="${list.getPID()}"></td><!--退款单编号-->
+                                <td  th:text="${list.getOID()}"></td><!--退货单号-->
+                                <td  th:text="${list.getRMoney()}"></td><!--退款金额-->
+                                <td  th:text="${list.getTime()}"></td><!--退款日期-->
+                                <td  th:text="${list.getPMan()}"></td><!--负责人-->
+                                <td  th:text="${list.getRemark()}"></td><!--备注-->
                             </tr>
                             </tbody>
                         </table>
