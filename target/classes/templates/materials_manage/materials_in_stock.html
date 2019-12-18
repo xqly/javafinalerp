@@ -55,7 +55,7 @@
             //     bisSuenDocuSacertCont : bisSuenDocuSacertCont
             // };
             var materials_in_stock=JSON.stringify(bisSuenDocuSacertCont);
-            alert(materials_in_stock);
+           // alert(materials_in_stock);
             $.ajax({
                 url:"add_realmaterials",
                 type:"post",
@@ -462,7 +462,6 @@
                                                 <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>
                                             </select>
                                         </td>
-
                                         <td>
                                             <select  name="stu_profession" style="width:100%;">
                                                 <option th:text="请选择原料库"></option>

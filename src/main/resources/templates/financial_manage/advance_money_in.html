@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -445,7 +445,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        确定要删除该资源？删除后不可恢复！
+                        确定要处理该资源？删除后不可恢复！
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -480,18 +480,25 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3 class="box-title">预定收款款项列表</h3>
-                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加款项</button>
-                    <label style="margin-left: 100px;font-size: small" >单据编号</label>
-                    <input type="text" >
-                    <button>查询</button>
 
-                    <label style="margin-left: 30px;font-size: small" >订单号</label>
-                    <input type="text">
-                    <button>查询</button>
+                    <form style="display: inline;margin-left: 0px" method="post" action="/query_by_sid">
+                        <label style="margin-left: 100px;font-size: small" >单据编号</label>
+                        <input type="text" name="QSID" >
+                        <button>查询</button>
+                    </form>
 
-                    <label style="margin-left: 30px;font-size: small" >负责人</label>
-                    <input type="text">
-                    <button>查询</button>
+
+                    <form style="display: inline" method="post" action="/query_by_did">
+                        <label style="margin-left: 100px;font-size: small" >订单号</label>
+                        <input type="text" name="QDID" >
+                        <button>查询</button>
+                    </form>
+
+                    <form style="display: inline" method="post" action="/query_by_man">
+                        <label style="margin-left: 100px;font-size: small" >负责人</label>
+                        <input type="text" name="QMan" >
+                        <button>查询</button>
+                    </form>
 
                     <div class="table-responsive">
                         <table class="table">
@@ -508,87 +515,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
-                                <td>Deshmukh</td>
-                                <td>@Genelia</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-
-                                <td>She is a excellent worker.</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Deshmukh</td>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>@Genelia</td>
-                                <td>@Ritesh</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Sanghani</td>
-                                <td>Deshmukh</td>
-                                <td>@Genelia</td>
-                                <td>@Govinda</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Roshan</td>
-                                <td>Rogahn</td>
-                                <td>Deshmukh</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>Hickle</td>
-                                <td>@Maruti</td>
-                                <td>@Genelia</td>
-                                <td>Deshmukh</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>Nigam</td>
-                                <td>Nigam</td>
-                                <td>Eichmann</td>
-                                <td>@Sonu</td>
-                                <td>Deshmukh</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
-                                </td>
+                            <tr th:each="list : ${lists}">
+                                <td scope="row" th:text="${listStat.index+1}" id="xqly"  data-toggle="modal" data-target="#jianjie1"  onclick="alterfun1()"></td>
+                                <td th:text="${list.getSID()}"></td><!--预收款单号-->
+                                <td  th:text="${list.getDID()}"></td><!--预订单号-->
+                                <td  th:text="${list.getMoney()}"></td><!--应收金额-->
+                                <td  th:text="${list.getRMoney()}"></td><!--实收金额-->
+                                <td  th:text="${list.getDate()}"></td><!--收款日期-->
+                                <td  th:text="${list.getMan()}"></td><!--负责人-->
+                                <td  th:text="${list.getBZ()}"></td><!--备注-->
+                                <!--<td>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${list.getSID()}"
+                                            th:data-did="${list.getDID()}" th:data-money="${list.getMoney()}" th:data-time="${list.getDate()}"
+                                            th:data-man="${list.getMan()}" th:data-rmoney="${list.getRMoney()}" th:data-bz="${list.getBZ()}" onclick="alterfun(this)">处理</button>
+                                </td>-->
                             </tr>
                             </tbody>
                         </table>
