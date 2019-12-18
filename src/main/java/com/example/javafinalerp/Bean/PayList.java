@@ -1,6 +1,6 @@
 package com.example.javafinalerp.Bean;
 
-import com.sun.javafx.beans.IDProperty;
+//import com.sun.javafx.beans.IDProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

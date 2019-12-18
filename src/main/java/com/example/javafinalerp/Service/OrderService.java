@@ -9,10 +9,8 @@ public interface OrderService {
     void addOrder();
     List<Order> getorderlistbyid();
     List<Order> getorderlistbyclient();
-
     List<Order> getpreorderlist();
     void addpreorder();
     List<Order> getpreorderlistbyid();
     List<Order> getpreoderlistbyclient();
-
 }

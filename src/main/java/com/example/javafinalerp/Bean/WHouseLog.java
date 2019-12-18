@@ -50,14 +50,6 @@ public class WHouseLog {
         this.LOper = LOper;
     }
 
-    public Integer getLFID() {
-        return LFID;
-    }
-
-    public void setLFID(Integer LFID) {
-        this.LFID = LFID;
-    }
-
     public Integer getLMan() {
         return LMan;
     }
