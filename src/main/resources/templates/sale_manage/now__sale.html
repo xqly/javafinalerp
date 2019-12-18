@@ -24,13 +24,18 @@
 
     <script type="text/javascript">
         function alterfun(butt) {
-            $("#uid").attr("value",butt.getAttribute("data-oid"));
-            $("#customer5").attr("value",butt.getAttribute("data-cid"));
-            $("#date_info5").attr("value",butt.getAttribute("data-otime"));
-            $("#before5").attr("value",butt.getAttribute("data-before"));
-            $("#zhekou5").attr("value",butt.getAttribute("data-discount"));
-            $("#sum5").attr("value",butt.getAttribute("data-after"));
-            $("#require5").attr("value",butt.getAttribute("data-remark"));
+            // $("#uid").attr("value",butt.getAttribute("data-oid"));
+            // $("#customer5").attr("value",butt.getAttribute("data-cid"));
+            // $("#date_info5").attr("value",butt.getAttribute("data-otime"));
+            // $("#before5").attr("value",butt.getAttribute("data-before"));
+            // $("#zhekou5").attr("value",butt.getAttribute("data-discount"));
+            // $("#sum5").attr("value",butt.getAttribute("data-after"));
+            // $("#require5").attr("value",butt.getAttribute("data-remark"));
+
+
+            var txt = butt.getAttribute("data-oid");
+            return txt;
+
         }
 
         var count = 1;
@@ -495,67 +500,8 @@
 
     <div class="modal fade" id="changeSource" role="dialog" aria-labelledby="gridSystemModalLabel" >
         <div class="modal-dialog" role="document" style="width: 75%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel5">销售订单</h4>
-
-                    <br><br>
-                    <label>客户编号:</label>
-                    <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer5" id="customer5" >
-
-                    <label style="margin-left: 100px">订单时间:</label>
-                    <input type="date" id="date_info5" name="date_info5" placeholder="原料入库时间" class=" form-control-line"  >
-
-                    <label style="margin-left: 100px">原价总计:</label>
-                    <input type="number" id="before5" name="before5" value="0" class=" form-control-line"  onchange="calend()" onfocus=this.blur()>
-
-                    <label style="margin-left: 100px">折扣:</label>
-                    <input type="number" id="zhekou5" name="zhekou5" placeholder="1.0" class=" form-control-line"  step = "0.1" onchange="calend()">
-
-                    <br><br>
-                    <label>折扣后总计:</label>
-                    <input type="number" id="sum5" name="sum5"  class=" form-control-line"  >
-                    <label  style="margin-left: 100px">备注:</label>
-                    <input type="text" id="require5" name="require5" placeholder="备注" class=" form-control-line">
-
-                    <form hidden method="post" action="/lookorder" name="delform" id="delform" >
-                        <input type="text" id="uid" name="uid">
-                    </form>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <form class="form-horizontal">
-                            <div class="table-responsive">
-                                <table class="table" id="ci" name="ci">
-                                    <thead>
-                                    <tr>
-                                        <th>商品名称</th>
-                                        <th>商品数量</th>
-                                        <th>单价</th>
-                                        <th>总计</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr th:each="goods1:${goods1}">
-                                        <td th:text="${goods1.getWID()}"></td>
-                                        <td th:text="${goods1.getnum()}"></td>
-                                        <td th:text="${goods1.getMPrice()}"></td>
-                                        <td th:text="${goods1.getsum()}"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <iframe src="/tiaozhuan" id="iframe" name="i" style="width:1200px;height: 900px;" align="center">
+            </iframe>
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
@@ -645,17 +591,18 @@
                                 <td th:text="${order.getCID()}"></td>
                                 <td th:text="${order.getOTime()}"></td>
 
-                                <td th:text="${order.getBefore()}"></td>     <!--原价总计-->
+                                <td th:text="${order.getPrice1()}"></td>     <!--原价总计-->
                                 <td th:text="${order.getDiscount()}"></td>   <!--折扣-->
-                                <td th:text="${order.getAfter()}"></td>   <!--折扣后总计-->
+                                <td th:text="${order.getPrice2()}"></td>   <!--折扣后总计-->
 
                                 <td th:text="${order.getOMID()}"></td>
-                                <td th:text="${order.getremark()}"></td>
+                                <td th:text="${order.getRemark()}"></td>
+
                                 <td>
                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource"
                                             th:data-oid="${order.getOID()}" th:data-cid="${order.getCID()}" th:data-otime="${order.getOTime()}"
-                                            th:data-before="${order.getBefore()}" th:data-discount="${order.getDiscount()}" th:data-after="${order.getAfter()}"
-                                            th:data-omid="${order.getOMID()}" th:data-remark="${order.getremark()}"  onclick="alterfun(this)">查看</button>
+                                            th:data-before="${order.getPrice1()}" th:data-discount="${order.getDiscount()}" th:data-after="${order.getPrice2()}"
+                                            th:data-omid="${order.getOMID()}" th:data-remark="${order.getRemark()}"  onclick="alterfun(this)">查看</button>
 
                                 </td>
                             </tr>
