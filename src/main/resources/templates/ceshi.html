@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/javascript" src="js/jquery-2.0.3.js"></script>
+    <title>无标题文档</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $.fn.serializeObject = function() {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if(o[this.name]) {
+                    if(!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+
+        function send() {
+            /*	var formRef = $('#form1').serializeArray();
+                var jsonString = JSON.stringify(formRef);*/
+            var jsonInfo = $('#form1').serializeObject();
+            var jsonString = JSON.stringify(jsonInfo);
+            alert(jsonString);
+        }
+
+    </script>
+</head>
+
+<body>
+<form id="form1">
+    <table>
+        <tr>
+            <td>name:<input type="text" name="name" /><br /></td>
+            <td>password:<input type="password" name="password" /><br /></td>
+        </tr>
+    </table>
+    <input type="button" onclick="send();" value="send" />
+</form>
+</body>
+</html>
