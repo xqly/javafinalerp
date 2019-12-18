@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../../plugins/images/favicon.png">
-    <title>待处理订单</title>
+    <title>待处理预订单</title>
     <!-- Bootstrap Core CSS -->
     <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
@@ -333,65 +333,67 @@
     </div>
 </div>
 
-
+<div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">待处理预订单</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form class="form-horizontal">
+                        <div class="form-group ">
+                            <label for="sName" class="col-xs-3 control-label">预定收款单编号：</label>
+                            <div class="col-xs-8 ">
+                                <input type="text" class="form-control input-sm duiqi" id="sName" placeholder="">
+                            </div>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sKnot" class="col-xs-3 control-label">收款日期：</label>
+                            <div class="col-xs-8">
+                                <input type="date" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sKnot" class="col-xs-3 control-label">备注：</label>
+                            <div class="col-xs-8">
+                                <textarea class="form-control input-sm duiqi" id="sKnot" placeholder=""></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
+                <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">待处理订单</h4> </div>
+                <h4 class="page-title">待处理预订单</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 <ol class="breadcrumb">
                     <li><a href="../../../pix_zq/pixel-html/index.html">首页</a></li>
-                    <li class="active">待处理订单</li>
+                    <li class="active">待处理预订单</li>
                 </ol>
             </div>
             <!-- /.col-lg-12 -->
         </div>
-
-
-        <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="gridSystemModalLabel">待处理订单</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <form class="form-horizontal">
-                                <div class="form-group ">
-                                    <label for="sName" class="col-xs-3 control-label">收款单编号：</label>
-                                    <div class="col-xs-8 ">
-                                        <input type="text" class="form-control input-sm duiqi" id="sName" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="sKnot" class="col-xs-3 control-label">收款日期：</label>
-                                    <div class="col-xs-8">
-                                        <input type="date" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
-                                    <div class="col-xs-8">
-                                        <input type="text" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
-                        <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-
-
 
         <!-- /.modal -->
         <!--弹出删除资源警告窗口-->
@@ -404,7 +406,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            确定要处理该订单？处理后不可恢复！
+                            确定要处理该预订单？处理后不可恢复！
                         </div>
                         <form hidden method="post" action="/deluser" name="delform" id="delform" >
                             <input type="" id="uid" name="uid">
@@ -424,7 +426,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="white-box">
-                    <h3 class="box-title">待收款订单列表</h3>
+                    <h3 class="box-title">待收款预订单列表</h3>
 
                     <form style="display: inline;margin-left: 0px" method="post" action="/query_by_sid">
                         <label style="margin-left: 100px;font-size: small" >单据编号</label>
@@ -445,14 +447,14 @@
                         <button>查询</button>
                     </form>
 
-
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>订单号</th>
+                                <th>预订单号</th>
                                 <th>应收金额</th>
+                                <th>预收金额</th>
                                 <th>负责人</th>
                                 <th>备注</th>
                                 <th>操作</th>
@@ -461,12 +463,14 @@
                             <tbody>
                             <tr th:each="list : ${lists}">
                                 <td scope="row" th:text="${listStat.index+1}" id="xqly"  data-toggle="modal" data-target="#jianjie1"  onclick="alterfun1()"></td>
-                                <td  th:text="${list.getDID()}"></td><!--订单号-->
-                                <td  th:text="${list.getMoney()}"></td><!--金额-->
+                                <td  th:text="${list.getDID()}"></td><!--预订单号-->
+                                <td  th:text="${list.getMoney()}"></td><!--应收金额-->
+                                <td  th:text="${list.getRMoney()}"></td><!--预收金额-->
                                 <td  th:text="${list.getMan()}"></td><!--负责人-->
                                 <td  th:text="${list.getBZ()}"></td><!--备注-->
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#addSource"  >处理</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#addSource" th:data-id="${list.getDID()}" th:data-money="${list.getMoney()}"
+                                            th:data-man="${list.getMan()}" th:data-bz="${list.getBZ()}" th:data-rmoney="${list.getRMoney()}" onclick="dealgood(this)">处理</button>
                                 </td>
                             </tr>
                             </tbody>
