@@ -63,3 +63,39 @@
 | gnum | 货物数量 |
 | pworkshop | 车间 |
 | pstate | 计划状态 |
+
+## Client
+| 字段名 | 含义 |
+| ---- | ---- |
+| C_ID | 客户ID |
+| CName | 客户名称 |
+| CTele | 客户电话 |
+| CMail | 客户邮箱 |
+| CCost | 客户消费额 |
+| CRemark | 客户备注 |
+
+## Goods 
+| 字段名 | 含义 |
+| ---- | ---- |
+| G_ID | 货物ID |
+| GName | 货物名称 |
+| GType | 货物类型 |
+| GExpDate | 货物保质期 |
+| GRemark | 货物备注 |
+| GPrice | 商品价格 |
+
+## GoodsTyep 
+| 字段名 | 含义 |
+| ---- | ---- |
+| GTypeID | 货物类型ID |
+| typename | 货物类型名称 |
+
+## GP
+| 字段名 | 含义 |
+| ---- | ---- |
+| GPID | 批次名称|
+| GID | 货物ID |
+| GTime | 批次生成日期 |
+| GShop | 批次生成车间 |
+
+## 
