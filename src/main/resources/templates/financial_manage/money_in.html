@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -463,7 +463,6 @@
 </div>
 
 
-
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -483,16 +482,19 @@
                 <div class="white-box">
                     <h3 class="box-title">收入款项列表</h3>
 
-                    <label style="margin-left: 100px;font-size: small" >日期</label>
-                    <input type="date">
-                    <button>查询</button>
 
+                    <form style="display: inline" method="post" action="/query_by_time">
+                        <label style="margin-left: 30px;font-size: small" >日期</label>
+                        <input type="date" name="QTIME">
+                        <button>查询</button>
+                    </form>
 
 
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                             <tr>
+                                <th>#</th>
                                 <th>日期</th>
                                 <th>月销售收入</th>
                                 <th>月原料支出</th>
@@ -502,59 +504,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Deshmukh</td>
-                                <td>Prohaska</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-
-                            </tr>
-                            <tr>
-                                <td>Deshmukh</td>
-                                <td>Gaylord</td>
-                                <td>@Ritesh</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-
-                            </tr>
-                            <tr>
-                                <td>Sanghani</td>
-                                <td>Gusikowski</td>
-                                <td>@Govinda</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-
-                            </tr>
-                            <tr>
-                                <td>Roshan</td>
-                                <td>Rogahn</td>
-                                <td>@Hritik</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-
-                            </tr>
-                            <tr>
-                                <td>Joshi</td>
-                                <td>Hickle</td>
-                                <td>@Maruti</td>
-                                <td>She is a excellent worker.</td>
-                                <td>@Genelia</td>
-                                <td>She is a excellent worker.</td>
-
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Nigam</td>
-                                <td>Nigam</td>
-                                <td>Eichmann</td>
-                                <td>@Sonu</td>
-                                <td>She is a excellent worker.</td>
-
+                            <tr th:each="list : ${lists}">
+                                <td scope="row" th:text="${listStat.index+1}" id="xqly"  data-toggle="modal" data-target="#jianjie1"  onclick="alterfun1()"></td>
+                                <td th:text="${list.getTime()}"></td><!--日期-->
+                                <td  th:text="${list.getSul()}"></td><!--月销售收入-->
+                                <td  th:text="${list.getOut()}"></td><!--月原料支出-->
+                                <td  th:text="${list.getElse()}"></td><!--其他-->
+                                <td  th:text="${list.getAll()}"></td><!--总计-->
+                                <td  th:text="${list.getBz()}"></td><!--备注-->
                             </tr>
                             </tbody>
                         </table>
