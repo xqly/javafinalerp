@@ -31,7 +31,9 @@ public class SaleManageController {
 
     @RequestMapping("advance_sale")
     public String ads(Model model){
+        List<Orderandname> order=null;
         List<Goods> goods=basicManageService.getgoodslist();
+        model.addAttribute("order",order);
         model.addAttribute("goods",goods);
         return "sale_manage/advance_sale";
     }
@@ -57,26 +59,46 @@ public class SaleManageController {
         return "sale_manage/children";
     }
 
+    @RequestMapping(value = "query_by_poid",method = RequestMethod.POST)
+    public String crk7(@RequestParam("OID") Integer id,  Model model){
+        List<Orderandname> order = null; //orderService.getpreorderlistbyid(id);
+        model.addAttribute("order",order);
+        return "sale_manage/advance_sale";
+    }
 
     @RequestMapping(value = "query_by_oid",method = RequestMethod.POST)
     public String crk(@RequestParam("OID") Integer id,  Model model){
-        List<Ordergoods> order = orderService.getorderlistbyid(id);
+        List<Orderandname> order = null; //orderService.getorderlistbyid(id);
         model.addAttribute("order",order);
         return "sale_manage/now__sale";
     }
 
+    @RequestMapping(value = "query_by_pcid",method = RequestMethod.POST)
+    public String crk11(@RequestParam("CID") Integer id,  Model model){
+        List<Orderandname> order = null; //orderService.getpreoderlistbyclient(id);
+        model.addAttribute("order",order);
+        return "sale_manage/advance_sale";
+    }
+
     @RequestMapping(value = "query_by_cid",method = RequestMethod.POST)
     public String crk1(@RequestParam("CID") Integer id,  Model model){
-        List<Ordergoods> order = orderService.getorderlistbyid(id);
+        List<Orderandname> order = null; //orderService.getorderlistbyclient(id);
         model.addAttribute("order",order);
         return "sale_manage/now__sale";
     }
 
     @RequestMapping("add_realorders")
-    public String amt(@RequestParam("orders_json") String x){
+    public String amt2(@RequestParam("orders_json") String x){
         orderService.addOrder();
         //xqly
         return "redirect:now__sale";
+    }
+
+    @RequestMapping("add_preorders")
+    public String amt(@RequestParam("preorders_json") String x){
+        orderService.addpreorder();
+        //xqly
+        return "redirect:advance_sale";
     }
 
     @RequestMapping("re_goods")
