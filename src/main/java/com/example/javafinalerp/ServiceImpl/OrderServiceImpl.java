@@ -1,50 +1,54 @@
 package com.example.javafinalerp.ServiceImpl;
 
 import com.example.javafinalerp.Bean.Order;
+import com.example.javafinalerp.Resitory.OrderResitory;
 import com.example.javafinalerp.Service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
 
+    @Autowired
+    OrderResitory orderResitory;
 
     @Override
     public List<Order> getorderlist() {
-        return null;
+        return orderResitory.findlistbytype(0);
     }
 
     @Override
     public void addOrder() {
-
+        //xqly
     }
 
     @Override
-    public List<Order> getorderlistbyid() {
-        return null;
+    public List<Order> getorderlistbyid(Integer x) {
+        return orderResitory.findlistbyid(0,x);
     }
 
     @Override
-    public List<Order> getorderlistbyclient() {
-        return null;
+    public List<Order> getorderlistbyclient(Integer x) {
+        return orderResitory.findlistbyid(0,x);
     }
 
     @Override
     public List<Order> getpreorderlist() {
-        return null;
+        return orderResitory.findlistbytype(1);
     }
 
     @Override
     public void addpreorder() {
-
+        //xqly
     }
 
     @Override
-    public List<Order> getpreorderlistbyid() {
-        return null;
+    public List<Order> getpreorderlistbyid(Integer x) {
+        return orderResitory.findlistbyid(1,x);
     }
 
     @Override
-    public List<Order> getpreoderlistbyclient() {
-        return null;
+    public List<Order> getpreoderlistbyclient(Integer x) {
+        return orderResitory.findlistbyclient(1,x);
     }
 }

@@ -5,10 +5,10 @@ import java.util.List;
 public interface OrderService {
     List<Order> getorderlist();
     void addOrder();
-    List<Order> getorderlistbyid();
-    List<Order> getorderlistbyclient();
+    List<Order> getorderlistbyid(Integer x);
+    List<Order> getorderlistbyclient(Integer x);
     List<Order> getpreorderlist();
     void addpreorder();
-    List<Order> getpreorderlistbyid();
-    List<Order> getpreoderlistbyclient();
+    List<Order> getpreorderlistbyid(Integer x);
+    List<Order> getpreoderlistbyclient(Integer x);
 }

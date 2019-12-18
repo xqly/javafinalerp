@@ -17,6 +17,23 @@ public class Order {
     private String OLTime;  //取货时间
     private Integer type;
 
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public Integer getOID() {
         return OID;
     }
