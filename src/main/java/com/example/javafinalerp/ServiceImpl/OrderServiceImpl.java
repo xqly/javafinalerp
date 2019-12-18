@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addOrder(String s) {
+    public void addOrder() {
         //xqly
     }
 
