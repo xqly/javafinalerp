@@ -40,9 +40,47 @@ public class Materfunc {
         mHouseLogResitory.save(mHouseLog);
     }
 
-    public void OutMaterialbyidandnum(Integer id,Integer num){
-        //xqly
+    public void OutMHSbynumandid(Integer id,Integer num){
+        MHStatus mhStatus = mhStatusResitory.findbysid(id);
+        if(mhStatus.getMHNum()==num){
+            mhStatusResitory.deleteById(id);
+        }
+        else {
+            mhStatus.setMHNum(mhStatus.getMHNum()-num);
+            mhStatusResitory.save(mhStatus);
+        }
+        UserInfo user = (UserInfo) SecurityUtils.getSubject().getPrincipal();
+        MHouseLog mHouseLog = new MHouseLog();
+        mHouseLog.setMDate(Myfunc.getDate());
+        mHouseLog.setMHID(mhStatus.getMHID());
+        mHouseLog.setOper(2);
+        mHouseLog.setMPID(mhStatus.getMHPID());
+        mHouseLog.setMLNum(mhStatus.getMHNum());
+        mHouseLog.setMLMan(user.getUid());
+        mHouseLogResitory.save(mHouseLog);
+    }
 
+    public void OutMaterialbyidandnum(Integer id,Integer num){
+        List<MHStatus> lists = mhStatusResitory.findbymid(id);
+        for(int i=0;i<lists.size();i++){
+            for(int j=0;j<lists.size();j++){
+                if(lists.get(i).getMHTime().compareTo(lists.get(j).getMHTime())==1){
+                    String temp = lists.get(i).getMHTime();
+                    lists.get(i).setMHTime(lists.get(j).getMHTime());
+                    lists.get(j).setMHTime(temp);
+                }
+            }
+        }
+        Integer all=0;
+        for(int i=0;i<lists.size();i++){
+            if(all+lists.get(i).getMHNum()<num){
+                OutMHSbynumandid(lists.get(i).getMHSID(),lists.get(i).getMHNum());
+            }
+            else {
+                OutMHSbynumandid(lists.get(i).getMHSID(),lists.get(i).getMHNum()-(num-all));
+                break;
+            }
+        }
     }
 
     public void OutMaterialbyPlan(Integer x){
@@ -59,7 +97,8 @@ public class Materfunc {
             }
         }
     }
-    public void InMaterialsbyidandnum(Integer id,Integer num){
+    public void InMaterialsbyiqdandnum(Integer id,Integer num){
         //xqly
+
     }
 }

@@ -32,10 +32,12 @@ public class PlanServiceImpl implements PlanService {
             m1.put(temp.getG_ID(),temp.getGName());
         }
         Iterator<ProducePlan> iter2 = plist.iterator();
-        while(iter.hasNext()){
+//        System.out.println(plist.size());
+        while(iter2.hasNext()){
             Planandname temp = new Planandname(iter2.next());
             temp.setName(m1.get(temp.getGoodid()));
             lists.add(temp);
+//            System.out.println(111);
         }
         return lists;
     }
