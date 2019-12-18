@@ -32,7 +32,7 @@ class JavafinalerpApplicationTests {
 
     @Test
     void contextLoads() {
-        planService.getunplannamelist();
+        mHouseService.getoutdatedmaterials();
     }
 
 }

@@ -11,6 +11,7 @@ public class Planandname extends ProducePlan {
         this.setPid(x.getPid());
         this.setPtime(x.getPtime());
         this.setPworkshop(x.getPworkshop());
+        this.setPstate(x.getPstate());
     }
 
     public String getName() {

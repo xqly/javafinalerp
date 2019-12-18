@@ -40,7 +40,6 @@ public class MHouseServiceImpl implements MHouseService {
 
     @Override
     public void Destroybymhsid(Integer x) {
-//        System.out.println(x);
         mhStatusResitory.deleteById(x);
     }
 
@@ -79,13 +78,12 @@ public class MHouseServiceImpl implements MHouseService {
             m2.put(materials.getMID(),materials.getMExpDate());
         }
         Iterator<MHStatus> iter2 = mhs.iterator();
-        System.out.println(mhs.size());
         while(iter2.hasNext()){
             temp = iter2.next();
             mhn = new Materialsandname(temp);
             mhn.setExpdate(m2.get(mhn.getMID()));
             mhn.setName(m1.get(mhn.getMID()));
-            if(Myfunc.checkTime(mhn.getMHTime(),mhn.getExpdate()));
+            if(!Myfunc.checkTime(mhn.getMHTime(),mhn.getExpdate()))
                 lists.add(mhn);
         }
         return lists;
