@@ -12,6 +12,4 @@ public interface MHouseService {
     void addMaterialsbyjson(String s);
     List<Materialsandname> getoutdatedmaterials();
     void Destroybymhsid(Integer x);
-
-
 }

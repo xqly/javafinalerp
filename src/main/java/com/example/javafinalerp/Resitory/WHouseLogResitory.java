@@ -13,4 +13,8 @@ public interface WHouseLogResitory extends JpaRepository<WHouseLog,Integer> {
     @Query("select l from WHouseLog l where l.WID=?1")
     List<WHouseLog> getlistByWID(Integer x);
 
+    @Query("select l from WHouseLog l where l.LOper=?1")
+    List<WHouseLog> getlistbyoper(Integer x);
+
+
 }

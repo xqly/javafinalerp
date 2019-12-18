@@ -150,7 +150,7 @@
 | GID | 商品ID |
 | GPID | 原料批次ID |
 | WHTime | 操作时间 |
-| GNum | 操作数量 |
+| GNum | 数量 |
 
 ## WorkShop
 | 字段名 | 含义 |

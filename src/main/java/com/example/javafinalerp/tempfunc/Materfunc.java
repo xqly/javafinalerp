@@ -41,7 +41,7 @@ public class Materfunc {
     }
 
     public void OutMHSbynumandid(Integer id,Integer num){
-        System.out.println("num:"+num.toString());
+//        System.out.println("num:"+num.toString());
         MHStatus mhStatus = mhStatusResitory.findbysid(id);
         if(mhStatus.getMHNum()==num){
             mhStatusResitory.deleteById(id);
@@ -67,9 +67,9 @@ public class Materfunc {
         for(int i=0;i<lists.size();i++){
             for(int j=0;j<lists.size();j++){
                 if(lists.get(i).getMHTime().compareTo(lists.get(j).getMHTime())==-1){
-                    String temp = lists.get(i).getMHTime();
-                    lists.get(i).setMHTime(lists.get(j).getMHTime());
-                    lists.get(j).setMHTime(temp);
+                    MHStatus temp = lists.get(i);
+                    lists.set(i,lists.get(j));
+                    lists.set(j,temp);
                 }
             }
         }

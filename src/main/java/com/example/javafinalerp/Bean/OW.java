@@ -16,6 +16,14 @@ public class OW  //订单-商品
     private Integer state ;
     private Integer tnum;
 
+    public Integer getOID() {
+        return OID;
+    }
+
+    public void setOID(Integer OID) {
+        this.OID = OID;
+    }
+
     public Integer getGID() {
         return GID;
     }
@@ -32,20 +40,19 @@ public class OW  //订单-商品
         this.num = num;
     }
 
-    public Integer getOID() {
-        return OID;
+    public Integer getState() {
+        return state;
     }
 
-    public void setOID(Integer OID) {
-        this.OID = OID;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
-
-    public Integer getnum() {
-        return num;
+    public Integer getTnum() {
+        return tnum;
     }
 
-    public void setnum(Integer num) {
-        this.num = num;
+    public void setTnum(Integer tnum) {
+        this.tnum = tnum;
     }
 }

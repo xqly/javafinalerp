@@ -15,4 +15,7 @@ public interface WHStatusResitory extends JpaRepository<WHStatus,Integer> {
 
     @Query("select w from WHStatus w where w.GPID=?1")
     List<WHStatus> findbypid(Integer x);
+
+    @Query("select w from WHStatus w where w.WHSID=?1")
+    WHStatus findbysid(Integer x);
 }

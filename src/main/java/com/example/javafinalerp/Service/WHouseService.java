@@ -11,7 +11,6 @@ public interface WHouseService {
     List<WHouseLog> getlistbyid(Integer x);
     List<WHouseLog> getoutLog();
     void outGoodsbysaleID(Integer x);
-    void DestroyGoodsbySID(Integer x);
     List<WHStatus> getoutdatedlist();
     void DestroybySID(Integer x);
 
