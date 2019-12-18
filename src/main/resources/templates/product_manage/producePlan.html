@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8" xmlns:th="http://www.thymeleaf.org">
@@ -586,15 +586,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="lists:${lists}">
-                                <td th:text="${listsStat.index+1}"></td>
-                                <td th:text="${lists.getPid()}"></td>
-                                <td th:text="${lists.getGoodid()}"></td>
-                                <td th:text="${lists.getGnum()}"></td>
-                                <td th:text="${lists.getPtime()}"></td>
-                                <td th:text="${lists.getPworkshop()}"></td>
+                            <tr th:each="list:${lists}">
+                                <td th:text="${listStat.index+1}"></td>
+                                <td th:text="${list.getPid()}"></td>
+                                <td th:text="${list.getGoodid()}"></td>
+                                <td th:text="${list.getGnum()}"></td>
+                                <td th:text="${list.getPtime()}"></td>
+                                <td th:text="${list.getPworkshop()}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-pid="${lists.getPid()}" th:data-goodid="${lists.getGoodid()}" th:data-gnum="${lists.getGnum()}" th:data-ptime="${lists.getPtime()}" th:data-pworkshop="${lists.getPworkshop()}"  onclick="alterfun(this)">修改</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-pid="${list.getPid()}" th:data-goodid="${list.getGoodid()}" th:data-gnum="${list.getGnum()}" th:data-ptime="${list.getPtime()}" th:data-pworkshop="${list.getPworkshop()}"  onclick="alterfun(this)">修改</button>
                                 </td>
                             </tr>
                             </tbody>
