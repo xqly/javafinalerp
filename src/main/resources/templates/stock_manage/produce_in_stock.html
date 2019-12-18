@@ -611,7 +611,7 @@
                     <h3 class="box-title">商品入库列表</h3>
                     <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加入库项</button>
                     <label style="margin-left: 80px;font-size: small" >入库单号</label>
-                    <input type="text"  style="width: 150px">
+                    <input type="text"  style="width: 150px" name="GIID">
                     <button>查询</button>
 
 
@@ -634,13 +634,13 @@
                             </thead>
                             <tbody>
                             <tr th:each="lists : ${lists}">
-                                <td th:text="${listStat.index+1}"></td>
+                                <td th:text="${listsStat.index+1}"></td>
+                                <td th:text="${lists.getLID()}"></td><!--入库单号?????????????????-->
+                                <td th:text="${lists.getLFID()}"></td><!--生产单号????????????????-->
+                                <td th:text="${lists.getLGId()}"></td>
                                 <td th:text="${lists.getGPID()}"></td>
-                                <td th:text="${lists.getFID()}"></td>
-                                <td th:text="${lists.getGID()}"></td>
-                                <td th:text="${lists.getLID()}"></td>
-                                <td th:text="${lists.getOper()}"></td>
                                 <td th:text="${lists.getWID()}"></td>
+                                <td th:text="${lists.getLNum()}"></td>
                                 <td th:text="${lists.getLTime()}"></td>
                                 <td th:text="${lists.getLMan()}"></td>
                                <!--<td>

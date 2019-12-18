@@ -8,16 +8,16 @@ public class GoodsType {
     @Id
     @GeneratedValue
 
-    private Integer GType;
+    private Integer GTypeID;
     private String TypeName;
 
 
     public Integer getGType() {
-        return GType;
+        return GTypeID;
     }
 
     public void setGType(Integer GType) {
-        this.GType = GType;
+        this.GTypeID = GType;
     }
 
     public String  getTypeName() {

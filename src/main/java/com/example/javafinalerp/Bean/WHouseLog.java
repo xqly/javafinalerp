@@ -8,15 +8,14 @@ import javax.persistence.Id;
 public class WHouseLog {
     @Id
     @GeneratedValue
-    private Integer LID;
-    private Integer WID;
-    private String LOper;
-    private Integer LFID;
-    private Integer LMan;
-    private String LTime;
-    private Integer LGId;
-    private Integer GPID;
-    private Integer LNum;
+    private Integer LID;//主键
+    private Integer WID;//仓库
+    private String LOper;//操作
+    private Integer LMan;//负责人
+    private String LTime;//入库时间
+    private Integer LGId;//货品
+    private Integer GPID;//货品批次
+    private Integer LNum;//数量
 
     public Integer getLID() {
         return LID;
@@ -40,14 +39,6 @@ public class WHouseLog {
 
     public void setLOper(String LOper) {
         this.LOper = LOper;
-    }
-
-    public Integer getLFID() {
-        return LFID;
-    }
-
-    public void setLFID(Integer LFID) {
-        this.LFID = LFID;
     }
 
     public Integer getLMan() {

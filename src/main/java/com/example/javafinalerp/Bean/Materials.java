@@ -14,6 +14,7 @@ public class Materials {
     private Integer MExpDate;
     private String MRemark;
 
+
     public String getMRemark() {
         return MRemark;
     }

@@ -390,16 +390,16 @@
                             <tbody>
                             <tr th:each="lists : ${lists}">
                                 <td scope="row" th:text="${listsStat.index+1}" id="xqly"></td>
-                                <td th:text="${lists.GID}"></td>
-                                <td  th:text="${lists.Gname}"></td>
-                                <td  th:text="${lists.GHPID}"></td>  <!--批次号-->
-                                <td  th:text="${lists.GHTime}"></td><!--生产日期-->
-                                <td  th:text="${lists.expdate}"></td><!--保质期-->
-                                <td  th:text="${lists.GHNum}"></td>
-                                <td  th:text="${lists.GHID}"></td><!--仓库id-->
-                                <td  th:text="${lists.GHBZ}"></td><!--备注？？？？？要不要？？？？-->
+                                <td  th:text="${lists.getLGId()}"></td>
+                                <td  th:text="${lists.getLName()}"></td><!-- 商品名称,日志里没有，先占着地方~ -->
+                                <td  th:text="${lists.getGPID()}"></td>  <!--批次号-->
+                                <td  th:text="${lists.getDate()}"></td><!--生产日期,日志里没有，先占着地方-->
+                                <td  th:text="${lists.expdate}"></td><!--保质期,日志里没有，先占着地方-->
+                                <td  th:text="${lists.GHNum}"></td><!--查询结果，占地方-->
+                                <td  th:text="${lists.getWID()}"></td><!--仓库id-->
+                                <td  th:text="${lists.GHBZ}"></td><!--占地方，，，备注？？？？？要不要？？？？-->
                                 <td>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal"  onclick="accptplan(this)" th:data-id="${lists.getGID()}" >销毁</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal"  onclick="accptplan(this)" th:data-id="${lists.getLGID()}" >销毁</button>
                                 </td>
                             </tr>
                             </tbody>

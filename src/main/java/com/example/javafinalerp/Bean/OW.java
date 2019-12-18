@@ -11,9 +11,26 @@ public class OW  //订单-商品
     @Id
     @GeneratedValue
     private Integer OID;  //订货号
-    private Integer WID;  //商品号
+    private Integer GID;  //商品号
     private Integer num; //商品数量
+    private Integer state ;
+    private Integer tnum;
 
+    public Integer getGID() {
+        return GID;
+    }
+
+    public void setGID(Integer GID) {
+        this.GID = GID;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
 
     public Integer getOID() {
         return OID;
@@ -21,15 +38,6 @@ public class OW  //订单-商品
 
     public void setOID(Integer OID) {
         this.OID = OID;
-    }
-
-
-    public Integer getWID() {
-        return WID;
-    }
-
-    public void setWID(Integer WID) {
-        this.WID = WID;
     }
 
 

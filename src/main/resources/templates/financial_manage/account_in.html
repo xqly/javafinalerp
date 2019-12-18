@@ -326,8 +326,69 @@
             </div>
         </div>
     </div>
-
     <!-- /.modal -->
+
+    <div class="modal fade" id="jianjie1" role="dialog" aria-labelledby="gridSystemModalLabel" >
+        <div class="modal-dialog" role="document" style="width: 75%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">销售订单</h4>
+                    <button class="btn btn-yellow btn-xs" onclick="add()" data-toggle="modal"  style="width: 10%;height:40px;" >添加订单</button>
+                    <br><br>
+
+
+                    <label >销售订单编号：</label>
+                    <input type="text" placeholder="201912020001" class="form-control-line" onfocus=this.blur() >
+                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负责人编号:</label>
+
+                    <input type="text" placeholder="201700800607" class=" form-control-line" onfocus=this.blur() >
+                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客户编号:</label>
+
+                    <input type="text" placeholder="201700800607" class=" form-control-line"  >
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单时间:</label>
+
+                    <input type="date" id="date_info" placeholder="原料入库时间" class=" form-control-line"  >
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form class="form-horizontal">
+                            <div class="table-responsive">
+                                <table class="table" id="ci" name="ci">
+                                    <thead>
+                                    <tr>
+                                        <th>商品编号</th>
+                                        <th>商品数量</th>
+                                        <th>商品价格</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td><input type="text" style="width:80%;"></td>
+                                        <td><input type="number" style="width:80%;"></td>
+                                        <td><input type="number" style="width:80%;"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">关 闭</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 
     <!--修改资源弹出窗口-->
     <div class="modal fade" id="changeSource" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -454,11 +515,6 @@
                                 <td  th:text="${list.getDate()}"></td><!--收款日期-->
                                 <td  th:text="${list.getMan()}"></td><!--负责人-->
                                 <td  th:text="${list.getBZ()}"></td><!--备注-->
-                            <!--    <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${list.getSID()}"
-                                            th:data-did="${list.getDID()}" th:data-money="${list.getMoney()}" th:data-time="${list.getDate()}"
-                                            th:data-man="${list.getMan()}" th:data-bz="${list.getBZ()}" onclick="alterfun(this)">修改</button>
-                                </td>-->
                             </tr>
                             </tbody>
                         </table>

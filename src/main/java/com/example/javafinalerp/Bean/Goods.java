@@ -8,11 +8,11 @@ import javax.persistence.Id;
 public class Goods {
     @Id
     @GeneratedValue
-    private Integer G_ID;
-    private String GName;
-    private Integer GType;
-    private Integer GExpDate;
-    private String GRemark;
+    private Integer G_ID;//ID
+    private String GName;//名字
+    private Integer GType;//大类
+    private Integer GExpDate;//保质期
+    private String GRemark;//备注
     private Double MPrice; //商品价格
 
     public Integer getG_ID() {

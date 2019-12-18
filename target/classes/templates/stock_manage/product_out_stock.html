@@ -452,10 +452,10 @@
 
                             <tr th:each="lists : ${lists}">
                                 <td scope="row" th:text="${listsStat.index+1}" id="xqly"></td>
-                                <td th:text="${lists.id}"></td>
-                                <td  th:text="${lists.time}"></td>
+                                <td th:text="${lists.getOID()}"></td>
+                                <td  th:text="${lists.getOTime()}"></td>
                                 <td>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal"  th:data-id="${lists.getid()}" onclick="accptplan(this)">接受出库</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal"  th:data-id="${lists.getOID()}" onclick="accptplan(this)">接受出库</button>
                                 </td>
                             </tr>
                             </tbody>
