@@ -13,4 +13,5 @@ public interface MHouseService {
     List<Materialsandname> getoutdatedmaterials();
     void Destroybymhsid(Integer x);
 
+
 }
