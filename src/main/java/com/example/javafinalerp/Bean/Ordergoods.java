@@ -16,6 +16,7 @@ public class Ordergoods {
     private String remark;  //备注
     private String OLTime;  //取货时间
     private Integer type;
+    private double discount;
 
 
     public String getRemark() {
