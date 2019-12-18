@@ -73,7 +73,12 @@
             $("#sKnot2").attr("value",butt.getAttribute("data-bz"));
         }
 
-        function del(btn) {
+        function fsubmit1(obj) {
+            obj.submit();
+        }
+
+
+        function dealgood (btn) {
             var tr = btn.parentElement.parentElement;
             var tbl = tr.parentElement;
             tbl.deleteRow(tr.rowIndex-1);
@@ -343,6 +348,34 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
+
+        <!-- /.modal -->
+        <!--弹出删除资源警告窗口-->
+        <div class="modal fade" id="deleteSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            确定要处理该订单？处理后不可恢复！
+                        </div>
+                        <form hidden method="post" action="/deluser" name="delform" id="delform" >
+                            <input type="" id="uid" name="uid">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                        <button type="button" class="btn btn-xs btn-danger" onclick="fsubmit1(document.delform)" >确 定</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
         <!-- /row -->
         <div class="row">
             <div class="col-sm-12">
@@ -365,10 +398,8 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>收款单编号</th>
                                 <th>订单号</th>
-                                <th>收取金额</th>
-                                <th>收款日期</th>
+                                <th>应收金额</th>
                                 <th>负责人</th>
                                 <th>备注</th>
                                 <th>操作</th>
@@ -377,14 +408,13 @@
                             <tbody>
                             <tr th:each="list : ${lists}">
                                 <td scope="row" th:text="${listStat.index+1}" id="xqly"  data-toggle="modal" data-target="#jianjie1"  onclick="alterfun1()"></td>
-                                <td th:text="${list.getSID()}"></td><!--收款单号-->
                                 <td  th:text="${list.getDID()}"></td><!--订单号-->
-                                <td  th:text="${list.getMoney()}"></td><!--收取金额号-->
-                                <td  th:text="${list.getDate()}"></td><!--收款日期-->
+                                <td  th:text="${list.getMoney()}"></td><!--金额-->
                                 <td  th:text="${list.getMan()}"></td><!--负责人-->
                                 <td  th:text="${list.getBZ()}"></td><!--备注-->
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">处理</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#addSource" th:data-id="${list.getDID()}" th:data-money="${list.getMoney()}"
+                                            th:data-man="${list.getMan()}" th:data-bz="${list.getBZ()}"  onclick="dealgood(this)">处理</button>
                                 </td>
                             </tr>
                             </tbody>
