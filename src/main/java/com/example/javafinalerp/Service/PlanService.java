@@ -7,4 +7,6 @@ import java.util.List;
 public interface PlanService {
     List<Planandname> getunplannamelist();
     void outMaterialsbyPlanid(Integer x);
+    List<Integer> getMethodmygoods(Integer x);
+
 }

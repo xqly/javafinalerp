@@ -12,15 +12,6 @@ public class MHouse {
     private String MHName;
     private String MHSite;
     private Integer MHMan;
-    private  String MRemark;
-
-    public String getMRemark() {
-        return MRemark;
-    }
-
-    public void setMRemark(String MRemark) {
-        this.MRemark = MRemark;
-    }
 
     public Integer getMHID() {
         return MHID;

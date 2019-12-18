@@ -15,6 +15,7 @@ public class Order {
     private Integer OMID; //负责人id
     private String remark;  //备注
     private String OLTime;  //取货时间
+    private Integer type;
 
     public Integer getOID() {
         return OID;
