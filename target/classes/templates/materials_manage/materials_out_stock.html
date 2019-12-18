@@ -23,9 +23,16 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script>
+        function deluser(butt) {
+            $("#QID").attr("value",butt.getAttribute("data-id"));
+        }
+        function fsubmit1(obj) {
+            obj.submit();
+        }
         function accptplan(butt) {
             var ret = window.confirm("确定出库?");
             if(ret){
+
                 $("#QID").attr("value",butt.getAttribute("data-id"));
             }
         }
@@ -279,7 +286,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">配料表</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel1">配料表</h4>
                     <!--<button class="btn btn-yellow btn-xs" onclick="add1()" data-toggle="modal"  style="width: 10%;height:40px;" >添加配料项</button>-->
                     <br><br>
                     <label >商品编号：</label>
@@ -399,10 +406,13 @@
                     <div class="container-fluid">
                         确定要接收该原料出库请求吗？
                     </div>
+                    <form hidden method="post" action="/materialsoutbyid" name="delform" id="delform" >
+                        <input type="text"  id="QID" name="QID">
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-danger">保 存</button>
+                    <button type="button" class="btn btn-xs btn-danger" onclick="fsubmit1(document.delform)">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -454,7 +464,7 @@
                                 <td  th:text="${lists.gnum}"></td>
                                 <td  th:text="${lists.ptime}"></td>
                                 <td>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal"  th:data-id="${lists.getPid()}" onclick="accptplan(this)">接受出库</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal"  th:data-id="${lists.getPid()}" data-target="#deleteSource" onclick="deluser(this)">接受出库</button>
                                 </td>
                             </tr>
                             </tbody>
