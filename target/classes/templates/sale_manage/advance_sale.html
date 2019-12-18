@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -9,60 +9,30 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../../plugins/images/favicon.png">
     <title>销售预订单</title>
-    <!-- Bootstrap Core CSS -->
+
     <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Menu CSS -->
+
     <link href="../../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-    <!-- animation CSS -->
+
     <link href="../css/animate.css" rel="stylesheet">
-    <!-- Custom CSS -->
+
     <link href="../css/style.css" rel="stylesheet">
-    <!-- color CSS -->
+
     <link href="../css/colors/blue-dark.css" id="theme" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
 
     <script type="text/javascript">
-        function get_table_data() {
-            var tr = $("#ci2 tr");
-            var result = [];
-            for (var i = 0; i < tr.length; i++) {
-                var inputs2 = $(tr[i]).find("td").find("input");
-                var inputs1 = $(tr[i]).find("td").find("select");
-                if (inputs1.length > 0 && inputs2.length>0) {
-                    result.push({
-                        mid : inputs1[0].value,
-                        mnum : inputs2[0].value,
-                        request : inputs2[1].value
-                    });
-                }
-            }
-            return result;
-        }
-        function send() {
-            var bisSuenDocuSacertCont = get_table_data();
-            var json= {
-                customer : document.getElementById("customer1").value,
-                time : document.getElementById("quhuo").value,
-                peiliao : bisSuenDocuSacertCont
-            };
-
-            var burden=JSON.stringify(json);
-            alert(burden);
-            $.ajax({
-                url:"burdenSheet",
-                type:"post",
-                dataType:"json",
-                contentType:"application/json",
-                data:burden,
-                success:function(){
-                    alert(burden);
-                }
-            });
+        function alterfun(butt) {
+            $("#uid").attr("value",butt.getAttribute("data-oid"));
+            $("#customer5").attr("value",butt.getAttribute("data-cid"));
+            $("#date_info5").attr("value",butt.getAttribute("data-otime"));
+            $("#date_info6").attr("value",butt.getAttribute("data-oltime"));
+            $("#before5").attr("value",butt.getAttribute("data-before"));
+            $("#zhekou5").attr("value",butt.getAttribute("data-discount"));
+            $("#sum5").attr("value",butt.getAttribute("data-after"));
+            $("#require5").attr("value",butt.getAttribute("data-remark"));
         }
 
         var count = 1;
@@ -90,16 +60,20 @@
             var tr = tbl.insertRow(rows);
 
             var name = tr.insertCell(0);
-            name.innerHTML = '                                <select   style="width:100%;" >\n' +
+            name.innerHTML = '                                            <select   style="width:100%;" >\n' +
                 '                                                <option th:text="请选择商品"></option>\n' +
                 '                                                <option th:each="goods:${goods}" th:value="${goods.getG_ID()}" th:text="${goods.getGName()}" ></option>\n' +
                 '                                            </select>';
             var tel = tr.insertCell(1);
             tel.innerHTML = '<input style="width: 80%;" type="number">';
-            var rdo = tr.insertCell(2);
-            rdo.innerHTML = '<input style="width: 80%;" type="text">';
 
-            var del = tr.insertCell(3);
+            var tel1 = tr.insertCell(2);
+            tel1.innerHTML = '<input style="width: 80%;" type="number">';
+
+            var tel2 = tr.insertCell(2);
+            tel2.innerHTML = '<input style="width: 80%;" type="number">';
+
+            var del = tr.insertCell(4);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
             count2++;
         }
@@ -110,7 +84,92 @@
             tbl.deleteRow(tr.rowIndex-1);
         }
 
-        //-->
+        function calusum() {
+            var tr = $("#ci2 tr");
+            var sum=0;
+            for (var i = 0; i < tr.length; i++) {
+                var inputs = $(tr[i]).find("td").find("input");
+                if (inputs.length>0) {
+                    sum+=parseInt(inputs[2].value);
+                }
+            }
+            $("#before").attr("value",sum);
+        }
+
+        function calend() {
+            var price= parseInt(document.getElementById("before").value);
+            var zhekou= parseFloat(document.getElementById("zhekou").value);
+            document.getElementById("sum").value= price*zhekou;
+        }
+        function get_table_data() {
+            var tr = $("#ci2 tr");
+            var result = [];
+            for (var i = 0; i < tr.length; i++) {
+                var inputs2 = $(tr[i]).find("td").find("input");
+                var inputs1 = $(tr[i]).find("td").find("select");
+                if (inputs1.length > 0 && inputs2.length>0) {
+                    var sel=inputs1[0];
+                    result.push({
+                        mname : sel.options[sel.selectedIndex].text,
+                        mnum : inputs2[0].value
+                    });
+                }
+            }
+            return result;
+        }
+
+        function send() {
+            var bisSuenDocuSacertCont = get_table_data();
+            var json= {
+                customer : document.getElementById("customer1").value,
+                discount :document.getElementById("zhekou").value,
+                tihuo_time :document.getElementById("date_info7").value,
+                beizhu :document.getElementById("require").value,
+                peiliao : bisSuenDocuSacertCont
+            };
+
+            var burden=JSON.stringify(json);
+            alert(burden);
+            $.ajax({
+                url:"burdenSheet",
+                type:"post",
+                dataType:"json",
+                contentType:"application/json",
+                data:burden,
+                success:function(){
+                    alert(burden);
+                }
+            });
+        }
+
+        function xiala() {
+            var  myselect=document.getElementById("mater");
+            var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
+            var danjia=myselect.options[index].value;
+            var num1=document.getElementById("num").value;
+            document.getElementById("price").value=danjia;
+            document.getElementById("zong").value=danjia*num1;
+        }
+
+        function num_change() {
+            var  myselect=document.getElementById("mater");
+            var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
+            var danjia=myselect.options[index].value;
+            var num1=document.getElementById("num").value;
+            //      document.getElementById("price").value=danjia;
+            document.getElementById("zong").value=danjia*num1;
+        }
+
+        // var data =[<c:forEach items="${array}" var="childArray" >
+        // [
+        // <c:forEach items="${childArray}" var="val" >
+        //     ${val},
+        // </c:forEach>
+        // ],
+        // </c:forEach>];
+
+
+
     </script>
 </head>
 
@@ -319,7 +378,6 @@
                         <li>
                             <a href="add_custom">客户信息</a>
                         </li>
-
                     </ul>
                 </li>
                 <li>
@@ -333,7 +391,6 @@
                         <li>
                             <a href="productsLog">仓库日志</a>
                         </li>
-
                     </ul>
                 </li>
                 <li>
@@ -364,19 +421,30 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">销售预订单</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel2">销售预订单</h4>
                     <button class="btn btn-yellow btn-xs" onclick="add1()" data-toggle="modal"  style="width: 10%;height:40px;" >添加商品</button>
                     <br><br>
 
-                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客户编号:</label>
-                    <input type="text" id="customer1" name="customer1" placeholder="201700800607" class=" form-control-line"  >
+                    <label>客户编号:</label>
+                    <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer1" id="customer1" >
 
-                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单时间:</label>
-                    <input type="date" id="date_info" placeholder="原料入库时间" class=" form-control-line"  >
-                    <br> <br>
+                    <label style="margin-left: 100px">订单时间:</label>
+                    <input type="date" id="date_info1" placeholder="原料入库时间" class=" form-control-line"  >
 
-                    <label>取货时间:</label>
-                    <input type="date" id="quhuo" name="quhuo" placeholder="取货时间" class=" form-control-line"  >
+                    <label style="margin-left: 100px">提货时间:</label>
+                    <input type="date" id="date_info7" placeholder="原料入库时间" class=" form-control-line"  >
+
+                    <label style="margin-left: 100px">原价总计:</label>
+                    <input type="number" id="before" name="before" value="0" class=" form-control-line"  onchange="calend()" onfocus=this.blur()>
+
+                    <label style="margin-left: 100px">折扣:</label>
+                    <input type="number" id="zhekou" name="zhekou" placeholder="1.0" class=" form-control-line"  step = "0.1" onchange="calend()">
+
+                    <br><br>
+                    <label>折扣后总计:</label>
+                    <input type="number" id="sum" name="sum"  class=" form-control-line"  >
+                    <label  style="margin-left: 100px">备注:</label>
+                    <input type="text" id="require" name="require" placeholder="备注" class=" form-control-line" >
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -387,7 +455,8 @@
                                     <tr>
                                         <th>商品名称</th>
                                         <th>商品数量</th>
-                                        <th>备注</th>
+                                        <th>单价</th>
+                                        <th>总计</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -397,17 +466,19 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
 
                                         <td>
-                                            <select  name="mater" id="mater" style="width:100%;" >
+                                            <select  name="mater" id="mater" style="width:100%;" onchange="xiala()">
                                                 <option th:text="请选择商品"></option>
-                                                <option th:each="goods:${goods}" th:value="${goods.getG_ID()}" th:text="${goods.getGName()}" ></option>
+                                                <option th:each="goods:${goods}" th:value="${goods.getMPrice()}" th:text="${goods.getGName()}" ></option>
                                             </select>
                                         </td>
-                                        <td><input type="number" style="width:80%;"></td>
-                                        <td><input type="text" style="width:80%;"></td>
+                                        <td><input type="number" style="width:80%;" id="num" name="num" onchange="num_change()" value="1"></td>
+                                        <td><input type="text" style="width:80%;"  id="price" name="price"  onfocus=this.blur()></td>
+                                        <td><input type="number" style="width:80%;" id="zong" name="zong" onfocus=this.blur()></td>
                                         <td><input type="button" onclick="del(this)" value="删除"></td>
                                     </tr>
                                     </tbody>
@@ -419,6 +490,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
                     <button type="button" class="btn btn-xs btn-green" onclick="send()">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="calusum()">生成</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -432,24 +504,33 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">销售预订单</h4>
-                    <button class="btn btn-yellow btn-xs" onclick="add()" data-toggle="modal"  style="width: 10%;height:40px;" >添加订单</button>
+                    <h4 class="modal-title" id="gridSystemModalLabel5">销售预订单</h4>
+
                     <br><br>
-                    <label >销售订单编号：</label>
-                    <input type="text" placeholder="201912020001" class="form-control-line" onfocus=this.blur() >
-                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负责人编号:</label>
+                    <label>客户编号:</label>
+                    <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer5" id="customer5" >
 
-                    <input type="text" placeholder="201700800607" class=" form-control-line" onfocus=this.blur() >
-                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客户编号:</label>
+                    <label style="margin-left: 100px">订单时间:</label>
+                    <input type="date" id="date_info5" name="date_info5"  class=" form-control-line"  >
 
-                    <input type="text" placeholder="201700800607" class=" form-control-line"  >
-                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单时间:</label>
+                    <label style="margin-left: 100px">取货时间:</label>
+                    <input type="date" id="date_info6" name="date_info6"  class=" form-control-line"  >
 
-                    <input type="date" id="date_info" placeholder="原料入库时间" class=" form-control-line"  >
-                    <br> <br>
-                    <label>取货时间:</label>
+                    <label style="margin-left: 100px">原价总计:</label>
+                    <input type="number" id="before5" name="before5" value="0" class=" form-control-line"  onchange="calend()" onfocus=this.blur()>
 
-                    <input type="date" id="date_info" placeholder="原料入库时间" class=" form-control-line"  >
+                    <label style="margin-left: 100px">折扣:</label>
+                    <input type="number" id="zhekou5" name="zhekou5" placeholder="1.0" class=" form-control-line"  step = "0.1" onchange="calend()">
+
+                    <br><br>
+                    <label>折扣后总计:</label>
+                    <input type="number" id="sum5" name="sum5"  class=" form-control-line"  >
+                    <label  style="margin-left: 100px">备注:</label>
+                    <input type="text" id="require5" name="require5" placeholder="备注" class=" form-control-line">
+
+                    <form hidden method="post" action="/lookadorder" name="delform" id="delform" >
+                        <input type="text" id="uid" name="uid">
+                    </form>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -458,37 +539,30 @@
                                 <table class="table" id="ci" name="ci">
                                     <thead>
                                     <tr>
-
-                                        <th>商品编号</th>
+                                        <th>商品名称</th>
                                         <th>商品数量</th>
-                                        <th>备注</th>
-                                        <th>操作</th>
+                                        <th>单价</th>
+                                        <th>总计</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-
                                         <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-
-                                        <td><input type="text" style="width:80%;"></td>
-                                        <td><input type="text" style="width:80%;"></td>
-                                        <td><input type="text" style="width:80%;"></td>
-                                        <td><input type="button" onclick="del(this)" value="删除"></td>
+                                    <tr th:each="order:${order}">
+                                        <td th:text="${order.getWID()}"></td>
+                                        <td th:text="${order.getnum()}"></td>
+                                        <td th:text="${order.getMPrice()}"></td>
+                                        <td th:text="${order.getsum()}"></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </form>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -529,11 +603,11 @@
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">销售预订单</h4> </div>
-            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <h4 class="page-title">销售订单</h4> </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="#" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
                 <ol class="breadcrumb">
                     <li><a href="../../../pix_zq/pixel-html/index.html">首页</a></li>
-                    <li class="active">销售预订单</li>
+                    <li class="active">销售订单</li>
                 </ol>
             </div>
             <!-- /.col-lg-12 -->
@@ -542,14 +616,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="white-box">
-                    <h3 class="box-title">预订单列表</h3>
-                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加预订单</button>
-                    <label style="margin-left: 100px;font-size: small" >销售订单编号</label>
-                    <input type="text" >
-                    <button>查询</button>
+                    <h3 class="box-title">订单列表</h3>
+                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加订单</button>
 
                     <form style="display: inline" method="post" action="/query_by_oid">
-                        <label style="margin-left: 100px;font-size: small" >销售预订单编号</label>
+                        <label style="margin-left: 100px;font-size: small" >销售订单编号</label>
                         <input type="text" name="OID" >
                         <button>查询</button>
                     </form>
@@ -565,11 +636,13 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>销售预定单编号</th>
-                                <th>客户编号</th>
-
+                                <th>销售订单编号</th>
+                                <th>客户账号</th>
                                 <th>订单日期</th>
                                 <th>取货日期</th>
+                                <th>原价总计</th>
+                                <th>折扣</th>
+                                <th>折扣后总计</th>
                                 <th>负责人</th>
                                 <th>备注</th>
                                 <th>操作</th>
@@ -582,10 +655,18 @@
                                 <td th:text="${order.getCID()}"></td>
                                 <td th:text="${order.getOTime()}"></td>
                                 <td th:text="${order.getOLTime()}"></td>
+
+                                <td th:text="${order.getBefore()}"></td>     <!--原价总计-->
+                                <td th:text="${order.getDiscount()}"></td>   <!--折扣-->
+                                <td th:text="${order.getAfter()}"></td>   <!--折扣后总计-->
+
                                 <td th:text="${order.getOMID()}"></td>
                                 <td th:text="${order.getremark()}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-pid="${order.getOID()}" th:data-goodid="${order.getCID()}" th:data-gnum="${order.getOTime()}" th:data-ptime="${order.getOMID()}" th:data-pworkshop="${order.getremark()}"  onclick="alterfun(this)">修改</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource"
+                                            th:data-oid="${order.getOID()}" th:data-cid="${order.getCID()}" th:data-otime="${order.getOTime()}" th:data-oltime="${order.getOLTime()}"
+                                            th:data-before="${order.getBefore()}" th:data-discount="${order.getDiscount()}" th:data-after="${order.getAfter()}"
+                                            th:data-omid="${order.getOMID()}" th:data-remark="${order.getremark()}"  onclick="alterfun(this)">查看</button>
 
                                 </td>
                             </tr>
