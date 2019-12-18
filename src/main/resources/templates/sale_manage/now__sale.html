@@ -125,16 +125,16 @@
                 peiliao : bisSuenDocuSacertCont
             };
 
-            var burden=JSON.stringify(json);
-            alert(burden);
+            var orders_json=JSON.stringify(json);
+            alert(orders_json);
             $.ajax({
-                url:"burdenSheet",
+                url:"add_realorders",
                 type:"post",
                 dataType:"json",
                 contentType:"application/json",
-                data:burden,
+                data:orders_json,
                 success:function(){
-                    alert(burden);
+                    alert(orders_json);
                 }
             });
         }

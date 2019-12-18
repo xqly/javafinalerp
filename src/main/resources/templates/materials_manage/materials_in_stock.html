@@ -54,16 +54,16 @@
             //   //  agenGene : $("#agenGene").val(),
             //     bisSuenDocuSacertCont : bisSuenDocuSacertCont
             // };
-            var materials_in_stock=JSON.stringify(bisSuenDocuSacertCont);
+            var materials_json=JSON.stringify(bisSuenDocuSacertCont);
            // alert(materials_in_stock);
             $.ajax({
                 url:"add_realmaterials",
                 type:"post",
                 dataType:"json",
                 contentType:"application/json",
-                data:materials_in_stock,
+                data:materials_json,
                 success:function(){
-                    alert(materials_in_stock);
+                    alert(materials_json);
                 }
             });
         }
