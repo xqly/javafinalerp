@@ -10,6 +10,7 @@ import com.example.javafinalerp.tempclass.Planandname;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -43,5 +44,10 @@ public class ProductManageController {
         model.addAttribute("lists",lists);
         return "product_manage/producePlan";
     }
+
+//    @RequestMapping("alterplan")
+//    public String altplan(@ModelAttribute ProducePlan producePlan){
+////        planService.
+//    }
 
 }

@@ -33,7 +33,12 @@ public class OWname extends OW {
 
 
     public OWname(OW x){
-
+        this.setGID(x.getGID());
+        this.setTnum(x.getTnum());
+        this.setState(x.getState());
+        this.setOID(x.getOID());
+        this.setNum(x.getNum());
+        this.setName("123");
     }
 
 }
