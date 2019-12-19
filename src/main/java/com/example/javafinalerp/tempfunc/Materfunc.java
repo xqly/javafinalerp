@@ -1,10 +1,7 @@
 package com.example.javafinalerp.tempfunc;
 
 import com.example.javafinalerp.Bean.*;
-import com.example.javafinalerp.Resitory.MHStatusResitory;
-import com.example.javafinalerp.Resitory.MHouseLogResitory;
-import com.example.javafinalerp.Resitory.MethodResitory;
-import com.example.javafinalerp.Resitory.ProducePlanResitory;
+import com.example.javafinalerp.Resitory.*;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +22,10 @@ public class Materfunc {
 
     @Autowired
     MethodResitory methodResitory;
+
+    @Autowired
+    MPResitory mpResitory;
+
 
     public void DesMaterbyMHSID(Integer x){
         mhStatusResitory.deleteById(x);
@@ -102,8 +103,22 @@ public class Materfunc {
             }
         }
     }
-    public void InMaterialsbyiqdandnum(Integer id,Integer num){
+    public void InMaterialsbyiqdandnum(Integer id,Integer num,String Time,Integer to){
         //xqly
-
+        MP mp = new MP();
+        mp.setMID(id);
+        mp.setMTime(Time);
+        mpResitory.save(mp);
+        Integer pid=0;
+        List<MP> list = mpResitory.findAll();
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getMPID()>pid){
+                pid= list.get(i).getMPID();
+            }
+        }
+        MHStatus mhStatus = new MHStatus(to,id,pid,num,Time);
+        mhStatusResitory.save(mhStatus);
+        MHouseLog mHouseLog = new MHouseLog(mhStatus,1);
+        mHouseLogResitory.save(mHouseLog);
     }
 }

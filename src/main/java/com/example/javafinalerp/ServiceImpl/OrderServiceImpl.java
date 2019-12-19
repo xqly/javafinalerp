@@ -1,5 +1,6 @@
 package com.example.javafinalerp.ServiceImpl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.javafinalerp.Bean.OW;
 import com.example.javafinalerp.Bean.Ordergoods;
 import com.example.javafinalerp.Resitory.OWResitory;
@@ -78,5 +79,18 @@ public class OrderServiceImpl implements OrderService {
             lists.add(temp);
         }
         return lists;
+    }
+
+    @Override
+    public JSONObject getajson() {
+
+        JSONObject object = new JSONObject();
+
+        object.put("name","xqly");
+        object.put("numm",12);
+        object.put("price1",12.12);
+        object.put("price2",13.22);
+
+        return object;
     }
 }

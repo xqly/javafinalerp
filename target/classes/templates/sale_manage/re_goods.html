@@ -655,16 +655,16 @@
                                 <td th:text="${order.getCID()}"></td>
                                 <td th:text="${order.getOTime()}"></td>
 
-                                <td th:text="${order.getBefore()}"></td>     <!--原价总计-->
+                                <td th:text="${order.getPrice1()}"></td>     <!--原价总计-->
                                 <td th:text="${order.getDiscount()}"></td>   <!--折扣-->
-                                <td th:text="${order.getAfter()}"></td>   <!--折扣后总计-->
+                                <td th:text="${order.getPrice2()}"></td>   <!--折扣后总计-->
 
                                 <td th:text="${order.getOMID()}"></td>
                                 <td th:text="${order.getremark()}"></td>
                                 <td>
                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource"
                                             th:data-oid="${order.getOID()}" th:data-cid="${order.getCID()}" th:data-otime="${order.getOTime()}"
-                                            th:data-before="${order.getBefore()}" th:data-discount="${order.getDiscount()}" th:data-after="${order.getAfter()}"
+                                            th:data-before="${order.getPrice1()}" th:data-discount="${order.getDiscount()}" th:data-after="${order.getPrice2()}"
                                             th:data-omid="${order.getOMID()}" th:data-remark="${order.getremark()}"  onclick="alterfun(this)">进行退货</button>
 
                                 </td>

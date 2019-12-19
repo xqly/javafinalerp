@@ -17,6 +17,17 @@ public class MHouseLog {
     private Integer MLMan;
     private Integer MLWMan;
 
+    public MHouseLog(){
+
+    }
+    public MHouseLog(MHStatus x,Integer oper){
+        this.setMHID(x.getMHID());
+        this.setOper(oper);
+        this.setMPID(x.getMHPID());
+        this.setMDate(x.getMHTime());
+        this.setMLNum(x.getMHNum());
+    }
+
     public Integer getOper() {
         return Oper;
     }
