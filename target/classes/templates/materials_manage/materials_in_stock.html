@@ -112,6 +112,20 @@
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
             count2++;
         }
+        function tian() {
+            var XX=['AA','BB','CC'];
+            $("#eq_num").empty();
+           // $("#eq_num").empty();//清空select，不然每点一次都循环添加一遍数据越来越多
+            for(var i=0;i <XX.length;i++){
+                $(".selectpicker").append('<option>'+XX[i]+'</option>');
+            };
+            // 缺一不可
+
+            $("#eq_num").selectpicker('refresh');
+            $("#eq_num").selectpicker('render');
+            // $("#eq_num").selectpicker('refresh');
+            // $("#eq_num").selectpicker('render');
+        }
 
         function add1() {
             var tbl = document.all.ci2;
@@ -129,10 +143,7 @@
             //     <option th:text="请选择原料"></option>\
             //     <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>\
             //     </select>';
-            name.innerHTML = '<select  name="mater1" id="mater1" style="width:100%;" onchange="xiala1()">\
-                <option >请选择原料</option>\
-                <option th:each="materials:${materials}" th:value="${materials.MPrice}" text="${materials.MName}" ></option>\
-                </select>';
+            name.innerHTML ='<select class="selectpicker"  id="eq_num" name="eq_num" data-actions-box="true"  data-live-search="true" data-live-search-placeholder="请选择···"  onclick="tian()">  </select>';
             var tel = tr.insertCell(1);
             tel.innerHTML = '<select  name="stu_profession" style="width:100%;">\n' +
                 '                                                <option th:text="请选择原料库"></option>\n' +
