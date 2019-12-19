@@ -23,7 +23,12 @@
 
 
     <script type="text/javascript">
-        function alterfun(butt) {
+        function tuihuonum() {
+
+            document.getElementById("c44").value=parseInt(document.getElementById("c22").value)*parseInt(document.getElementById("c33").value);
+
+        }
+        function alterfun(butt,yourData) {
             $("#uid").attr("value",butt.getAttribute("data-oid"));
             $("#customer5").attr("value",butt.getAttribute("data-cid"));
             $("#date_info5").attr("value",butt.getAttribute("data-otime"));
@@ -31,6 +36,57 @@
             $("#zhekou5").attr("value",butt.getAttribute("data-discount"));
             // $("#sum5").attr("value",butt.getAttribute("data-after"));
             // $("#require5").attr("value",butt.getAttribute("data-remark"));
+
+            $.ajax({
+                type: "get", // 以get方式发起请求
+                url: "/yourUrl/"+yourData, // 将你的请求参数以问号拼接到url中进行参数传递
+
+                success(data) {
+                    // data为返回值
+                    // 成功后的回调方法
+                    //      alert(data[0].name);
+                    alert(yourData);
+                    // alert(data[0]);
+                    //  alert(data.length);
+                    alert(data.name);
+                    //   alert(data.length);
+                    var table=document.getElementById("ci");
+                    // for(var i=0;i<data.length;i++){
+                    var row=table.insertRow(table.rows.length);
+                    // var c1=row.insertCell(0);
+                    // c1.innerHTML=data[i].name;
+                    // alert(c1.innerHTML);
+                    // var c2=row.insertCell(1);
+                    // c2.innerHTML=data[i].numm;
+                    // var c3=row.insertCell(2);
+                    // c3.innerHTML=data[i].price1;
+                    // var c4=row.insertCell(3);
+                    // c4.innerHTML=data[i].price2;
+                    var c0=row.insertCell(0);
+                    c0.innerHTML='    <span class="radio_wrap">\n' +
+                        '                   <input type="checkbox" id="xh" name="xh"/>\n' +
+                        '                   <label for="xh" class="check"></label>\n' +
+                        '              </span>';
+                    var c1=row.insertCell(1);
+                    c1.innerHTML='<input name="c11" id="c11">';
+                    document.getElementById("c11").value=data.name;
+                    //c1.innerHTML=data.name;
+                    alert(c1.innerHTML);
+                    var c2=row.insertCell(2);
+                    c2.innerHTML='<input type="number" name="c22" id="c22" onchange="tuihuonum()">';
+                    document.getElementById("c22").value=data.numm;
+                   //c2.innerHTML=data.numm;
+                    var c3=row.insertCell(3);
+                    c3.innerHTML='<input type="number" name="c33" id="c33" onfocus=this.blur()>';
+                    document.getElementById("c33").value=data.price1;
+                    //c3.innerHTML=data.price1;
+                    var c4=row.insertCell(4);
+                    c4.innerHTML='<input name="c44" id="c44" onfocus=this.blur()>';
+                    document.getElementById("c44").value=parseInt(data.numm)*parseInt(data.price1);
+                   // c4.innerHTML=data.price2;
+
+                }
+            })
         }
 
         var count = 1;
@@ -83,17 +139,25 @@
         }
 
         function calusum() {
-            var tr = $("#ci2 tr");
+            var tr = $("#ci tr");
             var sum=0;
             for (var i = 0; i < tr.length; i++) {
                 var inputs = $(tr[i]).find("td").find("input");
                 if (inputs.length>0) {
-                    sum+=parseInt(inputs[2].value);
+                    sum+=parseInt(inputs[3].value);
                 }
             }
             var zhekou=parseFloat(document.getElementById("zhekou5").value);
             sum = sum*zhekou;
             $("#reSum").attr("value",sum);
+
+            // $("table input:checkbox").each(function(){
+            //     if($(this).attr("checked")==true){
+            //         alert($("table input:checkbox").index(this));
+            //         //值
+            //         console.log($(this).parent().parent().children().eq(1).text());
+            //     }
+            // })
         }
 
         function calend() {
@@ -487,7 +551,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel5">销售订单</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel5">退货</h4>
 
                     <br><br>
 
@@ -524,7 +588,7 @@
                     <div class="container-fluid">
                         <form class="form-horizontal">
                             <div class="table-responsive">
-                                <table class="table" id="ci2" name="ci2">
+                                <table class="table" id="ci" name="ci">
                                     <thead>
                                     <tr>
                                         <th>选择</th>
@@ -542,18 +606,18 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    <tr th:each="goods1:${goods1}">
-                                        <td>
-                                            <span class="radio_wrap">
-                                                <input type="radio" id="xh" name="xh"/>
-                                                <label for="xh" class="check"></label>
-                                            </span>
-                                        </td>
-                                        <td><input th:value="${goods1.getWID()}"></td>
-                                        <td><input th:value="${goods1.getnum()}"></td>
-                                        <td th:text="${goods1.getMPrice()}"></td>
-                                        <td th:text="${goods1.getsum()}"></td>
-                                    </tr>
+                                    <!--<tr th:each="goods1:${goods1}">-->
+                                        <!--<td>-->
+                                            <!--<span class="radio_wrap">-->
+                                                <!--<input type="radio" id="xh" name="xh"/>-->
+                                                <!--<label for="xh" class="check"></label>-->
+                                            <!--</span>-->
+                                        <!--</td>-->
+                                        <!--<td><input th:value="${goods1.getWID()}"></td>-->
+                                        <!--<td><input th:value="${goods1.getnum()}"></td>-->
+                                        <!--<td th:text="${goods1.getMPrice()}"></td>-->
+                                        <!--<td th:text="${goods1.getsum()}"></td>-->
+                                    <!--</tr>-->
                                     </tbody>
                                 </table>
                             </div>
@@ -665,7 +729,7 @@
                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource"
                                             th:data-oid="${order.getOID()}" th:data-cid="${order.getCID()}" th:data-otime="${order.getOTime()}"
                                             th:data-before="${order.getPrice1()}" th:data-discount="${order.getDiscount()}" th:data-after="${order.getPrice2()}"
-                                            th:data-omid="${order.getOMID()}" th:data-remark="${order.getremark()}"  onclick="alterfun(this)">进行退货</button>
+                                            th:data-omid="${order.getOMID()}" th:data-remark="${order.getremark()}"  onclick='alterfun(this,this.getAttribute("data-oid"))'>进行退货</button>
 
                                 </td>
                             </tr>

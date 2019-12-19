@@ -52,4 +52,6 @@ public interface BasicManageService {
     List<Client> getclbyname(String name);
     void addclient(Client client);
     void delclientbyid(Integer x);
+
+    List<Goods> getunmethodgoods();
 }

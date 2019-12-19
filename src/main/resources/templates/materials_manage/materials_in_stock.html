@@ -119,16 +119,25 @@
             var tr = tbl.insertRow(rows);
 
             var name = tr.insertCell(0);
-            name.innerHTML = '<select  name="mater1" style="width:100%;" onchange="xiala1()" > </select>';
 
+            // name.innerHTML = '<select name="mater1" id="mater1" style="width:100%;"> \
+            //                        <option value="请选择原料"> \
+            //                              </option> \
+            //                              </select> ';
+
+            // name.innerHTML = '<select  name="mater1" id="mater1" style="width:100%;" onchange="xiala1()">\
+            //     <option th:text="请选择原料"></option>\
+            //     <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>\
+            //     </select>';
+            name.innerHTML = '<select  name="mater1" id="mater1" style="width:100%;" onchange="xiala1()">\
+                <option >请选择原料</option>\
+                <option th:each="materials:${materials}" th:value="${materials.MPrice}" text="${materials.MName}" ></option>\
+                </select>';
             var tel = tr.insertCell(1);
             tel.innerHTML = '<select  name="stu_profession" style="width:100%;">\n' +
                 '                                                <option th:text="请选择原料库"></option>\n' +
                 '                                                <option th:each="mhouse:${mhouse}" th:value="${mhouse.MHID}" th:text="${mhouse.MHName}" ></option>\n' +
                 '                                            </select>';
-
-
-
             var rdo = tr.insertCell(2);
             rdo.innerHTML = '<input type="date" style="width:100%;">';
             var chk = tr.insertCell(3);
@@ -140,7 +149,6 @@
             var del = tr.insertCell(6);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
             count++;
-
         }
 
         function del(btn) {
@@ -156,7 +164,6 @@
             var num1=document.getElementById("num").value;
             document.getElementById("price").value=danjia;
             document.getElementById("zong").value=danjia*num1;
-            //alert(document.getElementById("mater").innerText);
         }
 
         function num_change() {
@@ -167,22 +174,6 @@
             //      document.getElementById("price").value=danjia;
             document.getElementById("zong").value=danjia*num1;
         }
-
-        obj = document.getElementById("mater");
-        str = [];
-        for(var i=0;i<obj.length;i++){
-            str[i] = obj[i].text;
-        }
-
-        var sel=document.getElementsByName('mater1');
-        var strs="";
-        for(var i=0;i<str.length;i++){
-            str+='<option>'+str[i]+'</option>';
-        }
-        mater1.innerHTML=strs;
-
-
-
     </script>
 </head>
 
@@ -470,13 +461,13 @@
                                     </tr>
                                     <tr >
                                         <td>
-                                            <select   name="mater" id="mater" style="width:100%;" onchange="xiala()">
+                                            <select  name="mater" id="mater" style="width:100%;" onchange="xiala()">
                                                 <option th:text="请选择原料"></option>
                                                 <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>
                                             </select>
                                         </td>
                                         <td>
-                                            <select  name="stu_profession" id="stu_profession" style="width:100%;">
+                                            <select  name="stu_profession" style="width:100%;">
                                                 <option th:text="请选择原料库"></option>
                                                 <option th:each="mhouse:${mhouse}" th:value="${mhouse.MHID}" th:text="${mhouse.MHName}" ></option>
                                             </select>

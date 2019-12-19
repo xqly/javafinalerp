@@ -8,5 +8,5 @@ public interface PlanService {
     List<Planandname> getunplannamelist();
     void outMaterialsbyPlanid(Integer x);
     List<Integer> getMethodmygoods(Integer x);
-
+    void addmethodbyjson(String s,Integer gid);
 }

@@ -13,6 +13,16 @@ public class Method {
     private Integer MID;
     private Integer MNum;
 
+    public Method(){
+
+    }
+
+    public Method(Integer gid,Integer mid,Integer num){
+        this.setGID(gid);
+        this.setMID(mid);
+        this.setMNum(num);
+    }
+
     public Integer getMeID() {
         return MeID;
     }
