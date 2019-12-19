@@ -1,4 +1,5 @@
 package com.example.javafinalerp.Service;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.javafinalerp.Bean.Ordergoods;
 import com.example.javafinalerp.tempclass.OWname;
@@ -17,5 +18,5 @@ public interface OrderService {
     List<Ordergoods> getpreorderlistbyid(Integer x);
     List<Ordergoods> getpreoderlistbyclient(Integer x);
     List<OWname> getlistbyoid(Integer x);
-    JSONObject getajson();
+    JSONArray getordergoodsjson(Integer oid);
 }

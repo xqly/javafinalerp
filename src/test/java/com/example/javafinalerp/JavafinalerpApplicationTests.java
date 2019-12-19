@@ -30,9 +30,12 @@ class JavafinalerpApplicationTests {
     @Resource
     Materfunc materfunc;
 
+    @Resource
+    OrderService orderService;
+
     @Test
     void contextLoads() {
-        wHouseService.getinLog();
+        System.out.println(orderService.getordergoodsjson(1).toString());
     }
 
 }
