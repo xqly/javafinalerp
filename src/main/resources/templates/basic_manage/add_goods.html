@@ -26,11 +26,21 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
+        function fsubmit1(obj) {
+            obj.submit();
+        }
         function fsubmit(obj) {
             if(CheckPost()){
                 obj.submit();
             }
         }
+        function fsubmit2(obj) {
+            if(CheckPost2()){
+                obj.submit();
+            }
+        }
+
+
         function CheckPost () {
             var x1=formadd.bzq0.value;
 
@@ -43,6 +53,19 @@
             return true;
         }
 
+
+        function CheckPost2 () {
+            var x1=alterform.bzq.value;
+
+            if(x1<=2||x1>365){
+                alert("保质期区间有误!");
+                document.alterform.bzq.focus();
+                document.alterform.bzq.value = "";
+                return false;
+            }
+            return true;
+        }
+
         function alterfun(butt) {
             var userid = butt.getAttribute("data-id");
             $("#gid").attr("value",userid);
@@ -50,6 +73,11 @@
             $("#gtype").attr("value",butt.getAttribute("data-type"));
             $("#gtime").attr("value",butt.getAttribute("data-date"));
 
+        }
+
+
+        function deluser(butt) {
+            $("#uid").attr("value",butt.getAttribute("data-id"));
         }
     </script>
 </head>
@@ -355,7 +383,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="/altergoods" method="post" id="alterform" name="alterform">
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
@@ -377,7 +405,7 @@
                             <div class="form-group">
                                 <label for="sOrd" class="col-xs-3 control-label">保质期：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="gtime" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="gtime"  name="bzq" placeholder="">
                                 </div>
                             </div>
 
@@ -386,7 +414,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="fsubmit2(document.alterform)">保 存222</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -405,12 +433,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        确定要删除该资源？删除后不可恢复！
+                        确定要删除该商品？删除后不可恢复！
                     </div>
+                    <form hidden method="post" action="/degoods" name="delform" id="delform" >
+                        <input type="" id="uid" name="uid">
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-danger">保 存</button>
+                    <button type="button" class="btn btn-xs btn-danger" onclick="fsubmit1(document.delform)" >确 定</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -483,7 +514,7 @@
                                 <td>
                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${go.getG_ID()}"
                                             th:data-name="${go.getGName()}" th:data-type="${go.getGType()}" th:data-date="${go.getGExpDate()}" onclick="alterfun(this)">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${go.getG_ID()}" onclick="deluser(this)">删除</button>
                                 </td>
                             </tr>
                             </tbody>
