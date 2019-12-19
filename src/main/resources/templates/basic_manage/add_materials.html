@@ -27,6 +27,30 @@
     <![endif]-->
 
     <script>
+        function fsubmit(obj) {
+            if(CheckPost()){
+                obj.submit();
+            }
+        }
+        function CheckPost () {
+            var x0=formadd.mprice0.value;
+            var x1=formadd.mtime0.value;
+
+            if(x0<=0||x0>1000){
+                alert("价格区间有误!");
+                document.formadd.mprice0.focus();
+                document.formadd.mprice0.value = "";
+                return false;
+            }
+            if(x1<=2||x1>365){
+                alert("保质期区间有误!");
+                document.formadd.mtime0.focus();
+                document.formadd.mtime0.value = "";
+                return false;
+            }
+            return true;
+        }
+
         function alterfun(butt) {
             var userid = butt.getAttribute("data-id");
             $("#mid").attr("value",userid);
@@ -288,29 +312,29 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" id="formadd"  data-form="ajax" name="formadd" action="/savematerial" method="post">
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                    <input type="email" class="form-control input-sm duiqi" id="mid0" name="mid0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">名称：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" name="mname0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">单价：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="number" class="form-control input-sm duiqi" name="mprice0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">保质期：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="number" class="form-control input-sm duiqi" name="mtime0" placeholder="">
                                 </div>
                             </div>
 
@@ -319,7 +343,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-xs btn-green"onclick="javascript:fsubmit(document.formadd)">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -354,13 +378,13 @@
                             <div class="form-group">
                                 <label for="sOrd" class="col-xs-3 control-label">保质期：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="mdate" placeholder="">
+                                    <input type="number" class="form-control input-sm duiqi" id="mdate" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">单价：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="mprice" placeholder="">
+                                    <input type="number" class="form-control input-sm duiqi" id="mprice" placeholder="">
                                 </div>
                             </div>
                         </form>

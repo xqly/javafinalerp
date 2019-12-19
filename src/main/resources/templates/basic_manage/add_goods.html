@@ -26,6 +26,23 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
+        function fsubmit(obj) {
+            if(CheckPost()){
+                obj.submit();
+            }
+        }
+        function CheckPost () {
+            var x1=formadd.bzq0.value;
+
+            if(x1<=2||x1>365){
+                alert("保质期区间有误!");
+                document.formadd.bzq0.focus();
+                document.formadd.bzq0.value = "";
+                return false;
+            }
+            return true;
+        }
+
         function alterfun(butt) {
             var userid = butt.getAttribute("data-id");
             $("#gid").attr("value",userid);
@@ -287,7 +304,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" id="formadd"  data-form="ajax" name="formadd" action="/addgoods" method="post">
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
@@ -302,15 +319,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="sOrd" class="col-xs-3 control-label">类别：</label>
-                                <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
-                                </div>
+                                <select class=" col-xs-8 input-sm duiqi ">
+                                    <option id="sKnot0" name="sKnot0" placeholder="请选择"></option>
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">保质期：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="number" class="form-control input-sm duiqi" name="bzq0" placeholder="">
                                 </div>
                             </div>
 
@@ -319,7 +336,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-xs btn-green"onclick="javascript:fsubmit(document.formadd)">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
