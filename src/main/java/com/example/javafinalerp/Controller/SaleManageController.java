@@ -44,7 +44,7 @@ public class SaleManageController {
     @RequestMapping("/yourUrl/{yourDataName}")
     @ResponseBody
 // @RequestParam("yourData")是必不可少的，因为他指定了链接中的参数名称
-    public String yourUrl(@PathVariable("yourDataName") Integer yourData, Model model) {
+    public JSONObject  yourUrl(@PathVariable("yourDataName") Integer yourData, Model model) {
         System.out.println(yourData);
         // 返回值可以自由定义
 //
@@ -65,7 +65,9 @@ public class SaleManageController {
         List<OWname> goods1=orderService.getlistbyoid(yourData);
         System.out.println(goods1.size());
         model.addAttribute("goods1",goods1);
-        return orderService.getajson().toJSONString();
+        return orderService.getajson();
+        //return orderService.getajson().toJSONString();
+      //  return orderService.getajson();
     }
 
     @RequestMapping("now__sale")
