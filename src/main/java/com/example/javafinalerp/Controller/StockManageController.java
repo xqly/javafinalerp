@@ -1,7 +1,9 @@
 package com.example.javafinalerp.Controller;
 
 import com.example.javafinalerp.Bean.Ordergoods;
+import com.example.javafinalerp.Bean.WHStatus;
 import com.example.javafinalerp.Bean.WHouseLog;
+import com.example.javafinalerp.Service.OrderService;
 import com.example.javafinalerp.Service.WHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ public class StockManageController {
     @Resource
     WHouseService wHouseService;
 
+    @Resource
+    OrderService orderService;
+
     @RequestMapping("produce_in_stock")
     public String aa(Model model){
         List<WHouseLog> lists = wHouseService.getinLog();
@@ -32,14 +37,14 @@ public class StockManageController {
 
     @RequestMapping("product_out_stock")
     public String cx(Model model){
-        List<Ordergoods> lists=null;
+        List<Ordergoods> lists=orderService.getorderlistsbystate(1);
         model.addAttribute("lists",lists);
         return "stock_manage/product_out_stock";
     }
 
     @RequestMapping("productDestroy")
     public String xh(Model model){
-        List<WHouseLog> lists=null;
+        List<WHStatus> lists=wHouseService.getoutdatedlist();
         model.addAttribute("lists",lists);
         return "stock_manage/productDestroy";
     }

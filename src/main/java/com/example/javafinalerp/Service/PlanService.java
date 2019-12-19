@@ -1,5 +1,6 @@
 package com.example.javafinalerp.Service;
 
+import com.example.javafinalerp.Bean.ProducePlan;
 import com.example.javafinalerp.tempclass.Planandname;
 
 import java.util.List;
@@ -9,4 +10,5 @@ public interface PlanService {
     void outMaterialsbyPlanid(Integer x);
     List<Integer> getMethodmygoods(Integer x);
     void addmethodbyjson(String s,Integer gid);
+    void addplan(ProducePlan plan);
 }

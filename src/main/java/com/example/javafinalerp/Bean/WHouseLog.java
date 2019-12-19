@@ -10,7 +10,7 @@ public class WHouseLog {
     @GeneratedValue
     private Integer LID;//主键
     private Integer WID;//仓库
-    private String LOper;//操作
+    private Integer LOper;//操作
     private Integer LMan;//负责人
     private String LTime;//入库时间
     private Integer LGId;//货品
@@ -33,11 +33,11 @@ public class WHouseLog {
         this.WID = WID;
     }
 
-    public String getLOper() {
+    public Integer getLOper() {
         return LOper;
     }
 
-    public void setLOper(String LOper) {
+    public void setLOper(Integer LOper) {
         this.LOper = LOper;
     }
 

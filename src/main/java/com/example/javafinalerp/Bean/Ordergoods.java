@@ -20,7 +20,16 @@ public class Ordergoods {
     private String remark;  //备注
     private String OLTime;  //取货时间
     private Integer type;
+    private Integer OState;
     private double discount;
+
+    public Integer getOState() {
+        return OState;
+    }
+
+    public void setOState(Integer OState) {
+        this.OState = OState;
+    }
 
     public Integer getOMoney() {
         return OMoney;

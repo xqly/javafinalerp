@@ -15,4 +15,7 @@ public interface OrdergoodsResitory extends JpaRepository<Ordergoods,Integer> {
 
     @Query("select o from Ordergoods o where o.type=?1 and o.CID=?2")
     List<Ordergoods>  findlistbyclient(Integer type , Integer cid);
+
+    @Query("select o from Ordergoods o where o.type=?1 and o.OState=?2")
+    List<Ordergoods> findlistsbytypeandstate(Integer type,Integer state);
 }
