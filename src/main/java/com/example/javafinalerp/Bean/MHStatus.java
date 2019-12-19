@@ -15,6 +15,17 @@ public class MHStatus {
     private String MHTime;
     private Integer MHNum;
 
+    public MHStatus(Integer mhid,Integer mid,Integer mhpid,Integer mhnum ,String time) {
+        this.setMHID(mhid);
+        this.setMID(mid);
+        this.setMHPID(mhpid);
+        this.setMHTime(time);
+        this.setMHNum(mhnum);
+    }
+    public MHStatus(){
+
+    }
+
     public Integer getMHSID() {
         return MHSID;
     }
