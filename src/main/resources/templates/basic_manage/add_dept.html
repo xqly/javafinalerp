@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../../plugins/images/favicon.png">
-    <title>生产车间信息</title>
+    <title>原料库</title>
     <!-- Bootstrap Core CSS -->
     <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
@@ -27,6 +27,7 @@
     <![endif]-->
 
     <script>
+
         function alterfun(butt) {
             var userid = butt.getAttribute("data-id");
             $("#did").attr("value",userid);
@@ -287,30 +288,30 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" id="formadd"  data-form="ajax" name="formadd" action="/adddept" method="post">
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                    <input type="email" class="form-control input-sm duiqi" name="did0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">名称：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" name="dname0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">地址：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" name="dadd0" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
-                                <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                </div>
+                                <select class=" col-xs-8 input-sm duiqi ">
+                                    <option id="sKnot0" name="sKnot0" placeholder="请选择"></option>
+                                </select>
                             </div>
 
                         </form>
@@ -318,7 +319,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-xs btn-green"onclick="javascript:fsubmit(document.formadd)">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -422,7 +423,7 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3 class="box-title">原料库列表</h3>
-                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#">添加原料库</button>
+                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加原料库</button>
                     <form style="display: inline" method="post" action="/mhqbyid">
                         <label style="margin-left: 100px;font-size: small" >原料库编号</label>
                         <input type="text" name="QID">

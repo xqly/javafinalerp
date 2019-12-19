@@ -30,11 +30,11 @@ public class ProductManageController {
     @RequestMapping("burdenSheet")
     public String bud(Model model){
         List<Materials> materials = basicManageService.getmaterlist();
-        List<Goods> goods=basicManageService.getgoodslist();
-//        List<Planandname> lists = ;
+        List<Goods> goods=basicManageService.getunmethodgoods();
+        List<Planandname> lists = planService.getunplannamelist();
         model.addAttribute("materials",materials);
         model.addAttribute("goods",goods);
-//        model.addAttribute("lists",lists);
+        model.addAttribute("lists",lists);
         return "product_manage/burdenSheet";
     }
 

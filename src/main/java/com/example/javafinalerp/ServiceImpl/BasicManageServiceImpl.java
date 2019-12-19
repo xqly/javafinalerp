@@ -6,6 +6,7 @@ import com.example.javafinalerp.Service.BasicManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -228,5 +229,28 @@ public class BasicManageServiceImpl implements BasicManageService {
     @Override
     public void delclientbyid(Integer x) {
         clientResitory.deleteById(x);
+    }
+
+    @Autowired
+    MethodResitory methodResitory;
+
+    @Override
+    public List<Goods> getunmethodgoods() {
+        List<Method> list = methodResitory.findAll();
+        List<Goods> gl = new ArrayList<>();
+        List<Goods> gls = goodsResitory.findAll();
+        for(int i=0;i<gls.size();i++){
+            Integer ok=0;
+            for(int j=0;j<list.size();j++){
+                if(list.get(j).getGID()==gls.get(i).getG_ID()){
+                    ok=1;
+                    break;
+                }
+            }
+            if(ok==0){
+                gl.add(gls.get(i));
+            }
+        }
+        return gl;
     }
 }
