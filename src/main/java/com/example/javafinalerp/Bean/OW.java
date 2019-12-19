@@ -8,8 +8,17 @@ import java.util.Date;
 @Entity
 public class OW  //订单-商品
 {
+    public Integer getOWID() {
+        return OWID;
+    }
+
+    public void setOWID(Integer OWID) {
+        this.OWID = OWID;
+    }
+
     @Id
     @GeneratedValue
+    private Integer OWID;
     private Integer OID;  //订货号
     private Integer GID;  //商品号
     private Integer num; //商品数量

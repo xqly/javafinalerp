@@ -23,18 +23,39 @@
 
 
     <script type="text/javascript">
-        function alterfun(butt) {
-            // $("#uid").attr("value",butt.getAttribute("data-oid"));
-            // $("#customer5").attr("value",butt.getAttribute("data-cid"));
-            // $("#date_info5").attr("value",butt.getAttribute("data-otime"));
-            // $("#before5").attr("value",butt.getAttribute("data-before"));
-            // $("#zhekou5").attr("value",butt.getAttribute("data-discount"));
-            // $("#sum5").attr("value",butt.getAttribute("data-after"));
-            // $("#require5").attr("value",butt.getAttribute("data-remark"));
+        function alterfun(butt,yourData) {
+            $("#uid").attr("value",butt.getAttribute("data-oid"));
+            $("#customer5").attr("value",butt.getAttribute("data-cid"));
+            $("#date_info5").attr("value",butt.getAttribute("data-otime"));
+            $("#before5").attr("value",butt.getAttribute("data-before"));
+            $("#zhekou5").attr("value",butt.getAttribute("data-discount"));
+            $("#sum5").attr("value",butt.getAttribute("data-after"));
+            $("#require5").attr("value",butt.getAttribute("data-remark"));
+            $("#div1").css("display","block");
 
+            $.ajax({
+                    type: "get", // 以get方式发起请求
+                    url: "/yourUrl/"+yourData, // 将你的请求参数以问号拼接到url中进行参数传递
 
-            var txt = butt.getAttribute("data-oid");
-            return txt;
+                    success(data) {
+                        // data为返回值
+                        // 成功后的回调方法
+                        alert(yourData);
+                        var table=document.getElementById("ci");
+                        for(var i=0;i<data.length;i++){
+                            var row=table.insertRow(table.rows.length);
+                            var c1=row.insertCell(0);
+                            c1.innerHTML=data[i].name;
+                            var c2=row.insertCell(1);
+                            c2.innerHTML=data[i].numm;
+                            var c3=row.insertCell(2);
+                            c3.innerHTML=data[i].price1;
+                            var c4=row.insertCell(3);
+                            c4.innerHTML=data[i].price2;
+                        }
+                    }
+            })
+
 
         }
 
@@ -138,10 +159,12 @@
                 dataType:"json",
                 contentType:"application/json",
                 data:orders_json,
-                success:function(){
+                success:function(data){
                     alert(orders_json);
                 }
             });
+
+
         }
 
         function xiala() {
@@ -500,8 +523,67 @@
 
     <div class="modal fade" id="changeSource" role="dialog" aria-labelledby="gridSystemModalLabel" >
         <div class="modal-dialog" role="document" style="width: 75%">
-            <iframe src="/tiaozhuan" id="iframe" name="i" style="width:1200px;height: 900px;" align="center">
-            </iframe>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel5">销售订单</h4>
+
+                    <br><br>
+                    <label>客户编号:</label>
+                    <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer5" id="customer5" >
+
+                    <label style="margin-left: 100px">订单时间:</label>
+                    <input type="date" id="date_info5" name="date_info5" placeholder="原料入库时间" class=" form-control-line"  >
+
+                    <label style="margin-left: 100px">原价总计:</label>
+                    <input type="number" id="before5" name="before5" value="0" class=" form-control-line"  onchange="calend()" onfocus=this.blur()>
+
+                    <label style="margin-left: 100px">折扣:</label>
+                    <input type="number" id="zhekou5" name="zhekou5" placeholder="1.0" class=" form-control-line"  step = "0.1" onchange="calend()">
+
+                    <br><br>
+                    <label>折扣后总计:</label>
+                    <input type="number" id="sum5" name="sum5"  class=" form-control-line"  >
+                    <label  style="margin-left: 100px">备注:</label>
+                    <input type="text" id="require5" name="require5" placeholder="备注" class=" form-control-line">
+
+                    <!--<form hidden method="post" action="/lookorder" name="delform" id="delform" >-->
+                        <!--<input type="text" id="uid" name="uid">-->
+                    <!--</form>-->
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form class="form-horizontal">
+                            <div class="table-responsive">
+                                <table class="table" id="ci" name="ci">
+                                    <thead>
+                                    <tr>
+                                        <th>商品名称</th>
+                                        <th>商品数量</th>
+                                        <th>单价</th>
+                                        <th>总计</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <!--<tr th:each="goods1:${goods1}">-->
+                                        <!--<td th:text="${goods1.getName()}"></td>-->
+                                        <!--<td th:text="${goods1.getNum()}"></td>-->
+                                        <!--<td th:text="${goods1.getPrice()}"></td>-->
+                                        <!--<td th:text="${goods1.getDoublePrice()}"></td>-->
+                                    <!--</tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
@@ -598,11 +680,12 @@
                                 <td th:text="${order.getOMID()}"></td>
                                 <td th:text="${order.getRemark()}"></td>
 
+
                                 <td>
                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource"
                                             th:data-oid="${order.getOID()}" th:data-cid="${order.getCID()}" th:data-otime="${order.getOTime()}"
                                             th:data-before="${order.getPrice1()}" th:data-discount="${order.getDiscount()}" th:data-after="${order.getPrice2()}"
-                                            th:data-omid="${order.getOMID()}" th:data-remark="${order.getRemark()}"  onclick="alterfun(this)">查看</button>
+                                            th:data-omid="${order.getOMID()}" th:data-remark="${order.getRemark()}"  onclick='alterfun(this,this.getAttribute("data-oid"))'>查看</button>
 
                                 </td>
                             </tr>

@@ -136,6 +136,17 @@
 
         }
     </script>
+
+    <script>
+        function alterfun(butt) {
+            var userid = butt.getAttribute("data-id");
+            $("#cid").attr("value",userid);
+            $("#cname").attr("value",butt.getAttribute("data-name"));
+            $("#ctele").attr("value",butt.getAttribute("data-tele"));
+            $("#cmail").attr("value",butt.getAttribute("data-mail"));
+            $("#ccost").attr("value",butt.getAttribute("data-cost"));
+        }
+    </script>
 </head>
 
 <body>
@@ -421,12 +432,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">备注：</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control input-sm duiqi" id="sKnot" placeholder=""></textarea>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -454,42 +459,34 @@
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                    <input type="email" class="form-control input-sm duiqi" id="cid" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">姓名：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="cname" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sOrd" class="col-xs-3 control-label">联系方式：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="ctele" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">E-mail：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="cmail" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">消费额度：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="ccost" placeholder="">
                                 </div>
                             </div>
 
-
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">备注：</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control input-sm duiqi" id="sKnot" placeholder=""></textarea>
-
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -572,7 +569,6 @@
                                 <th>联系方式</th>
                                 <th>E-mail</th>
                                 <th>消费额度</th>
-                                <th>备注</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -584,9 +580,10 @@
                                 <td th:text="${cl.getCTele()}"></td>
                                 <td th:text="${cl.getCMail()}"></td>
                                 <td th:text="${cl.getCCost()}"></td>
-                                <td th:text="${cl.getCReamrk()}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${cl.getC_ID()}"
+                                            th:data-name="${cl.getCName()}" th:data-tele="${cl.getCTele()}" th:data-mail="${cl.getCMail()}" th:data-cost="${cl.getCCost()}"
+                                             onclick="alterfun(this)">修改</button>
                                     <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
                                 </td>
                             </tr>

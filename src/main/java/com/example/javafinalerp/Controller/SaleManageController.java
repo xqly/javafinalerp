@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.javafinalerp.tempclass.Orderandname;
@@ -35,6 +37,18 @@ public class SaleManageController {
         model.addAttribute("order",order);
         model.addAttribute("goods",goods);
         return "sale_manage/advance_sale";
+    }
+
+    @RequestMapping("/yourUrl/{yourDataName}")
+    @ResponseBody
+// @RequestParam("yourData")是必不可少的，因为他指定了链接中的参数名称
+    public String yourUrl(@PathVariable("yourDataName") Integer yourData, Model model) {
+        System.out.println(yourData);
+        // 返回值可以自由定义
+        List<OWname> goods1=orderService.getlistbyoid(yourData);
+        System.out.println(goods1.size());
+        model.addAttribute("goods1",goods1);
+        return "sale_manage/now__sale";
     }
 
     @RequestMapping("now__sale")
