@@ -19,6 +19,7 @@ import com.example.javafinalerp.tempclass.Orderandname;
 import com.example.javafinalerp.tempclass.OWname;
 import javax.annotation.Resource;
 import java.util.List;
+//import com.google.gson.Gson;
 
 @Controller
 public class SaleManageController {
@@ -45,6 +46,21 @@ public class SaleManageController {
     public String yourUrl(@PathVariable("yourDataName") Integer yourData, Model model) {
         System.out.println(yourData);
         // 返回值可以自由定义
+//
+//        List<ImageInfo> imageInfos = imageFaceService.FindAll();
+//        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+//        Map<String, Object> map = null;
+//        for (ImageInfo img : imageInfos) {
+//            map = new HashMap<String, Object>();
+//            map.put("image_id", img.getImage_id());
+//            map.put("image_name", img.getImage_name());
+//            map.put("image_path", img.getImage_path());
+//            map.put("image_feature", img.getImage_feature());
+//            result.add(map);
+//        }
+//        Gson gson = new Gson();
+//        return gson.toJson(result);
+
         List<OWname> goods1=orderService.getlistbyoid(yourData);
         System.out.println(goods1.size());
         model.addAttribute("goods1",goods1);
