@@ -1,4 +1,5 @@
 package com.example.javafinalerp.Service;
+import com.alibaba.fastjson.JSONObject;
 import com.example.javafinalerp.Bean.Ordergoods;
 import com.example.javafinalerp.tempclass.OWname;
 import com.example.javafinalerp.tempclass.Orderandname;
@@ -15,4 +16,5 @@ public interface OrderService {
     List<Ordergoods> getpreorderlistbyid(Integer x);
     List<Ordergoods> getpreoderlistbyclient(Integer x);
     List<OWname> getlistbyoid(Integer x);
+    JSONObject getajson();
 }
