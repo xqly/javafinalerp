@@ -36,12 +36,12 @@
                     var sel=inputs1[0];
                     // alert(sel.options[sel.selectedIndex].text);
                     result.push({
-                        mname : sel.options[sel.selectedIndex].text,
-                        mhid : inputs1[1].value,
-                        mdate : inputs2[0].value,
-                        mnum : inputs2[1].value,
-                        mprice : inputs2[2].value,
-                        msum : inputs2[3].value
+                        // mname : sel.options[sel.selectedIndex].text,
+                        MHID : inputs1[1].value,
+                        MHTime : inputs2[0].value,
+                        MHNum : inputs2[1].value
+                        // mprice : inputs2[2].value,
+                        // msum : inputs2[3].value
                     });
                 }
             }
@@ -55,7 +55,7 @@
             //     bisSuenDocuSacertCont : bisSuenDocuSacertCont
             // };
             var materials_json=JSON.stringify(bisSuenDocuSacertCont);
-           // alert(materials_in_stock);
+           alert(materials_json);
             $.ajax({
                 url:"add_realmaterials",
                 type:"post",
