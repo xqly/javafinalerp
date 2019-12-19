@@ -100,4 +100,9 @@ public class OrderServiceImpl implements OrderService {
 
         return object;
     }
+
+    @Override
+    public List<Ordergoods> getorderlistsbystate(Integer x) {
+        return ordergoodsResitory.findlistsbytypeandstate(0,x);
+    }
 }
