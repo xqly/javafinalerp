@@ -125,9 +125,13 @@
             //                              </option> \
             //                              </select> ';
 
+            // name.innerHTML = '<select  name="mater1" id="mater1" style="width:100%;" onchange="xiala1()">\
+            //     <option th:text="请选择原料"></option>\
+            //     <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>\
+            //     </select>';
             name.innerHTML = '<select  name="mater1" id="mater1" style="width:100%;" onchange="xiala1()">\
-                <option th:text="请选择原料"></option>\
-                <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>\
+                <option >请选择原料</option>\
+                <option th:each="materials:${materials}" th:value="${materials.MPrice}" text="${materials.MName}" ></option>\
                 </select>';
             var tel = tr.insertCell(1);
             tel.innerHTML = '<select  name="stu_profession" style="width:100%;">\n' +
