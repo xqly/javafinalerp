@@ -32,7 +32,7 @@ class JavafinalerpApplicationTests {
 
     @Test
     void contextLoads() {
-        mHouseService.getoutdatedmaterials();
+        mHouseService.addMaterialsbyjson("[{\"mname\":\"竹子\",\"MHID\":\"1\",\"MHTime\":\"0001-01-01\",\"MHNum\":\"1\"}]");
     }
 
 }
