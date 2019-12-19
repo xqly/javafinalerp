@@ -50,8 +50,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Ordergoods> getpreorderlist() {
-        return ordergoodsResitory.findlistbytype(1);
+    public List<Orderandname> getpreorderlist() {
+
+        List<Orderandname> lists = new ArrayList<>();
+        List<Ordergoods> gl= ordergoodsResitory.findlistbytype(1);
+        for(int i=0;i<gl.size();i++){
+            Orderandname temp = new Orderandname(gl.get(i));
+            lists.add(temp);
+        }
+        return lists;
     }
 
     @Override
