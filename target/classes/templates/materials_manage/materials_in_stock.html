@@ -55,7 +55,7 @@
             //     bisSuenDocuSacertCont : bisSuenDocuSacertCont
             // };
             var materials_json=JSON.stringify(bisSuenDocuSacertCont);
-           alert(materials_json);
+           // alert(materials_json);
             $.ajax({
                 url:"add_realmaterials",
                 type:"post",
@@ -66,6 +66,8 @@
                     alert(materials_json);
                 }
             });
+            alert("原料已成功入库！");
+            window.location.href = "materials_in_stock";
         }
 
     </script>
@@ -497,7 +499,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green" onclick="send()">保 存</button>
+                    <a type="button" class="btn btn-xs btn-green" onclick="send()" >保 存</a>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -637,6 +639,7 @@
                         <input type="text" name="QID">
                         <button>查询</button>
                     </form>
+                    <a type="button" class="btn btn-xs btn-green" style="margin-left: 50px" href="materials_in_stock">刷新</a>
 
 
 

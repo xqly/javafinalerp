@@ -40,116 +40,22 @@
 
     }
 
-    function fsubmit1(obj) {
-        obj.submit();
-    }
     function fsubmit(obj) {
-       /* if(CheckPost()){
-            obj.submit();
-        }*/
-        obj.submit();
-    }
-    function fsubmit2(obj) {
-        if (CheckPost2()) {
+       if(CheckPost()){
             obj.submit();
         }
     }
-
-/*
-    function CheckPost2 () {
-        var reg=/[^\x00-\x80]{2,5}/;
-        var reg1 = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-        var reg2 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-        var x=alterform.UName.value;
-        var x1=alterform.UTelephone.value;
-        var x2=alterform.UMail.value;
-        var x3=alterform.USal.value;
-        if ( alterform.UName.value==''||alterform.UName.value==null) {
-            alert("请填写用户名！");
-            document.alterform.UName.focus();
-            return false;
-        }
-        if(!reg.test(x)){
-            alert("用户名应为中文，且2-5个字符!");
-            document.alterform.UName.focus();
-            document.alterform.UName.value = "";
-            return false;
-        }
-        if ( alterform.UTelephone.value==''||alterform.UTelephone.value==null) {
-            alert("请填写手机号！");
-            document.alterform.UTelephone.focus();
-            return false;
-        }
-        if(!reg1.test(x1)){
-            alert("手机号格式错误!");
-            document.alterform.UTelephone.focus();
-            document.alterform.UTelephone.value = "";
-            return false;
-        }
-        if(x2!='' && !reg2.test(x2)){
-            alert("邮箱格式错误!");
-            document.alterform.UMail.focus();
-            document.alterform.UMail.value = "";
-            return false;
-        }
-        if(x3<1000||x3>100000){
-            alert("工资范围有误!");
-            document.alterform.USal.focus();
-            document.alterform.USal.value = "";
-            return false;
-        }
-
-        return true;
-
-    }
-
     function CheckPost () {
-        var reg=/[^\x00-\x80]{2,5}/;
-        var reg1 = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-        var reg2 = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-        var x=formadd.UName.value;
-        var x1=formadd.UTelephone.value;
-        var x2=formadd.UMail.value;
-        var x3=formadd.USal.value;
-        if ( formadd.UName.value==''||formadd.UName.value==null) {
-            alert("请填写用户名！");
-            document.formadd.UName.focus();
-            return false;
-        }
-        if(!reg.test(x)){
-            alert("用户名应为中文，且2-5个字符!");
-            document.formadd.UName.focus();
-            document.formadd.UName.value = "";
-            return false;
-        }
-        if ( formadd.UTelephone.value==''||formadd.UTelephone.value==null) {
-            alert("请填写手机号！");
-            document.formadd.UTelephone.focus();
-            document.formadd.UTelephone.value = "";
-            return false;
-        }
-        if(!reg1.test(x1)){
-            alert("手机号格式错误!");
-            document.formadd.UTelephone.focus();
-            document.formadd.UTelephone.value = "";
-            return false;
-        }
-        if(x2!='' && !reg2.test(x2)){
-            alert("邮箱格式错误!");
-            document.formadd.UMail.focus();
-            document.formadd.UMail.value = "";
-            return false;
-        }
-        if(x3<1000||x3>100000){
-            alert("工资范围有误!");
+        var x3=formadd.sKnot1.value;
+
+        if(x3<=0||x3>100000){
+            alert("数量范围有误!");
             document.formadd.USal.focus();
             document.formadd.USal.value = "";
             return false;
         }
-
         return true;
-
-    }*/
+    }
 
     function alterfun1(butt) {
         var userid = butt.getAttribute("data-id");
@@ -428,7 +334,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" id="formadd"  data-form="ajax" name="formadd" action="/savestock" method="post">
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">入库单号：</label>
                                 <div class="col-xs-8 ">
@@ -455,14 +361,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">仓库编号：</label>
-                                <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sKnot0" placeholder="">
-                                </div>
+                                <select class=" col-xs-8 input-sm duiqi ">
+                                    <option class="" id="sKnot0" name="sKnot0" placeholder=""></option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">数量(单位)：</label>
                                 <div class="col-xs-8">
-                                    <input type="number" class="form-control input-sm duiqi" id="sKnot1" placeholder="">
+                                    <input type="number" class="form-control input-sm duiqi" id="sKnot1" name="sKnot1" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -473,9 +379,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
-                                <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="sKnot3" placeholder="">
-                                </div>
+                                <select class=" col-xs-8 input-sm duiqi ">
+                                    <option id="sKnot0" name="sKnot0" placeholder="请选择"></option>
+                                </select>
                             </div>
                         </form>
                     </div>
@@ -610,9 +516,13 @@
                 <div class="white-box">
                     <h3 class="box-title">商品入库列表</h3>
                     <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加入库项</button>
-                    <label style="margin-left: 80px;font-size: small" >入库单号</label>
-                    <input type="text"  style="width: 150px" name="GIID">
-                    <button>查询</button>
+
+                    <form style="display: inline" method="post" action="/query_by_giid">
+                        <label style="margin-left: 100px;font-size: small" >入库单号</label>
+                        <input type="text" name="GIID" >
+                        <input type="hidden" value="5" name="deptment">
+                        <button>查询</button>
+                    </form>
 
 
                     <br><br>

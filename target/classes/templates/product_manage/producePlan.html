@@ -382,7 +382,8 @@
     </div>
     <!-- Left navbar-header end -->
     <!-- Page Content -->
-    <div class="modal fade" id="" role="dialog" aria-labelledby="gridSystemModalLabel">
+
+    <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -391,27 +392,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal" id="formadd"  data-form="ajax" name="formadd" action="/saveinfo" method="post" >
-                            <!--<div class="form-group ">
-                                <label for="sName" class="col-xs-3 control-label">计划单号：</label>
-                                <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="kid0" name="kid0" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sLink" class="col-xs-3 control-label">商品编号：</label>
-                                <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi"  id="gid0" name="gid0"  readonly>
-                                </div>
-                            </div>-->
+                        <form class="form-horizontal" id="formadd"  data-form="ajax" name="formadd" action="/saveplan" method="post" >
 
                             <div class="form-group">
-                                <select class="form-control input-sm duiqi" >
-                                    <option>商品编号</option>
+                                <label  for="sLink1" class="col-xs-3 control-label" >商品名称：</label>
+                                <select class="form-control input-sm duiqi" style="width: 350px; margin-left: 60px" name="goods0" id="goods">
+                                    <option th:text="请选择商品"></option>
+                                    <option th:each="goods:${goods}" th:value="${goods.getG_ID()}" th:text="${goods.getGName()}" ></option>
                                 </select>
                             </div>
-
-
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">商品数量：</label>
                                 <div class="col-xs-8 ">
@@ -419,15 +408,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sOrd" class="col-xs-3 control-label">计划制定时间：</label>
+                                <label  class="col-xs-3 control-label">计划完成时间：</label>
                                 <div class="col-xs-8">
                                     <input type="date" class="form-control input-sm duiqi"  id="time0" name="time0" placeholder="">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <select class="form-control input-sm duiqi" >
-                                    <option>商品编号</option>
+                                <label  class="col-xs-3 control-label">负责车间：</label>
+                                <select class="form-control input-sm duiqi" style="width: 350px; margin-left: 60px" id="chejian0" name="chejian0">
+                                    <option th:text="请选择车间"></option>
+                                    <option th:each="workShops:${workShops}" th:value="${workShops.WSID}" th:text="${workShops.WSName}" ></option>
                                 </select>
                             </div>
 
@@ -555,7 +546,7 @@
             <div class="col-sm-12">
                 <div class="white-box">
                     <h3 class="box-title">生产计划列表</h3>
-                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#">添加商品</button>
+                    <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加生产计划</button>
 
                     <form style="display: inline" method="post" action="/query_by_kid">
                     <label style="margin-left: 80px;font-size: small" >计划单号</label>
