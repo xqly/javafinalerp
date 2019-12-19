@@ -1,12 +1,18 @@
 package com.example.javafinalerp.ServiceImpl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.javafinalerp.Bean.Goods;
+import com.example.javafinalerp.Bean.Method;
 import com.example.javafinalerp.Bean.ProducePlan;
 import com.example.javafinalerp.Resitory.GoodsResitory;
+import com.example.javafinalerp.Resitory.MethodResitory;
 import com.example.javafinalerp.Resitory.ProducePlanResitory;
 import com.example.javafinalerp.Service.PlanService;
 import com.example.javafinalerp.tempclass.Planandname;
 import com.example.javafinalerp.tempfunc.Materfunc;
+import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +31,9 @@ public class PlanServiceImpl implements PlanService {
 
     @Resource
     Materfunc materfunc;
+
+    @Autowired
+    MethodResitory methodResitory;
 
     @Override
     public List<Planandname> getunplannamelist() {
@@ -63,5 +72,17 @@ public class PlanServiceImpl implements PlanService {
     public List<Integer> getMethodmygoods(Integer x) {
         return null;//xqly
 
+    }
+
+    @Override
+    public void addmethodbyjson(String s,Integer gid) {
+        JSONArray jsonArray = JSON.parseArray(s);
+        for(int i=0;i<jsonArray.size();i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            Integer mid = jsonObject.getInteger("mid");
+            Integer num = jsonObject.getInteger("num");
+            Method method = new Method(gid,mid,num);
+            methodResitory.save(method);
+        }
     }
 }
