@@ -85,4 +85,9 @@ public class PlanServiceImpl implements PlanService {
             methodResitory.save(method);
         }
     }
+
+    @Override
+    public void addplan(ProducePlan plan) {
+        producePlanResitory.save(plan);
+    }
 }

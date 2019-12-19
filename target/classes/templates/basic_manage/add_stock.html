@@ -25,6 +25,17 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script>
+        function alterfun(butt) {
+            var userid = butt.getAttribute("data-id");
+            $("#sid").attr("value",userid);
+            $("#sname").attr("value",butt.getAttribute("data-name"));
+            $("#sadd").attr("value",butt.getAttribute("data-add"));
+            $("#sman").attr("value",butt.getAttribute("data-man"));
+
+        }
+    </script>
 </head>
 
 <body>
@@ -278,7 +289,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" id="formadd"  data-form="ajax" name="formadd" action="/addstock" method="post">
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
@@ -299,16 +310,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
-                                <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                </div>
+                                <select class=" col-xs-8 input-sm duiqi ">
+                                    <option id="sKnot0" name="sKnot0" placeholder="请选择"></option>
+                                </select>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-xs btn-green"onclick="javascript:fsubmit(document.formadd)">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -331,25 +342,25 @@
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                    <input type="email" class="form-control input-sm duiqi" id="sid" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">名称：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="sname" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sOrd" class="col-xs-3 control-label">地址：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="sadd" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">负责人：</label>
                                 <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="sman" placeholder="">
                                 </div>
                             </div>
 
@@ -444,9 +455,9 @@
                                 <td th:text="${wh.getWName()}"></td>
                                 <td th:text="${wh.getWAdr()}"></td>
                                 <td th:text="${wh.getWMID()}"></td>
-                                <td th:text="${wh.getWRemark()}"></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${wh.getWID()}"
+                                            th:data-name="${wh.getWName()}" th:data-add="${wh.getWAdr()}" th:data-man="${wh.getWMID()}" onclick="alterfun(this)">修改</button>
                                     <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
                                 </td>
                             </tr>
