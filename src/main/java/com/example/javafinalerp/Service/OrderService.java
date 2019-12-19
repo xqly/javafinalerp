@@ -11,7 +11,7 @@ public interface OrderService {
     void addOrder();
     List<Ordergoods> getorderlistbyid(Integer x);
     List<Ordergoods> getorderlistbyclient(Integer x);
-    List<Ordergoods> getpreorderlist();
+    List<Orderandname> getpreorderlist();
     void addpreorder();
     List<Ordergoods> getpreorderlistbyid(Integer x);
     List<Ordergoods> getpreoderlistbyclient(Integer x);

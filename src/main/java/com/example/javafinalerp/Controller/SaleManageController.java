@@ -34,7 +34,7 @@ public class SaleManageController {
 
     @RequestMapping("advance_sale")
     public String ads(Model model){
-        List<Orderandname> order=null;
+        List<Orderandname> order=orderService.getpreorderlist();
         List<Goods> goods=basicManageService.getgoodslist();
         model.addAttribute("order",order);
         model.addAttribute("goods",goods);
@@ -137,6 +137,8 @@ public class SaleManageController {
     @RequestMapping("re_goods")
     public String rg(Model model){
         List<Goods> goods=basicManageService.getgoodslist();
+        List<Orderandname> order=orderService.getorderlist();
+        model.addAttribute("order",order);
         model.addAttribute("goods",goods);
         return "sale_manage/re_goods";
     }
