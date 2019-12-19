@@ -1,5 +1,6 @@
 package com.example.javafinalerp.Controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.javafinalerp.Bean.Goods;
 import com.example.javafinalerp.Bean.Ordergoods;
 import com.example.javafinalerp.Bean.OW;
@@ -64,7 +65,7 @@ public class SaleManageController {
         List<OWname> goods1=orderService.getlistbyoid(yourData);
         System.out.println(goods1.size());
         model.addAttribute("goods1",goods1);
-        return "sale_manage/now__sale";
+        return orderService.getajson().toJSONString();
     }
 
     @RequestMapping("now__sale")

@@ -47,10 +47,7 @@ public class MaterialsManageController {
     @RequestMapping("add_realmaterials")
     @ResponseBody
     public String amt(@RequestBody String x){
-        System.out.println(x);
-//        mHouseService.addMaterialsbyjson(x);
-        //xqly
-//        System.out.println(x.get(0).getMHTime());
+        mHouseService.addMaterialsbyjson(x);
         return "redirect:materials_in_stock";
     }
 

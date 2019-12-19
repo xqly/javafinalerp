@@ -57,7 +57,6 @@ public class MHouseServiceImpl implements MHouseService {
 
     @Override
     public void addMaterialsbyjson(String s) {
-        //xqly
         System.out.println(s);
     }
 
