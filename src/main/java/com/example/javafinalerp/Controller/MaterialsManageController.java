@@ -4,13 +4,16 @@ import com.example.javafinalerp.Bean.*;
 import com.example.javafinalerp.Service.BasicManageService;
 import com.example.javafinalerp.Service.MHouseService;
 import com.example.javafinalerp.Service.PlanService;
+import com.example.javafinalerp.tempclass.Json1;
 import com.example.javafinalerp.tempclass.Materialsandname;
 import com.example.javafinalerp.tempclass.Planandname;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -42,9 +45,12 @@ public class MaterialsManageController {
     }
 
     @RequestMapping("add_realmaterials")
-    public String amt(@RequestParam("materials_json") String x){
-        mHouseService.addMaterialsbyjson(x);
+    @ResponseBody
+    public String amt(@RequestBody String x){
+        System.out.println(x);
+//        mHouseService.addMaterialsbyjson(x);
         //xqly
+//        System.out.println(x.get(0).getMHTime());
         return "redirect:materials_in_stock";
     }
 
