@@ -100,7 +100,25 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addpreorder() {
+    public void addpreorder(String x) {
+        System.out.println(x);
+        List<Goods> list = goodsResitory.findAll();
+        Map<String,Integer> m1= new HashMap<>();
+        for(int i=0;i<list.size();i++){
+            m1.put(list.get(i).getGName(),list.get(i).getG_ID());
+        }
+        JSONObject jsonObject = JSONObject.parseObject(x);
+        Integer cust = jsonObject.getInteger("customer");
+        Double discount = jsonObject.getDouble("discount");
+        String tihuo = jsonObject.getString("tihuo_time");
+        String bz = jsonObject.getString("beizhu");
+        JSONArray pl = jsonObject.getJSONArray("peiliao");
+        for(int i=0;i<pl.size();i++){
+            JSONObject ob = pl.getJSONObject(i);
+            String mname = ob.getString("mname");
+            Integer mnum = ob.getInteger("mnum");
+            Integer gid = m1.get(mname);
+        }
         //xqly
     }
 

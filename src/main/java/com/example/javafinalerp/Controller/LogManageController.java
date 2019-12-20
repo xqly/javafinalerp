@@ -47,14 +47,14 @@ public class LogManageController {
 
     @RequestMapping(value = "mlogquery_by_id",method = RequestMethod.POST)
     public String qbi(@RequestParam("QID") Integer x,Model model){
-        List<MHouseLog> logs = logService.getMHLListByID(x);
+        List<MaterialLogandname> logs = logService.getMHLListByID(x);
         model.addAttribute("logs",logs);
         return "log_manage/materialsLog";
     }
 
     @RequestMapping(value = "mlogquery_by_hid",method = RequestMethod.POST)
     public String qbhi(@RequestParam("QID") Integer x,Model model){
-        List<MHouseLog> logs = logService.getMHLListByHID(x);
+        List<MaterialLogandname> logs = logService.getMHLListByHID(x);
         model.addAttribute("logs",logs);
         return "log_manage/materialsLog";
     }

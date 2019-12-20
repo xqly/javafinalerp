@@ -57,13 +57,37 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public List<MHouseLog> getMHLListByHID(Integer x) {
-        return mHouseLogResitory.getlistByMHID(x);
+    public List<MaterialLogandname> getMHLListByHID(Integer x) {
+        List<MHouseLog> lists = mHouseLogResitory.getlistByMHID(x);;
+        List<MaterialLogandname> logs = new ArrayList<>();
+        List<MP> mp = mpResitory.findAll();
+        Map<Integer,Integer> m1 = new HashMap<>();
+        for(int i=0;i<mp.size();i++){
+            m1.put(mp.get(i).getMPID(),mp.get(i).getMID());
+        }
+        for(int i=0;i<lists.size();i++){
+            MaterialLogandname temp = new MaterialLogandname(lists.get(i));
+            temp.setMid(m1.get(temp.getMPID()));
+            logs.add(temp);
+        }
+        return logs;
     }
 
     @Override
-    public List<MHouseLog> getMHLListByID(Integer x) {
-        return mHouseLogResitory.getlistByID(x);
+    public List<MaterialLogandname> getMHLListByID(Integer x) {
+        List<MHouseLog> lists = mHouseLogResitory.getlistByID(x);;
+        List<MaterialLogandname> logs = new ArrayList<>();
+        List<MP> mp = mpResitory.findAll();
+        Map<Integer,Integer> m1 = new HashMap<>();
+        for(int i=0;i<mp.size();i++){
+            m1.put(mp.get(i).getMPID(),mp.get(i).getMID());
+        }
+        for(int i=0;i<lists.size();i++){
+            MaterialLogandname temp = new MaterialLogandname(lists.get(i));
+            temp.setMid(m1.get(temp.getMPID()));
+            logs.add(temp);
+        }
+        return logs;
     }
 
     @Override

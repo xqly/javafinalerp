@@ -128,9 +128,9 @@ public class SaleManageController {
     }
 
     @RequestMapping("add_preorders")
-    public String amt(@RequestParam("preorders_json") String x){
-        orderService.addpreorder();
-        //xqly
+    @ResponseBody
+    public String amt(@RequestBody String x){
+        orderService.addpreorder(x);
         return "redirect:advance_sale";
     }
 

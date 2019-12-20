@@ -13,7 +13,7 @@ public interface OrderService {
     List<Ordergoods> getorderlistbyid(Integer x);
     List<Ordergoods> getorderlistbyclient(Integer x);
     List<Orderandname> getpreorderlist();
-    void addpreorder();
+    void addpreorder(String x);
     List<Ordergoods> getorderlistsbystate(Integer x);
     List<Ordergoods> getpreorderlistbyid(Integer x);
     List<Ordergoods> getpreoderlistbyclient(Integer x);
