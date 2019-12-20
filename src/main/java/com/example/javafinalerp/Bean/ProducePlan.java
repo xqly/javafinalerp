@@ -15,6 +15,10 @@ public class ProducePlan {
     private Integer pworkshop;
     private Integer pstate;
 
+    public ProducePlan(){
+
+    }
+
     public Integer getPstate() {
         return pstate;
     }

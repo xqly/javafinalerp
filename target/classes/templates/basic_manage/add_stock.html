@@ -27,6 +27,32 @@
     <![endif]-->
 
     <script>
+
+        function fsubmit1(obj) {
+            obj.submit();
+        }
+        function fsubmit(obj) {
+            if(CheckPost()){
+                obj.submit();
+            }
+        }
+        function fsubmit2(obj) {
+            if(CheckPost2()){
+                obj.submit();
+            }
+        }
+
+
+        function CheckPost () {
+            return true;
+        }
+
+
+        function CheckPost2 () {
+            return true;
+        }
+
+
         function alterfun(butt) {
             var userid = butt.getAttribute("data-id");
             $("#sid").attr("value",userid);
@@ -34,6 +60,10 @@
             $("#sadd").attr("value",butt.getAttribute("data-add"));
             $("#sman").attr("value",butt.getAttribute("data-man"));
 
+        }
+
+        function deluser(butt) {
+            $("#uid").attr("value",butt.getAttribute("data-id"));
         }
     </script>
 </head>
@@ -338,7 +368,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="/alterstock" method="post" id="alterform" name="alterform">
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
@@ -369,7 +399,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="fsubmit2(document.alterform)">保 存222</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -388,12 +418,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        确定要删除该资源？删除后不可恢复！
+                        确定要删除该仓库？删除后不可恢复！
                     </div>
+                    <form hidden method="post" action="/destock" name="delform" id="delform" >
+                        <input type="" id="uid" name="uid">
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-danger">保 存</button>
+                    <button type="button" class="btn btn-xs btn-danger" onclick="fsubmit1(document.delform)" >确 定</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -458,7 +491,7 @@
                                 <td>
                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${wh.getWID()}"
                                             th:data-name="${wh.getWName()}" th:data-add="${wh.getWAdr()}" th:data-man="${wh.getWMID()}" onclick="alterfun(this)">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${wh.getWID()}" onclick="deluser(this)">删除</button>
                                 </td>
                             </tr>
                             </tbody>
