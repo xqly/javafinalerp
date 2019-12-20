@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface OrderService {
     List<Orderandname> getorderlist();
-    void addOrder();
+    void addOrder(String x);
     List<Ordergoods> getorderlistbyid(Integer x);
     List<Ordergoods> getorderlistbyclient(Integer x);
     List<Orderandname> getpreorderlist();

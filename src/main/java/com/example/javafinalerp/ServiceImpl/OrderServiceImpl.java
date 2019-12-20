@@ -11,9 +11,11 @@ import com.example.javafinalerp.Resitory.OrdergoodsResitory;
 import com.example.javafinalerp.Service.OrderService;
 import com.example.javafinalerp.tempclass.OWname;
 import com.example.javafinalerp.tempclass.Orderandname;
+import com.example.javafinalerp.tempfunc.Myfunc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +33,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     GoodsResitory goodsResitory;
 
+    @Resource
+    Myfunc myfunc;
+
     @Override
     public List<Orderandname> getorderlist() {
         List<Orderandname> lists = new ArrayList<>();
@@ -43,10 +48,35 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addOrder() {
-        //xqly
+    public void addOrder(String x) {
+        List<Goods> list = goodsResitory.findAll();
+        Map<String,Integer> m1= new HashMap<>();
+        for(int i=0;i<list.size();i++){
+            m1.put(list.get(i).getGName(),list.get(i).getG_ID());
+        }
+        JSONObject jsonObject = JSONObject.parseObject(x);
+        Integer cust = jsonObject.getInteger("customer");
+        Double discount = jsonObject.getDouble("discount");
+        String bz = jsonObject.getString("beizhu");
+        JSONArray jsonArray = jsonObject.getJSONArray("peiliao");
+        for(int i=0;i<jsonArray.size();i++){
+            JSONObject pl = jsonArray.getJSONObject(i);
+            String name = pl.getString("mname");
+            Integer num = pl.getInteger("mnum");
+            Integer gid = m1.get(name);
+        }
+        Ordergoods order = new Ordergoods();
+        if(discount!=null)
+        order.setDiscount(discount);
+        else order.setDiscount(1.0);
+        order.setCID(cust);
+        order.setOTime(myfunc.getDate());
+        order.setOMID(1);//xqly
+        order.setRemark(bz);
+        order.setOState(0);
+        order.setType(0);
+        ordergoodsResitory.save(order);
     }
-
     @Override
     public List<Ordergoods> getorderlistbyid(Integer x) {
         return ordergoodsResitory.findlistbyid(0,x);
