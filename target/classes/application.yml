@@ -3,7 +3,11 @@ spring:
     name: javaemp  #数据库名
     url: jdbc:mysql://localhost:3306/javaemp?serverTimezone=UTC #url
     username: root  #用户名
+<<<<<<< HEAD
     password: 123qweasd  #密码
+=======
+    password: 123  #密码
+>>>>>>> origin
     driver-class-name: com.mysql.cj.jdbc.Driver
   mail:
     username: java_isverygood@163.com

@@ -79,10 +79,15 @@ public class PlanServiceImpl implements PlanService {
             methodResitory.save(method);
         }
     }
+<<<<<<< HEAD
+=======
+//<<<<<<< Updated upstream
+>>>>>>> origin
     @Override
     public void addplan(ProducePlan plan) {
         producePlanResitory.save(plan);
     }
+<<<<<<< HEAD
 
     @Override
     public void delgoodsmethod(Integer dd) {
@@ -109,4 +114,8 @@ public class PlanServiceImpl implements PlanService {
     public JSONArray getmethodjson(Integer gid) {
         return null;
     }
+=======
+//=======
+//>>>>>>> Stashed changes
+>>>>>>> origin
 }

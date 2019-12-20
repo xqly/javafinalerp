@@ -43,32 +43,33 @@
                   //      alert(data[0].name);
                         alert(yourData);
                        // alert(data[0]);
-                       //  alert(data.length);
-                        alert(data.name);
+                        alert(data.length);
+                        alert(data[0].name);
                      //   alert(data.length);
                         var table=document.getElementById("ci");
-                        // for(var i=0;i<data.length;i++){
+                        //table.clear();
+                         for(var i=0;i<data.length;i++){
                             var row=table.insertRow(table.rows.length);
+                            var c1=row.insertCell(0);
+                            c1.innerHTML=data[i].name;
+                           // alert(c1.innerHTML);
+                            var c2=row.insertCell(1);
+                            c2.innerHTML=data[i].numm;
+                            var c3=row.insertCell(2);
+                            c3.innerHTML=data[i].price1;
+                            var c4=row.insertCell(3);
+                            c4.innerHTML=data[i].price2;
+
                             // var c1=row.insertCell(0);
-                            // c1.innerHTML=data[i].name;
+                            // c1.innerHTML=data.name;
                             // alert(c1.innerHTML);
                             // var c2=row.insertCell(1);
-                            // c2.innerHTML=data[i].numm;
+                            // c2.innerHTML=data.numm;
                             // var c3=row.insertCell(2);
-                            // c3.innerHTML=data[i].price1;
+                            // c3.innerHTML=data.price1;
                             // var c4=row.insertCell(3);
-                            // c4.innerHTML=data[i].price2;
-
-                            var c1=row.insertCell(0);
-                            c1.innerHTML=data.name;
-                            alert(c1.innerHTML);
-                            var c2=row.insertCell(1);
-                            c2.innerHTML=data.numm;
-                            var c3=row.insertCell(2);
-                            c3.innerHTML=data.price1;
-                            var c4=row.insertCell(3);
-                            c4.innerHTML=data.price2;
-                        // }
+                            // c4.innerHTML=data.price2;
+                         }
                     }
             })
 
@@ -179,6 +180,8 @@
                     alert(orders_json);
                 }
             });
+            alert("已成功增加订单！");
+            window.location.href = "now__sale";
 
 
         }
@@ -353,6 +356,9 @@
                             <a href="product_out_stock">商品出库</a>
                         </li>
                         <li>
+                            <a href="product_in_home">仓库存储信息</a>
+                        </li>
+                        <li>
                             <a href="productDestroy">商品销毁</a>
                         </li>
                     </ul>
@@ -410,9 +416,7 @@
                         <li>
                             <a href="add_stock">仓库信息</a>
                         </li>
-                        <li>
-                            <a href="product_in_home">仓库存储信息</a>
-                        </li>
+
                         <li>
                             <a href="add_product_acre">生产车间信息</a>
                         </li>
@@ -473,7 +477,7 @@
                     <input type="date" id="date_info1" placeholder="原料入库时间" class=" form-control-line"  >
 
                     <label style="margin-left: 100px">原价总计:</label>
-                    <input type="number" id="before" name="before" value="0" class=" form-control-line"  onchange="calend()" onfocus=this.blur()>
+                    <input type="number" id="before" name="before" value="0" class=" form-control-line" onfocus=this.blur() onchange="calend()" >
 
                     <label style="margin-left: 100px">折扣:</label>
                     <input type="number" id="zhekou" name="zhekou" placeholder="1.0" class=" form-control-line"  step = "0.1" onchange="calend()">

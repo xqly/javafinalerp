@@ -42,49 +42,43 @@
                 url: "/yourUrl/"+yourData, // 将你的请求参数以问号拼接到url中进行参数传递
 
                 success(data) {
-                    // data为返回值
-                    // 成功后的回调方法
-                    //      alert(data[0].name);
                     alert(yourData);
-                    // alert(data[0]);
-                    //  alert(data.length);
-                    alert(data.name);
-                    //   alert(data.length);
+                  //  alert(data.name);
                     var table=document.getElementById("ci");
-                    // for(var i=0;i<data.length;i++){
-                    var row=table.insertRow(table.rows.length);
-                    // var c1=row.insertCell(0);
-                    // c1.innerHTML=data[i].name;
-                    // alert(c1.innerHTML);
-                    // var c2=row.insertCell(1);
-                    // c2.innerHTML=data[i].numm;
-                    // var c3=row.insertCell(2);
-                    // c3.innerHTML=data[i].price1;
-                    // var c4=row.insertCell(3);
-                    // c4.innerHTML=data[i].price2;
-                    var c0=row.insertCell(0);
-                    c0.innerHTML='    <span class="radio_wrap">\n' +
-                        '                   <input type="checkbox" id="xh" name="xh"/>\n' +
-                        '                   <label for="xh" class="check"></label>\n' +
-                        '              </span>';
-                    var c1=row.insertCell(1);
-                    c1.innerHTML='<input name="c11" id="c11">';
-                    document.getElementById("c11").value=data.name;
-                    //c1.innerHTML=data.name;
-                    alert(c1.innerHTML);
-                    var c2=row.insertCell(2);
-                    c2.innerHTML='<input type="number" name="c22" id="c22" onchange="tuihuonum()">';
-                    document.getElementById("c22").value=data.numm;
-                   //c2.innerHTML=data.numm;
-                    var c3=row.insertCell(3);
-                    c3.innerHTML='<input type="number" name="c33" id="c33" onfocus=this.blur()>';
-                    document.getElementById("c33").value=data.price1;
-                    //c3.innerHTML=data.price1;
-                    var c4=row.insertCell(4);
-                    c4.innerHTML='<input name="c44" id="c44" onfocus=this.blur()>';
-                    document.getElementById("c44").value=parseInt(data.numm)*parseInt(data.price1);
-                   // c4.innerHTML=data.price2;
-
+                     for(var i=0;i<data.length;i++) {
+                         var row = table.insertRow(table.rows.length);
+                         // var c1=row.insertCell(0);
+                         // c1.innerHTML=data[i].name;
+                         // alert(c1.innerHTML);
+                         // var c2=row.insertCell(1);
+                         // c2.innerHTML=data[i].numm;
+                         // var c3=row.insertCell(2);
+                         // c3.innerHTML=data[i].price1;
+                         // var c4=row.insertCell(3);
+                         // c4.innerHTML=data[i].price2;
+                         var c0 = row.insertCell(0);
+                         c0.innerHTML = '    <span class="radio_wrap">\n' +
+                             '                   <input type="checkbox" id="xh" name="xh"/>\n' +
+                             '                   <label for="xh" class="check"></label>\n' +
+                             '              </span>';
+                         var c1 = row.insertCell(1);
+                         c1.innerHTML = '<input name="c11" id="c11">';
+                         document.getElementById("c11").value = data[i].name;
+                         //c1.innerHTML=data.name;
+                        // alert(c1.innerHTML);
+                         var c2 = row.insertCell(2);
+                         c2.innerHTML = '<input type="number" name="c22" id="c22" onchange="tuihuonum()">';
+                         document.getElementById("c22").value = data[i].numm;
+                         //c2.innerHTML=data.numm;
+                         var c3 = row.insertCell(3);
+                         c3.innerHTML = '<input type="number" name="c33" id="c33" onfocus=this.blur()>';
+                         document.getElementById("c33").value = data[i].price1;
+                         //c3.innerHTML=data.price1;
+                         var c4 = row.insertCell(4);
+                         c4.innerHTML = '<input type="number" name="c44" id="c44" onfocus=this.blur()>';
+                         document.getElementById("c44").value = parseInt(data[i].numm) * parseInt(data[i].price1);
+                         // c4.innerHTML=data.price2;
+                     }
                 }
             })
         }
@@ -144,11 +138,12 @@
             for (var i = 0; i < tr.length; i++) {
                 var inputs = $(tr[i]).find("td").find("input");
                 if (inputs.length>0) {
-                    sum+=parseInt(inputs[3].value);
+                    sum+=parseInt(inputs[4].value);
                 }
             }
             var zhekou=parseFloat(document.getElementById("zhekou5").value);
             sum = sum*zhekou;
+            alert(sum);
             $("#reSum").attr("value",sum);
 
             // $("table input:checkbox").each(function(){
@@ -166,14 +161,14 @@
             document.getElementById("rerealSum").value= price*zhekou;
         }
         function get_table_data() {
-            var tr = $("#ci2 tr");
+            var tr = $("#ci tr");
             var result = [];
             for (var i = 0; i < tr.length; i++) {
                 var inputs = $(tr[i]).find("td").find("input");
                 if (inputs.length > 0) {
                     result.push({
-                        mname : inputs[0].value,
-                        mnum : inputs[1].value
+                        mname : inputs[1].value,
+                        mnum : inputs[2].value
                     });
                 }
             }
@@ -189,18 +184,20 @@
                 peiliao : bisSuenDocuSacertCont
             };
 
-            var burden=JSON.stringify(json);
-            alert(burden);
+            var reo_json=JSON.stringify(json);
+            alert(reo_json);
             $.ajax({
-                url:"burdenSheet",
+                url:"re_orders",
                 type:"post",
                 dataType:"json",
                 contentType:"application/json",
-                data:burden,
+                data:reo_json,
                 success:function(){
-                    alert(burden);
+                    alert(reo_json);
                 }
             });
+            alert("已成功退货！");
+            window.location.href = "re_goods";
         }
 
 
@@ -362,6 +359,9 @@
                             <a href="product_out_stock">商品出库</a>
                         </li>
                         <li>
+                            <a href="product_in_home">仓库存储信息</a>
+                        </li>
+                        <li>
                             <a href="productDestroy">商品销毁</a>
                         </li>
                     </ul>
@@ -419,9 +419,7 @@
                         <li>
                             <a href="add_stock">仓库信息</a>
                         </li>
-                        <li>
-                            <a href="product_in_home">仓库存储信息</a>
-                        </li>
+
                         <li>
                             <a href="add_product_acre">生产车间信息</a>
                         </li>

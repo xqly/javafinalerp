@@ -11,8 +11,15 @@ public interface PlanService {
     List<Planandname> getunplannamelist();
     void outMaterialsbyPlanid(Integer x);
     void addmethodbyjson(String s,Integer gid);
+<<<<<<< HEAD
     void addplan(ProducePlan plan);
     void delgoodsmethod(Integer dd);
     void delgoodsonemethod(Integer goods,Integer mater);
     JSONArray getmethodjson(Integer gid);
+=======
+//<<<<<<< Updated upstream
+    void addplan(ProducePlan plan);
+//=======
+//>>>>>>> Stashed changes
+>>>>>>> origin
 }
