@@ -36,6 +36,7 @@ public class ProductManageController {
         model.addAttribute("materials",materials);
         model.addAttribute("goods",goods);
         model.addAttribute("lists",lists);
+
         return "product_manage/burdenSheet";
     }
 
@@ -51,7 +52,14 @@ public class ProductManageController {
     }
 
     @RequestMapping(value = "/saveplan" ,method = RequestMethod.POST)
-    public String saver(@ModelAttribute  ProducePlan producePlan , HttpSession session){
+    public String saver(@RequestParam("goods0") Integer goods,@RequestParam("num0") Integer num,@RequestParam("time0") String time,@RequestParam("chejian0") Integer chejian, HttpSession session){
+        ProducePlan producePlan = new ProducePlan();
+//        System.out.println(chejian);
+        producePlan.setGnum(num);
+        producePlan.setPstate(1);
+        producePlan.setPtime(time);
+        producePlan.setGoodid(goods);
+        producePlan.setPworkshop(chejian);
         planService.addplan(producePlan);
         return "redirect:producePlan";
     }

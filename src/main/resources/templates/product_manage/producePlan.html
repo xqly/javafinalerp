@@ -396,7 +396,7 @@
 
                             <div class="form-group">
                                 <label  for="sLink1" class="col-xs-3 control-label" >商品名称：</label>
-                                <select class="form-control input-sm duiqi" style="width: 350px; margin-left: 60px" name="goods0" id="goods">
+                                <select class="form-control input-sm duiqi" style="width: 350px; margin-left: 60px" name="goods0" id="goods0">
                                     <option th:text="请选择商品"></option>
                                     <option th:each="goods:${goods}" th:value="${goods.getG_ID()}" th:text="${goods.getGName()}" ></option>
                                 </select>
@@ -458,14 +458,14 @@
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">计划单号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="kid" name="kid" placeholder="" readonly>
+                                    <input type="text" class="form-control input-sm duiqi" id="pid" name="pid" placeholder="" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="sLink" class="col-xs-3 control-label">商品编号：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="text" class="form-control input-sm duiqi" id="gid" name="gid" placeholder="" readonly>
+                                    <input type="text" class="form-control input-sm duiqi" id="goodid" name="goodid" placeholder="" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -477,13 +477,13 @@
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">计划制定时间：</label>
                                 <div class="col-xs-8">
-                                    <input type="date" class="form-control input-sm duiqi" id="time" name="time" placeholder="">
+                                    <input type="date" class="form-control input-sm duiqi" id="ptime" name="ptime" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">负责车间：</label>
                                 <div class="col-xs-8">
-                                    <input type="text" class="form-control input-sm duiqi" id="chejian" name="chejian" placeholder="">
+                                    <input type="text" class="form-control input-sm duiqi" id="pworkshop" name="pworkshop" placeholder="">
                                 </div>
                             </div>
 

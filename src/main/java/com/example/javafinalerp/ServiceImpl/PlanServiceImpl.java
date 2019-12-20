@@ -69,12 +69,6 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<Integer> getMethodmygoods(Integer x) {
-        return null;//xqly
-
-    }
-
-    @Override
     public void addmethodbyjson(String s,Integer gid) {
         JSONArray jsonArray = JSON.parseArray(s);
         for(int i=0;i<jsonArray.size();i++){
@@ -85,11 +79,33 @@ public class PlanServiceImpl implements PlanService {
             methodResitory.save(method);
         }
     }
-//<<<<<<< Updated upstream
     @Override
     public void addplan(ProducePlan plan) {
         producePlanResitory.save(plan);
     }
-//=======
-//>>>>>>> Stashed changes
+    @Override
+    public void delgoodsmethod(Integer dd) {
+        List<Method> list = methodResitory.findAll();
+        for(int i=0;i<list.size();i++){
+            Method temp = list.get(i);
+            if(temp.getGID()==dd){
+                methodResitory.deleteById(temp.getMeID());
+            }
+        }
+    }
+
+    @Override
+    public void delgoodsonemethod(Integer goods, Integer mater) {
+        List<Method> list = methodResitory.findAll();
+        for(int i=0;i<list.size();i++){
+            Method temp = list.get(i);
+            if(temp.getGID().equals(goods) && temp.getMID().equals(mater)){
+                methodResitory.deleteById(temp.getMeID());
+            }
+        }
+    }
+    @Override
+    public JSONArray getmethodjson(Integer gid) {
+        return null;
+    }
 }
