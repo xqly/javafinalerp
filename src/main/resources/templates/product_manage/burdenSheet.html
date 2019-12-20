@@ -24,16 +24,42 @@
 
 
     <script>
-        function alterfun(butt) {
-            $("#ugid").attr("value",butt.getAttribute("data-gid"));
-            $("#ugname").attr("value",butt.getAttribute("data-gname"));
+        function alterfun(butt,yourData1) {
+            $("#GID").attr("value",butt.getAttribute("data-gid"));
+            // $("#ugname").attr("value",butt.getAttribute("data-gname"));
+            $.ajax({
+                type: "get", // 以get方式发起请求
+                url: "/yourUrl1/"+yourData1, // 将你的请求参数以问号拼接到url中进行参数传递
+
+                success(data) {
+                    // data为返回值
+                    // 成功后的回调方法
+                    //      alert(data[0].name);
+                    alert(yourData1);
+                    // alert(data[0]);
+                    //  alert(data.length);
+                    alert(data.name);
+                    //   alert(data.length);
+                    var table=document.getElementById("ci");
+                    // for(var i=0;i<data.length;i++){
+                    var row=table.insertRow(table.rows.length);
+
+                    var c1=row.insertCell(0);
+                    c1.innerHTML=data.name;
+                    alert(c1.innerHTML);
+                    var c2=row.insertCell(1);
+                    c2.innerHTML=data.numm;
+                }
+            })
         }
 
         function delsheet(butt) {
-            $("#sid").attr("value",butt.getAttribute("data-id"));
+            $("#uid").attr("value",butt.getAttribute("data-id"));
         }
 
-
+        function fsubmit1(obj) {
+            obj.submit();
+        }
         function get_table_data() {
             var tr = $("#ci2 tr");
             var result = [];
@@ -62,7 +88,7 @@
             var burden=JSON.stringify(json);
             alert(burden);
             $.ajax({
-                url:"burdenSheet",
+                url:"add_burdenSheet",
                 type:"post",
                 dataType:"json",
                 contentType:"application/json",
@@ -460,22 +486,22 @@
                                         <th>原料名称</th>
                                         <th>数量(单位)</th>
 
-                                        <th>操作</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+
 
 
                                     </tr>
-                                    <tr>
-                                        <td><input type="text" style="width:70%;"></td>
-                                        <td><input type="number" style="width:70%;"></td>
-                                        <td><input type="button" onclick="del(this)" value="删除"></td>
-                                    </tr>
+                                    <!--<tr>-->
+                                        <!--<td><input type="text" style="width:70%;"></td>-->
+                                        <!--<td><input type="number" style="width:70%;"></td>-->
+                                        <!--<td><input type="button" onclick="del(this)" value="删除"></td>-->
+                                    <!--</tr>-->
                                     </tbody>
                                 </table>
                             </div>
@@ -506,10 +532,13 @@
                     <div class="container-fluid">
                         确定要删除该配料项？删除后不可恢复！
                     </div>
+                    <form hidden method="post" action="/deluser1" name="delform" id="delform" >
+                        <input type="" id="uid" name="uid">
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-danger">保 存</button>
+                    <button type="button" class="btn btn-xs btn-danger" onclick="fsubmit1(document.delform)">保 存</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -540,13 +569,7 @@
                 <div class="white-box">
                     <h3 class="box-title">配料单列表</h3>
                     <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加配料项</button>
-                    <label style="margin-left: 100px;font-size: small" >商品名称</label>
-                    <input type="text" >
-                    <button>查询</button>
 
-                    <label style="margin-left: 30px;font-size: small" >商品编号</label>
-                    <input type="text">
-                    <button>查询</button>
 
 
                     <div class="table-responsive">
@@ -568,8 +591,8 @@
                                 <td  th:text="${sheet.getG_SID()}"></td>
                                 <td  th:text="${sheet.getG_NAME()}"></td>
                                 <td>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${sheet.getG_SID()}" >查看</button>
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-gid="${sheet.getG_SID()}" th:data-gname="${sheet.getG_NAME()}"   onclick="alterfun(this)">修改</button>
+                                    <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${sheet.getG_SID()}" >查看</button>-->
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-gid="${sheet.getG_SID()}" th:data-gname="${sheet.getG_NAME()}"   onclick='alterfun(this,this.getAttribute("data-gid"))'>查看</button>
                                     <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${sheet.getG_SID()}" onclick="delsheet(this)">删除</button>
                                 </td>
                             </tr>
