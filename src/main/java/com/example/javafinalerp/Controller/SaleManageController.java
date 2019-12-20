@@ -136,6 +136,13 @@ public class SaleManageController {
         return "redirect:advance_sale";
     }
 
+    @RequestMapping("re_orders")
+    public String amt12(@RequestParam("reo_json") String x){
+        //这里是退货的接口通过订单号
+        //xqly
+        return "redirect:re_goods";
+    }
+
     @RequestMapping("re_goods")
     public String rg(Model model){
         List<Goods> goods=basicManageService.getgoodslist();

@@ -184,18 +184,20 @@
                 peiliao : bisSuenDocuSacertCont
             };
 
-            var burden=JSON.stringify(json);
-            alert(burden);
+            var reo_json=JSON.stringify(json);
+            alert(reo_json);
             $.ajax({
-                url:"burdenSheet",
+                url:"re_orders",
                 type:"post",
                 dataType:"json",
                 contentType:"application/json",
-                data:burden,
+                data:reo_json,
                 success:function(){
-                    alert(burden);
+                    alert(reo_json);
                 }
             });
+            alert("已成功退货！");
+            window.location.href = "re_goods";
         }
 
 

@@ -43,10 +43,11 @@
                   //      alert(data[0].name);
                         alert(yourData);
                        // alert(data[0]);
-                       //  alert(data.length);
+                        alert(data.length);
                         alert(data[0].name);
                      //   alert(data.length);
                         var table=document.getElementById("ci");
+                        //table.clear();
                          for(var i=0;i<data.length;i++){
                             var row=table.insertRow(table.rows.length);
                             var c1=row.insertCell(0);
@@ -179,6 +180,8 @@
                     alert(orders_json);
                 }
             });
+            alert("已成功增加订单！");
+            window.location.href = "now__sale";
 
 
         }
@@ -473,7 +476,7 @@
                     <input type="date" id="date_info1" placeholder="原料入库时间" class=" form-control-line"  >
 
                     <label style="margin-left: 100px">原价总计:</label>
-                    <input type="number" id="before" name="before" value="0" class=" form-control-line"  onchange="calend()" onfocus=this.blur()>
+                    <input type="number" id="before" name="before" value="0" class=" form-control-line" onfocus=this.blur() onchange="calend()" >
 
                     <label style="margin-left: 100px">折扣:</label>
                     <input type="number" id="zhekou" name="zhekou" placeholder="1.0" class=" form-control-line"  step = "0.1" onchange="calend()">
