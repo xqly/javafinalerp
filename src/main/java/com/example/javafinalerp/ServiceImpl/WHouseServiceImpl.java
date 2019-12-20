@@ -84,7 +84,7 @@ public class WHouseServiceImpl implements WHouseService {
             m1.put(gl.get(i).getG_ID(),gl.get(i).getGExpDate());
         }
         for(int i=0;i<whStatuses.size();i++){
-            if(Myfunc.checkTime(whStatuses.get(i).getWHTime(),m1.get(whStatuses.get(i).getGID()))){
+            if(!Myfunc.checkTime(whStatuses.get(i).getWHTime(),m1.get(whStatuses.get(i).getGID()))){
                 lists.add(whStatuses.get(i));
             }
         }

@@ -27,11 +27,22 @@
     <![endif]-->
 
     <script>
+        function fsubmit1(obj) {
+            obj.submit();
+        }
+
         function fsubmit(obj) {
             if(CheckPost()){
                 obj.submit();
             }
         }
+
+        function fsubmit2(obj) {
+            if(CheckPost2()){
+                obj.submit();
+            }
+        }
+
         function CheckPost () {
             var x0=formadd.mprice0.value;
             var x1=formadd.mtime0.value;
@@ -51,12 +62,35 @@
             return true;
         }
 
+        function CheckPost2 () {
+            var x0=alterform.mprice.value;
+            var x1=alterform.mdate.value;
+
+            if(x0<=0||x0>1000){
+                alert("价格区间有误!");
+                document.alterform.mprice.focus();
+                document.alterform.mprice.value = "";
+                return false;
+            }
+            if(x1<=2||x1>365){
+                alert("保质期区间有误!");
+                document.alterform.mdate.focus();
+                document.alterform.mdate.value = "";
+                return false;
+            }
+            return true;
+        }
+
         function alterfun(butt) {
             var userid = butt.getAttribute("data-id");
             $("#mid").attr("value",userid);
             $("#mname").attr("value",butt.getAttribute("data-name"));
             $("#mprice").attr("value",butt.getAttribute("data-price"));
             $("#mdate").attr("value",butt.getAttribute("data-date"));
+        }
+
+        function delmaterial(butt) {
+            $("#uid").attr("value",butt.getAttribute("data-id"));
         }
     </script>
 </head>
@@ -362,7 +396,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="/altermaterial" method="post" id="alterform" name="alterform">
                             <div class="form-group ">
                                 <label for="sName" class="col-xs-3 control-label">编号：</label>
                                 <div class="col-xs-8 ">
@@ -378,13 +412,13 @@
                             <div class="form-group">
                                 <label for="sOrd" class="col-xs-3 control-label">保质期：</label>
                                 <div class="col-xs-8">
-                                    <input type="number" class="form-control input-sm duiqi" id="mdate" placeholder="">
+                                    <input type="number" class="form-control input-sm duiqi"  name="mdate" id="mdate" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">单价：</label>
                                 <div class="col-xs-8">
-                                    <input type="number" class="form-control input-sm duiqi" id="mprice" placeholder="">
+                                    <input type="number" class="form-control input-sm duiqi" name="mprice" id="mprice" placeholder="">
                                 </div>
                             </div>
                         </form>
@@ -392,7 +426,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green" onclick="fsubmit2(document.alterform)">保 存222</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -411,14 +445,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        确定要删除该资源？删除后不可恢复！
+                        确定要删除该原料？删除后不可恢复！
                     </div>
+                    <form hidden method="post" action="/delmaterial" name="delform" id="delform" >
+                        <input type="" id="uid" name="uid">
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-danger">保 存</button>
+                    <button type="button" class="btn btn-xs btn-danger" onclick="fsubmit1(document.delform)" >确 定</button>
                 </div>
-            </div>
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
@@ -482,7 +518,7 @@
                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-id="${mater.getMID()}"
                                             th:data-name="${mater.getMName()}" th:data-price="${mater.getMPrice()}" th:data-date="${mater.getMExpDate()}"
                                             onclick="alterfun(this)">修改</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${mater.getMID()}" onclick="delmaterial(this)">删除</button>
                                 </td>
                             </tr>
                             </tbody>
