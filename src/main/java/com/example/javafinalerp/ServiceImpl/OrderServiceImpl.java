@@ -211,4 +211,29 @@ public class OrderServiceImpl implements OrderService {
     public List<Ordergoods> getorderlistsbystate(Integer x) {
         return ordergoodsResitory.findlistsbytypeandstate(0,x);
     }
+
+    @Override
+    public void tuiorder(String x) {
+        List<Goods> list = goodsResitory.findAll();
+        Map<String,Integer> m1= new HashMap<>();
+        for(int i=0;i<list.size();i++){
+            m1.put(list.get(i).getGName(),list.get(i).getG_ID());
+        }
+        JSONObject jsonObject = JSONObject.parseObject(x);
+        Integer oid = jsonObject.getInteger("dingdan");
+        JSONArray pl = jsonObject.getJSONArray("peiliao");
+        for(int i=0;i<pl.size();i++){
+            JSONObject ob = pl.getJSONObject(i);
+            String name = ob.getString("mname");
+            Integer num = ob.getInteger("mnum");
+            Integer gid = m1.get(name);
+            OW ow = owResitory.findbyoidandgid(oid,gid);
+            ow.setState(2);
+            ow.setTnum(ow.getTnum()+num);
+            if(ow.getTnum().intValue()>ow.getNum().intValue()){
+                ow.setTnum(ow.getNum());
+            }
+            owResitory.save(ow);
+        }
+    }
 }

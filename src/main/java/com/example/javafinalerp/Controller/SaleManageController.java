@@ -135,9 +135,10 @@ public class SaleManageController {
     }
 
     @RequestMapping("re_orders")
-    public String amt12(@RequestParam("reo_json") String x){
-        //这里是退货的接口通过订单号
-        //xqly
+    @ResponseBody
+    public String amt12(@RequestBody String x){
+        System.out.println(x);
+
         return "redirect:re_goods";
     }
 

@@ -19,4 +19,5 @@ public interface OrderService {
     List<Ordergoods> getpreoderlistbyclient(Integer x);
     List<OWname> getlistbyoid(Integer x);
     JSONArray getordergoodsjson(Integer oid);
+    void tuiorder(String x);
 }
