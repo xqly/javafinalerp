@@ -16,6 +16,18 @@ public class WHStatus {
     private String WHTime;
     private Integer GNum;
 
+    public WHStatus(){
+
+    }
+
+    public WHStatus(Integer whid,Integer gid,Integer gpid ,String time,Integer num){
+        this.WHID=whid;
+        this.GID=gid;
+        this.setGPID(gpid);
+        this.setWHTime(time);
+        this.setGNum(num);
+    }
+
     public String getWHTime() {
         return WHTime;
     }

@@ -1,13 +1,7 @@
 package com.example.javafinalerp.ServiceImpl;
 
-import com.example.javafinalerp.Bean.Goods;
-import com.example.javafinalerp.Bean.OW;
-import com.example.javafinalerp.Bean.WHStatus;
-import com.example.javafinalerp.Bean.WHouseLog;
-import com.example.javafinalerp.Resitory.GoodsResitory;
-import com.example.javafinalerp.Resitory.OWResitory;
-import com.example.javafinalerp.Resitory.WHStatusResitory;
-import com.example.javafinalerp.Resitory.WHouseLogResitory;
+import com.example.javafinalerp.Bean.*;
+import com.example.javafinalerp.Resitory.*;
 import com.example.javafinalerp.Service.WHouseService;
 import com.example.javafinalerp.tempfunc.Goodsfunc;
 import com.example.javafinalerp.tempfunc.Myfunc;
@@ -39,10 +33,27 @@ public class WHouseServiceImpl implements WHouseService {
     @Resource
     Goodsfunc goodsfunc;
 
+    @Autowired
+    GPResitory gpResitory;
+
 
     @Override
-    public void addWH(WHStatus x) {
-        whStatusResitory.save(x);
+    public void addWH(Integer gid,Integer num,Integer shop ,String Time,Integer whid) {
+        GP gp = new GP();
+        gp.setGID(gid);
+        gp.setGShop(shop);
+        gp.setGTime(Time);
+        gpResitory.save(gp);
+        List<GP> ll = gpResitory.findAll();
+        Integer pid =0;
+        for(int i=0;i<ll.size();i++){
+            if(ll.get(i).getGPID()>pid){
+                pid=ll.get(i).getGPID();
+            }
+        }
+        WHStatus whStatus = new WHStatus(whid,gid,pid,Time,num);
+        whStatusResitory.save(whStatus);
+
     }
 
     @Override

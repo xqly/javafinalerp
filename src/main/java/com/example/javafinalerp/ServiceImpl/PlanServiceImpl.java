@@ -85,8 +85,11 @@ public class PlanServiceImpl implements PlanService {
             methodResitory.save(method);
         }
     }
+<<<<<<< Updated upstream
     @Override
     public void addplan(ProducePlan plan) {
         producePlanResitory.save(plan);
     }
+=======
+>>>>>>> Stashed changes
 }

@@ -6,7 +6,8 @@ import com.example.javafinalerp.Bean.WHouseLog;
 import java.util.List;
 
 public interface WHouseService {
-    void addWH(WHStatus x);
+//    void addWH(WHStatus x);
+    void addWH(Integer gid,Integer num,Integer shop ,String Time,Integer whid);
     List<WHouseLog> getinLog();
     List<WHouseLog> getlistbyid(Integer x);
     List<WHouseLog> getoutLog();
