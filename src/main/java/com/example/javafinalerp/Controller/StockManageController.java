@@ -4,6 +4,7 @@ import com.example.javafinalerp.Bean.Ordergoods;
 import com.example.javafinalerp.Bean.WHStatus;
 import com.example.javafinalerp.Bean.WHouseLog;
 import com.example.javafinalerp.Service.OrderService;
+
 import com.example.javafinalerp.Service.WHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,6 @@ public class StockManageController {
 
     @Resource
     OrderService orderService;
-
     @RequestMapping("produce_in_stock")
     public String aa(Model model){
         List<WHouseLog> lists = wHouseService.getinLog();
