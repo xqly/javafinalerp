@@ -46,6 +46,10 @@
             count++;
         }
 
+        function fsubmit(obj) {
+            obj.submit();
+        }
+
         function add1() {
             var tbl = document.all.ci2;
             var rows = tbl.rows.length;
@@ -77,6 +81,10 @@
             var tr = btn.parentElement.parentElement;
             var tbl = tr.parentElement;
             tbl.deleteRow(tr.rowIndex-1);
+        }
+
+        function deluser(butt) {
+            $("#uid").attr("value",butt.getAttribute("data-id"));
         }
 
         //-->
@@ -453,6 +461,32 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal-dialog -->
+
+
+    <div class="modal fade" id="deleteSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        确定要处理该订单？处理后不可恢复！
+                    </div>
+                    <form hidden method="post" action="/deal" name="delform" id="delform" >
+                        <input type="" id="uid" name="uid">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                    <button type="button" class="btn btn-xs btn-danger" onclick="fsubmit(document.delform)" >确 定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 </div>
 
 
@@ -517,6 +551,11 @@
                                 <td  th:text="${list.getTime()}"></td><!--收款日期-->
                                 <td  th:text="${list.getPMan()}"></td><!--负责人-->
                                 <td  th:text="${list.getRemark()}"></td><!--备注-->
+                                <td>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource"th:data—id="${list.getPID()}"  th:data-oid="${list.getOID()}" th:data-money="${list.getMoney()}"
+                                            th:data-time="${list.getTime()}" th:data-man="${list.getPMan()}" th:data-,ark="${list.getRemark()}" onclick="deluser(this)">收到款项</button>
+                                </td>
+
                             </tr>
                             </tbody>
                         </table>

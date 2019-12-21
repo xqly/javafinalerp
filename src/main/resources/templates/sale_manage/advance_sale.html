@@ -24,6 +24,11 @@
 
 
     <script type="text/javascript">
+
+        function fsubmit(obj) {
+            obj.submit();
+        }
+
         function alterfun(butt,yourData) {
             $("#uid").attr("value",butt.getAttribute("data-oid"));
             $("#customer5").attr("value",butt.getAttribute("data-cid"));
@@ -93,6 +98,10 @@
             var del = tr.insertCell(3);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
             count++;
+        }
+
+        function fsubmit(obj) {
+            obj.submit();
         }
 
         function add1() {
@@ -181,6 +190,8 @@
                     alert(preorders_json);
                 }
             });
+            alert("已成功增加订单！");
+            window.location.href = "advance_sale";
         }
 
         function xiala() {
