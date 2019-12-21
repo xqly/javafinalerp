@@ -33,14 +33,14 @@
 
                 success(data) {
                     // data为返回值
-                    alert(yourData1);
-                    alert(data[0].name);
+                    //alert(yourData1);
+                    //alert(data[0].name);
                     var table=document.getElementById("ci");
                      for(var i=0;i<data.length;i++) {
                          var row = table.insertRow(table.rows.length);
                          var c1 = row.insertCell(0);
                          c1.innerHTML = data[0].name;
-                         alert(c1.innerHTML);
+                         //alert(c1.innerHTML);
                          var c2 = row.insertCell(1);
                          c2.innerHTML = data[0].num;
                      }
@@ -101,7 +101,7 @@
             };
 
             var burden=JSON.stringify(json);
-            alert(burden);
+            //alert(burden);
             $.ajax({
                 url:"add_burdenSheet",
                 type:"post",
@@ -109,7 +109,7 @@
                 contentType:"application/json",
                 data:burden,
                 success:function(){
-                    alert(burden);
+                    //alert(burden);
                 }
             });
         }
