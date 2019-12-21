@@ -5,9 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.javafinalerp.Bean.Goods;
 import com.example.javafinalerp.Bean.OW;
 import com.example.javafinalerp.Bean.Ordergoods;
+import com.example.javafinalerp.Bean.PayList;
 import com.example.javafinalerp.Resitory.GoodsResitory;
 import com.example.javafinalerp.Resitory.OWResitory;
 import com.example.javafinalerp.Resitory.OrdergoodsResitory;
+import com.example.javafinalerp.Resitory.PayListResitory;
 import com.example.javafinalerp.Service.OrderService;
 import com.example.javafinalerp.tempclass.OWname;
 import com.example.javafinalerp.tempclass.Orderandname;
@@ -22,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.apache.ibatis.ognl.DynamicSubscript.MID;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -33,6 +37,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     GoodsResitory goodsResitory;
+
+    @Autowired
+    PayListResitory payListResitory;
 
     @Resource
     Myfunc myfunc;
@@ -74,6 +81,13 @@ public class OrderServiceImpl implements OrderService {
         order.setOState(0);
         order.setType(0);
         ordergoodsResitory.save(order);
+        Integer oid = iDfunc.ordergoods();
+        PayList payl = new PayList();
+        payl.setOID(oid);
+        payl.setPMan(MID);
+        payl.setTime(myfunc.getDate());
+        payl.setRemark(bz);
+        payl.setMoney(0.0);
         for(int i=0;i<jsonArray.size();i++){
             JSONObject pl = jsonArray.getJSONObject(i);
             String name = pl.getString("mname");
@@ -83,10 +97,17 @@ public class OrderServiceImpl implements OrderService {
             ow.setGID(gid);
             ow.setNum(num);
             ow.setState(1);
+            if(num!=null)
+            payl.setMoney(payl.getMoney()+num*10);
             ow.setTnum(0);
             ow.setOID(iDfunc.ordergoods());
             owResitory.save(ow);
         }
+        System.out.println("123123123123");
+        payl.setState(1);
+        payl.setStateout(1);
+        payListResitory.save(payl);
+
     }
     @Override
     public List<Ordergoods> getorderlistbyid(Integer x) {

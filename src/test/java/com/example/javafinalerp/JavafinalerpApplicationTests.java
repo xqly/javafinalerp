@@ -36,7 +36,7 @@ class JavafinalerpApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println(Myfunc.md5("123456","aaa8d78869f470951332959580424d4bf4f"));
+        orderService.addOrder("{\"customer\":\"\",\"discount\":\"\",\"beizhu\":\"\",\"peiliao\":[{\"mname\":\"竹鼠\",\"mnum\":\"10\"}]}");
     }
 
 }
