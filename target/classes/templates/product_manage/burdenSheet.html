@@ -71,6 +71,26 @@
             }
             return result;
         }
+        function tian() {
+            $.ajax({
+                type: "get", // 以get方式发起请求
+                url: "/xiala", // 将你的请求参数以问号拼接到url中进行参数传递
+
+                success(data) {
+
+                    $("#eq_num").empty();
+                    for(var i=0;i<data.length;i++){
+                        $(".selectpicker").append('<option value="'+data[i].price+'">'+data[i].name+'</option>');
+                    }
+                    // getElementsByClassName(pprice).value = data[i].price;
+                    // $(".pprice").value = data[i].price;
+                    //  $(".psum").value = data[i].price* $(".pnum").value;
+                    $("#eq_num").selectpicker('refresh');
+                    $("#eq_num").selectpicker('render');
+                }
+            })
+
+        }
         function send() {
 
 
@@ -105,12 +125,7 @@
             var tr = tbl.insertRow(rows);
 
             var name = tr.insertCell(0);
-            name.innerHTML = '                                        <td>\n' +
-                '                                            <select  name="mater1" id="mater1" style="width:100%;" >\n' +
-                '                                                <option th:text="请选择原料"></option>\n' +
-                '                                                <option th:each="materials:${materials}" th:value="${materials.MID}" th:text="${materials.MName}" ></option>\n' +
-                '                                            </select>\n' +
-                '                                        </td>';
+            name.innerHTML ='<select class="selectpicker"  id="eq_num" name="eq_num"   onclick="tian()" >    <option >请选择原料</option> </select>';
             var tel = tr.insertCell(1);
             tel.innerHTML = '<input style="width: 70%;" type="number">';
 
@@ -125,12 +140,7 @@
             var tr = tbl.insertRow(rows);
 
             var name = tr.insertCell(0);
-            name.innerHTML = '                                        <td>\n' +
-                '                                            <select  name="mater2" id="mater2" style="width:100%;" >\n' +
-                '                                                <option th:text="请选择原料"></option>\n' +
-                '                                                <option th:each="materials:${materials}" th:value="${materials.MID}" th:text="${materials.MName}" ></option>\n' +
-                '                                            </select>\n' +
-                '                                        </td>';
+           name.innerHTML ='<select class="selectpicker"  id="eq_num" name="eq_num"   onclick="tian()" >    <option >请选择原料</option> </select>';
             var tel = tr.insertCell(1);
             tel.innerHTML = '<input style="width: 70%;" type="number">';
 

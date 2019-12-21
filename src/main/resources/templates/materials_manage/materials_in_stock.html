@@ -126,13 +126,35 @@
                     for(var i=0;i<data.length;i++){
                         $(".selectpicker").append('<option value="'+data[i].price+'">'+data[i].name+'</option>');
                     }
-                    $("#eq_num").selectpicker('refresh');
-                    $("#eq_num").selectpicker('render');
+                    // getElementsByClassName(pprice).value = data[i].price;
+                    // $(".pprice").value = data[i].price;
+                    //  $(".psum").value = data[i].price* $(".pnum").value;
+                     $("#eq_num").selectpicker('refresh');
+                     $("#eq_num").selectpicker('render');
                 }
             })
 
         }
 
+        function tian1() {
+            $.ajax({
+                type: "get", // 以get方式发起请求
+                url: "/xiala2", // 将你的请求参数以问号拼接到url中进行参数传递
+
+                success(data) {
+
+                    $("#eq_num1").empty();
+                    for(var i=0;i<data.length;i++){
+                        $(".selectpicker1").append('<option value="'+data[i].price+'">'+data[i].name+'</option>');
+                    }
+
+                    $("#eq_num1").selectpicker('refresh');
+                    $("#eq_num1").selectpicker('render');
+                    $(".pprice").value = data[i].price;
+                }
+            })
+
+        }
         function add1() {
             var tbl = document.all.ci2;
             var rows = tbl.rows.length;
@@ -149,20 +171,17 @@
             //     <option th:text="请选择原料"></option>\
             //     <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>\
             //     </select>';
-            name.innerHTML ='<select class="selectpicker"  id="eq_num" name="eq_num"   onclick="tian()">  </select>';
+            name.innerHTML ='<select class="selectpicker"  id="eq_num" name="eq_num"   onclick="tian()" >    <option >请选择原料</option> </select>';
             var tel = tr.insertCell(1);
-            tel.innerHTML = '<select  name="stu_profession" style="width:100%;">\n' +
-                '                   <option th:text="请选择原料库"></option>\n' +
-                '                   <option th:each="mhouse:${mhouse}" th:value="${mhouse.MHID}" th:text="${mhouse.MHName}" ></option>\n' +
-                '            </select>';
+            tel.innerHTML = '<select class="selectpicker1"  id="eq_num1" name="eq_num1"   onclick="tian1()" >    <option >请选择原料库</option> </select>';
             var rdo = tr.insertCell(2);
             rdo.innerHTML = '<input type="date" style="width:100%;">';
             var chk = tr.insertCell(3);
-            chk.innerHTML = '<input type="number" value="1" style="width:70%;" id="num1" name="num1" onchange="num_change1()">';
+            chk.innerHTML = '<input type="number" class="pnum" value="1" style="width:70%;" id="num1" name="num1" onchange="num_change1()">';
             var four= tr.insertCell(4);
-            four.innerHTML = '<input type="text" style="width:70%;" id="price1" name="price1" onfocus=this.blur()>';
+            four.innerHTML = '<input type="text" class="pprice" style="width:70%;" id="price1" name="price1" onfocus=this.blur()>';
             var five= tr.insertCell(5);
-            five.innerHTML = '<input type="number" style="width:70%;" id="zong1" name="zong1" onfocus=this.blur()>';
+            five.innerHTML = '<input type="number" class="psum" style="width:70%;" id="zong1" name="zong1" onfocus=this.blur()>';
             var del = tr.insertCell(6);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
             count++;
@@ -181,7 +200,7 @@
             var num1=document.getElementById("num").value;
             document.getElementById("price").value=danjia;
             document.getElementById("zong").value=danjia*num1;
-            alert(keyList)
+
         }
 
         function num_change() {

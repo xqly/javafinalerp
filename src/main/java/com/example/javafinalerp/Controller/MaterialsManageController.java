@@ -69,6 +69,13 @@ public class MaterialsManageController {
         return jsonService.Material();
     }
 
+    @RequestMapping("xiala2")
+    @ResponseBody
+    public JSONArray yourUrl1(Model model) {
+        return jsonService.MHouse();
+    }
+
+
     @RequestMapping("materials_out_stock")
     public String mst(Model model)
     {
