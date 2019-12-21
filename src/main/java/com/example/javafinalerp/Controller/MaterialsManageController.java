@@ -3,6 +3,7 @@ package com.example.javafinalerp.Controller;
 import com.alibaba.fastjson.JSONArray;
 import com.example.javafinalerp.Bean.*;
 import com.example.javafinalerp.Service.BasicManageService;
+import com.example.javafinalerp.Service.JsonService;
 import com.example.javafinalerp.Service.MHouseService;
 import com.example.javafinalerp.Service.PlanService;
 import com.example.javafinalerp.tempclass.Json1;
@@ -27,6 +28,9 @@ public class MaterialsManageController {
 
     @Resource
     PlanService planService;
+
+    @Resource
+    JsonService jsonService;
 
     @Autowired
     MaterialsManageController materialsManageController;
@@ -62,7 +66,7 @@ public class MaterialsManageController {
     @RequestMapping("xiala")
     @ResponseBody
     public JSONArray yourUrl(Model model) {
-        return mHouseService.getmaterials();
+        return jsonService.Material();
     }
 
     @RequestMapping("materials_out_stock")
