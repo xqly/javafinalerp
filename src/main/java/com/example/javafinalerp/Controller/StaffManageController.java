@@ -113,7 +113,7 @@ public class StaffManageController {
                 break;
             }
         }
-        userService.saveUser(user);
+        userService.addUser(user);
         return "redirect:"+URL[user.getUDept()];
     }
 
@@ -135,7 +135,6 @@ public class StaffManageController {
         System.out.println(DeptName);
         System.out.println(user.getUDept());
         User old= userService.getUserByID(user.getU_ID());
-        user.setUPassword(old.getUPassword());
         userService.saveUser(user);
         return "redirect:"+URL[user.getUDept()];
     }

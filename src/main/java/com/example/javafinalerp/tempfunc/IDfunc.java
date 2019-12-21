@@ -4,9 +4,11 @@ package com.example.javafinalerp.tempfunc;
 import com.example.javafinalerp.Bean.Client;
 import com.example.javafinalerp.Bean.MHouseLog;
 import com.example.javafinalerp.Bean.Ordergoods;
+import com.example.javafinalerp.Bean.User;
 import com.example.javafinalerp.Resitory.ClientResitory;
 import com.example.javafinalerp.Resitory.MHouseLogResitory;
 import com.example.javafinalerp.Resitory.OrdergoodsResitory;
+import com.example.javafinalerp.Resitory.UserResitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,20 @@ public class IDfunc {
 
     @Autowired
     MHouseLogResitory mHouseLogResitory;
+
+    @Autowired
+    UserResitory userResitory;
+
+    public Integer user(){
+        List<User> lists = userResitory.findAll();
+        Integer maxx=0;
+        for(int i=0;i<lists.size();i++){
+            if(maxx.intValue()<lists.get(i).getU_ID()){
+                maxx= lists.get(i).getU_ID();
+            }
+        }
+        return maxx;
+    }
 
     public Integer ordergoods(){
         List<Ordergoods> lists = ordergoodsResitory.findAll();
