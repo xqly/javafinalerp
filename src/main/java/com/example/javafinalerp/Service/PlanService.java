@@ -2,6 +2,7 @@ package com.example.javafinalerp.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.example.javafinalerp.Bean.Goods;
 import com.example.javafinalerp.Bean.ProducePlan;
 import com.example.javafinalerp.tempclass.Planandname;
 
@@ -15,4 +16,5 @@ public interface PlanService {
     void delgoodsmethod(Integer dd);
     void delgoodsonemethod(Integer goods,Integer mater);
     JSONArray getmethodjson(Integer gid);
+    List<Goods> getmethodgoods();
 }
