@@ -32,7 +32,10 @@
             $("#sum5").attr("value",butt.getAttribute("data-after"));
             $("#require5").attr("value",butt.getAttribute("data-remark"));
             $("#div1").css("display","block");
-            $("#ci tbody").remove();
+            //$("#ci tbody").remove();
+            $("#ci tr:not(:first)").html("");
+            $("#ci tr:not(:first)").empty("");
+
             $.ajax({
                     type: "get", // 以get方式发起请求
                     url: "/yourUrl/"+yourData, // 将你的请求参数以问号拼接到url中进行参数传递

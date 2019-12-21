@@ -117,6 +117,7 @@
         }
         function tian() {
             var XX=['AA','BB','CC'];
+            var XX
             $("#eq_num").empty();
            // $("#eq_num").empty();//清空select，不然每点一次都循环添加一遍数据越来越多
             for(var i=0;i <XX.length;i++){
@@ -171,6 +172,16 @@
             tbl.deleteRow(tr.rowIndex-1);
         }
 
+        var keyList = eval('${lists}');
+        var arrs=Object.values(keyList);
+
+        var cityMap = {
+            "北京市": "110100",
+            "天津市": "120100",
+            "上海市": "310100",
+        }
+        var arrss=Object.values(cityMap)
+
         function xiala() {
             var  myselect=document.getElementById("mater");
             var index=myselect.selectedIndex ;             // selectedIndex代表的是所选中项的index
@@ -178,7 +189,7 @@
             var num1=document.getElementById("num").value;
             document.getElementById("price").value=danjia;
             document.getElementById("zong").value=danjia*num1;
-            alert(keyList)
+            alert(arrss)
         }
 
         function num_change() {
@@ -190,9 +201,14 @@
             document.getElementById("zong").value=danjia*num1;
         }
 
-        var keyList = eval('${lists}');
+
+
+
+
+
 
     </script>
+
 
 
 </head>
