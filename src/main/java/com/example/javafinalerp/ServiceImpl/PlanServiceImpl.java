@@ -70,14 +70,17 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public void addmethodbyjson(String s) {
-        JSONArray jsonArray = JSON.parseArray(s);
-/*        for(int i=0;i<jsonArray.size();i++){
+        JSONObject jsonObject1 = JSONObject.parseObject(s);
+        Integer gid = jsonObject1.getInteger("goods");
+        JSONArray jsonArray = jsonObject1.getJSONArray("peiliao");
+        System.out.println(s);
+        for(int i=0;i<jsonArray.size();i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             Integer mid = jsonObject.getInteger("mid");
             Integer num = jsonObject.getInteger("num");
             Method method = new Method(gid,mid,num);
             methodResitory.save(method);
-        }*/
+        }
     }
     @Override
     public void addplan(ProducePlan plan) {
