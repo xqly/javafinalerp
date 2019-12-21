@@ -124,7 +124,7 @@
 
                     $("#eq_num").empty();
                     for(var i=0;i<data.length;i++){
-                        $(".selectpicker").append('<option>'+data[i].name+'</option>');
+                        $(".selectpicker").append('<option value="'+data[i].price+'">'+data[i].name+'</option>');
                     }
                     $("#eq_num").selectpicker('refresh');
                     $("#eq_num").selectpicker('render');
