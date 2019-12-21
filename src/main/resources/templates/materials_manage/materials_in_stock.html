@@ -56,7 +56,7 @@
             //     bisSuenDocuSacertCont : bisSuenDocuSacertCont
             // };
             var materials_json=JSON.stringify(bisSuenDocuSacertCont);
-           // alert(materials_json);
+            // alert(materials_json);
             $.ajax({
                 url:"add_realmaterials",
                 type:"post",
@@ -116,18 +116,21 @@
             count2++;
         }
         function tian() {
-            var XX=['AA','BB','CC'];
-            $("#eq_num").empty();
-           // $("#eq_num").empty();//清空select，不然每点一次都循环添加一遍数据越来越多
-            for(var i=0;i <XX.length;i++){
-                $(".selectpicker").append('<option>'+XX[i]+'</option>');
-            };
-            // 缺一不可
+            $.ajax({
+                type: "get", // 以get方式发起请求
+                url: "/xiala", // 将你的请求参数以问号拼接到url中进行参数传递
 
-            $("#eq_num").selectpicker('refresh');
-            $("#eq_num").selectpicker('render');
-            // $("#eq_num").selectpicker('refresh');
-            // $("#eq_num").selectpicker('render');
+                success(data) {
+
+                    $("#eq_num").empty();
+                    for(var i=0;i<data.length;i++){
+                        $(".selectpicker").append('<option>'+data[i].name+'</option>');
+                    }
+                    $("#eq_num").selectpicker('refresh');
+                    $("#eq_num").selectpicker('render');
+                }
+            })
+
         }
 
         function add1() {
@@ -146,12 +149,12 @@
             //     <option th:text="请选择原料"></option>\
             //     <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>\
             //     </select>';
-            name.innerHTML ='<select class="selectpicker"  id="eq_num" name="eq_num" data-actions-box="true"  data-live-search="true" data-live-search-placeholder="请选择···"  onclick="tian()">  </select>';
+            name.innerHTML ='<select class="selectpicker"  id="eq_num" name="eq_num"   onclick="tian()">  </select>';
             var tel = tr.insertCell(1);
             tel.innerHTML = '<select  name="stu_profession" style="width:100%;">\n' +
-                '                                                <option th:text="请选择原料库"></option>\n' +
-                '                                                <option th:each="mhouse:${mhouse}" th:value="${mhouse.MHID}" th:text="${mhouse.MHName}" ></option>\n' +
-                '                                            </select>';
+                '                   <option th:text="请选择原料库"></option>\n' +
+                '                   <option th:each="mhouse:${mhouse}" th:value="${mhouse.MHID}" th:text="${mhouse.MHName}" ></option>\n' +
+                '            </select>';
             var rdo = tr.insertCell(2);
             rdo.innerHTML = '<input type="date" style="width:100%;">';
             var chk = tr.insertCell(3);
@@ -374,7 +377,7 @@
                             <a href="money_out">退款出款单</a>
                         </li>
                         <li>
-                            <li>
+                        <li>
                             <a href="money_in">收入单</a>
                         </li>
                         <li>
