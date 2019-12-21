@@ -565,12 +565,12 @@
                             <tr th:each="log: ${logs}">
                                 <td scope="row" th:text="${logStat.index+1}"></td>
                                 <td th:text="${log.getMHLID()}"></td>
-                                <td th:text="${log.getMHID()}"></td>
-                                <td th:text="${log.getOper()}"></td>
-                                <td th:text="${log.getMid()}"></td>
+                                <td th:text="${log.namewh}"></td>
+                                <td th:text="${log.getNameoper()}"></td>
+                                <td th:text="${log.namem}"></td>
                                 <td th:text="${log.getMPID()}"></td>
                                 <td th:text="${log.getMLNum()}"></td>
-                                <td th:text="${log.getMLMan()}"></td>
+                                <td th:text="${log.nameman1}"></td>
                                 <td th:text="${log.getMDate()}"></td>
                             </tr>
                             </tbody>

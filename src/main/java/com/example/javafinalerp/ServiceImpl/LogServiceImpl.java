@@ -9,9 +9,12 @@ import com.example.javafinalerp.Resitory.WHouseLogResitory;
 import com.example.javafinalerp.Service.LogService;
 import com.example.javafinalerp.tempclass.MaterialLogandname;
 import com.example.javafinalerp.tempclass.Materialsandname;
+import com.example.javafinalerp.tempclass.Mhlandname;
+import com.example.javafinalerp.tempfunc.Changefunc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,25 +32,19 @@ public class LogServiceImpl implements LogService {
     @Autowired
     MPResitory mpResitory;
 
+    @Resource
+    Changefunc changefunc;
+
     @Override
     public List<WHouseLog> getWHLList() {
         return wHouseLogResitory.findAll();
     }
 
     @Override
-    public List<MaterialLogandname> getMHLListandname() {
+    public List<Mhlandname> getMHLListandname() {
         List<MHouseLog> lists = mHouseLogResitory.findAll();
-        List<MaterialLogandname> logs = new ArrayList<>();
-        List<MP> mp = mpResitory.findAll();
-        Map<Integer,Integer> m1 = new HashMap<>();
-        for(int i=0;i<mp.size();i++){
-            m1.put(mp.get(i).getMPID(),mp.get(i).getMID());
-        }
-        for(int i=0;i<lists.size();i++){
-            MaterialLogandname temp = new MaterialLogandname(lists.get(i));
-            temp.setMid(m1.get(temp.getMPID()));
-            logs.add(temp);
-        }
+
+        List<Mhlandname> logs = changefunc.MHL(lists);
         return logs;
     }
 
