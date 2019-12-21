@@ -4,6 +4,7 @@ import com.example.javafinalerp.Bean.MHStatus;
 
 public class Mhsname extends MHStatus {
     String mname;
+    String nhname;
     public Mhsname(MHStatus x){
         this.setMHNum(x.getMHNum());
         this.setMHID(x.getMHID());
@@ -19,5 +20,13 @@ public class Mhsname extends MHStatus {
 
     public void setMname(String mname) {
         this.mname = mname;
+    }
+
+    public String getNhname() {
+        return nhname;
+    }
+
+    public void setNhname(String nhname) {
+        this.nhname = nhname;
     }
 }

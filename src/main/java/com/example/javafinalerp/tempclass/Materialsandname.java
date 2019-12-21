@@ -7,6 +7,7 @@ public class Materialsandname extends MHStatus {
     private String name;
     private Integer expdate;
     private Double MPrice;
+    private String mhname;
 
     public Materialsandname(MHStatus x){
         this.setMHID(x.getMHID());
@@ -15,6 +16,14 @@ public class Materialsandname extends MHStatus {
         this.setMHSID(x.getMHSID());
         this.setMHTime(x.getMHTime());
         this.setMID(x.getMID());
+    }
+
+    public String getMhname() {
+        return mhname;
+    }
+
+    public void setMhname(String mhname) {
+        this.mhname = mhname;
     }
 
     public Double getMPrice() {
