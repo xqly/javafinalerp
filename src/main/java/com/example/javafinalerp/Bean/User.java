@@ -16,6 +16,19 @@ public class User {
     private Integer UDept;
     private Double USal;
     private String UMail;
+<<<<<<< HEAD
+=======
+    private String UPicURL;
+    private String URole;
+
+    public String getURole() {
+        return URole;
+    }
+
+    public void setURole(String UName) {
+        this.URole = URole;
+    }
+>>>>>>> origin/master
 
     public Integer getU_ID() {
         return U_ID;
