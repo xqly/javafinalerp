@@ -118,7 +118,7 @@
         function tian() {
             $.ajax({
                 type: "get", // 以get方式发起请求
-                url: "/xiala", // 将你的请求参数以问号拼接到url中进行参数传递
+                url: "/sp", // 将你的请求参数以问号拼接到url中进行参数传递
 
                 success(data) {
 
@@ -179,9 +179,9 @@
             var chk = tr.insertCell(3);
             chk.innerHTML = '<input type="number" class="pnum" value="1" style="width:70%;" id="num1" name="num1" onchange="num_change1()">';
             var four= tr.insertCell(4);
-            four.innerHTML = '<input type="text" class="pprice" style="width:70%;" id="price1" name="price1" onfocus=this.blur()>';
+            four.innerHTML = '<input type="number" class="pprice" value="20" style="width:70%;" id="price1" name="price1" onfocus=this.blur()>';
             var five= tr.insertCell(5);
-            five.innerHTML = '<input type="number" class="psum" style="width:70%;" id="zong1" name="zong1" onfocus=this.blur()>';
+            five.innerHTML = '<input type="number" class="psum" value="20" style="width:70%;" id="zong1" name="zong1" onfocus=this.blur()>';
             var del = tr.insertCell(6);
             del.innerHTML = '<input type="button" onclick="del(this)" value="删除">';
             count++;
