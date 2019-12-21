@@ -288,6 +288,9 @@
                             <a href="product_out_stock">商品出库</a>
                         </li>
                         <li>
+                            <a href="product_in_home">仓库存储信息</a>
+                        </li>
+                        <li>
                             <a href="productDestroy">商品销毁</a>
                         </li>
                     </ul>
@@ -349,9 +352,7 @@
                         <li>
                             <a href="add_stock">仓库信息</a>
                         </li>
-                        <li>
-                            <a href="product_in_home">仓库存储信息</a>
-                        </li>
+
                         <li>
                             <a href="add_product_acre">生产车间信息</a>
                         </li>
@@ -467,7 +468,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="gridSystemModalLabel">配料单</h4>
-                    <button class="btn btn-yellow btn-xs" onclick="add()" data-toggle="modal"  style="width: 10%;height:40px;" >添加配料项</button>
+                   
                     <br><br>
                     <form style="display: inline" method="post" action="/query_by_id">
                     <label >商品编号：</label>
@@ -584,15 +585,15 @@
                             </thead>
                             <tbody>
 
-                            <tr th:each="sheet : ${sheets}">
-                                <td scope="row" th:text="${sheetStat.index+1}" id="xqly"></td>
+                            <tr th:each="methodgoods : ${methodgoods}">
+                                <td scope="row" th:text="${methodgoodsStat.index+1}" id="xqly"></td>
 
-                                <td  th:text="${sheet.getG_SID()}"></td>
-                                <td  th:text="${sheet.getG_NAME()}"></td>
+                                <td  th:text="${methodgoods.getG_ID()}"></td>
+                                <td  th:text="${methodgoods.getGName()}"></td>
                                 <td>
                                     <!--<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${sheet.getG_SID()}" >查看</button>-->
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-gid="${sheet.getG_SID()}" th:data-gname="${sheet.getG_NAME()}"   onclick='alterfun(this,this.getAttribute("data-gid"))'>查看</button>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${sheet.getG_SID()}" onclick="delsheet(this)">删除</button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource" th:data-gid="${methodgoods.getG_ID()}" th:data-gname="${methodgoods.getGName()}"   onclick='alterfun(this,this.getAttribute("data-gid"))'>查看</button>
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource" th:data-id="${methodgoods.getG_ID()}" onclick="delsheet(this)">删除</button>
                                 </td>
                             </tr>
                             </tbody>

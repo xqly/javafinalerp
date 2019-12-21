@@ -32,11 +32,11 @@ public class ProductManageController {
     public String bud5(Model model){
         List<Materials> materials = basicManageService.getmaterlist();
         List<Goods> goods=basicManageService.getunmethodgoods();
-        List<Planandname> lists = planService.getunplannamelist();
+     //   List<Planandname> lists = planService.getunplannamelist();
         List<Goods> methodgoods = planService.getmethodgoods();//有配料的商品
         model.addAttribute("materials",materials);
         model.addAttribute("goods",goods);
-        model.addAttribute("lists",lists);
+        model.addAttribute("methodgoods",methodgoods);
         return "product_manage/burdenSheet";
     }
 
