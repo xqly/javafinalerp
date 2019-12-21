@@ -12,4 +12,7 @@ public interface WHouseResitroy extends JpaRepository<WHouse,Integer> {
 
     @Query("select w from WHouse w where w.WName=?1")
     List<WHouse> findbyname(String x);
+
+    @Query("select w from WHouse w ")
+    List<WHouse> findall();
 }

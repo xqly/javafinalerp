@@ -2,6 +2,7 @@ package com.example.javafinalerp.Controller;
 
 import com.example.javafinalerp.Bean.Ordergoods;
 import com.example.javafinalerp.Bean.WHStatus;
+import com.example.javafinalerp.Bean.WHouse;
 import com.example.javafinalerp.Bean.WHouseLog;
 import com.example.javafinalerp.Service.OrderService;
 
@@ -30,7 +31,9 @@ public class StockManageController {
     @RequestMapping("produce_in_stock")
     public String aa(Model model){
         List<WHouseLog> lists = wHouseService.getinLog();
+        List<WHouse> lists1= wHouseService.getwhbyid();
         model.addAttribute("lists",lists);
+        model.addAttribute("lists1",lists1);
         return "stock_manage/produce_in_stock";
     }
 

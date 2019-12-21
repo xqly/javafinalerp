@@ -28,6 +28,9 @@ public class WHouseServiceImpl implements WHouseService {
     WHouseLogResitory wHouseLogResitory;
 
     @Autowired
+    WHouseResitroy wHouseResitroy;
+
+    @Autowired
     OWResitory owResitory;
 
     @Resource
@@ -105,5 +108,9 @@ public class WHouseServiceImpl implements WHouseService {
     @Override
     public void DestroybySID(Integer x) {
         whStatusResitory.deleteById(x);
+    }
+
+    public List<WHouse> getwhbyid(){
+        return wHouseResitroy.findAll();
     }
 }

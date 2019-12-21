@@ -349,8 +349,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">仓库编号：</label>
-                                <select class=" col-xs-8 input-sm duiqi ">
-                                    <option class="" id="sKnot0" name="sKnot0" placeholder=""></option>
+                                <select  name="mater" id="mater"  class="col-xs-8">
+                                    <option th:text="请选择仓库"></option>
+                                    <option th:each="list1:${list1}" th:value="${list1.WID}" th:text="${list1.WName}" ></option>
                                 </select>
                             </div>
                             <div class="form-group">

@@ -69,6 +69,12 @@ public class MaterialsManageController {
         return jsonService.Material();
     }
 
+    @RequestMapping("sp")
+    @ResponseBody
+    public JSONArray yourUrl2(Model model) {
+        return jsonService.Goods();
+    }
+
     @RequestMapping("xiala2")
     @ResponseBody
     public JSONArray yourUrl1(Model model) {
