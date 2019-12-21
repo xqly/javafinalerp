@@ -47,7 +47,15 @@ public class StaffManageController {
         temp[6]="生产计划部";
         URL[6]="add_plan_people";
     }
-
+/*
+    @RequestMapping("role_manage")
+    public String afps(Model model)
+    {
+        List<User> users = userService.getListByDept(1);
+        model.addAttribute("users",users);
+        return "role_manage";
+    }
+*/
     @RequestMapping("add_financial_people")
     public String afp(Model model)
     {
@@ -113,7 +121,7 @@ public class StaffManageController {
                 break;
             }
         }
-        userService.saveUser(user);
+        userService.addUser(user);
         return "redirect:"+URL[user.getUDept()];
     }
 
@@ -135,7 +143,6 @@ public class StaffManageController {
         System.out.println(DeptName);
         System.out.println(user.getUDept());
         User old= userService.getUserByID(user.getU_ID());
-        user.setUPassword(old.getUPassword());
         userService.saveUser(user);
         return "redirect:"+URL[user.getUDept()];
     }

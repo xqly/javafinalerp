@@ -11,13 +11,24 @@ public class User {
     @GeneratedValue
     private Integer U_ID;
     private String UName;
-    private String UPassword;
     private String UTelephone;
     private String UStartTime;
     private Integer UDept;
     private Double USal;
     private String UMail;
+<<<<<<< HEAD
+=======
     private String UPicURL;
+    private String URole;
+
+    public String getURole() {
+        return URole;
+    }
+
+    public void setURole(String UName) {
+        this.URole = URole;
+    }
+>>>>>>> origin/master
 
     public Integer getU_ID() {
         return U_ID;
@@ -73,21 +84,5 @@ public class User {
 
     public void setUMail(String UMail) {
         this.UMail = UMail;
-    }
-
-    public String getUPicURL() {
-        return UPicURL;
-    }
-
-    public void setUPicURL(String UPicURL) {
-        this.UPicURL = UPicURL;
-    }
-
-    public String getUPassword() {
-        return UPassword;
-    }
-
-    public void setUPassword(String UPassword) {
-        this.UPassword = UPassword;
     }
 }

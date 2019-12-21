@@ -2,6 +2,8 @@ package com.example.javafinalerp.tempfunc;
 
 import com.example.javafinalerp.Bean.User;
 import com.example.javafinalerp.Resitory.UserResitory;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +11,27 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class Myfunc {
+
+    public static String createSalt(){
+        return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+
+    public static final String md5(String password, String salt){
+        //加密方式
+        String hashAlgorithmName = "MD5";
+        //盐：为了即使相同的密码不同的盐加密后的结果也不同
+        ByteSource byteSalt = ByteSource.Util.bytes(salt);
+        //密码
+        Object source = password;
+        //加密次数
+        int hashIterations = 2;
+        SimpleHash result = new SimpleHash(hashAlgorithmName, source, byteSalt, hashIterations);
+        return result.toString();
+    }
 
 
     private static Integer TimetoI(String x){

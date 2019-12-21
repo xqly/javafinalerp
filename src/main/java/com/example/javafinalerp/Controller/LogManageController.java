@@ -28,6 +28,12 @@ public class LogManageController {
     public String ac2(){
         return "log_manage/chejian_in_Log";
     }
+
+    @RequestMapping("role_manage")
+    public String ac(){
+        return "role_manage";
+    }
+
     @RequestMapping("chejian_out_Log")
     public String ac3(){
         return "log_manage/chejian_out_Log";

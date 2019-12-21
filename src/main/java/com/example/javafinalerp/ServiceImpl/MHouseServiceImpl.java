@@ -115,4 +115,17 @@ public class MHouseServiceImpl implements MHouseService {
         }
         return lists;
     }
+
+    @Override
+    public JSONArray getmaterials() {
+        List<Materials> list = materialsResitory.findAll();
+        JSONArray jsonArray = new JSONArray();
+        for(int i=0;i<list.size();i++){
+            JSONObject temp = new JSONObject();
+            temp.put("name",list.get(i).getMName());
+            temp.put("price",list.get(i).getMPrice());
+            jsonArray.add(temp);
+        }
+        return jsonArray;
+    }
 }

@@ -8,9 +8,6 @@ import java.util.List;
 
 public interface UserResitory extends JpaRepository<User,Integer> {
 
-    @Query("select u from User u where u.U_ID=?1 and u.UPassword=?2")
-    User loginFind(Integer x,String y);
-
     @Query("select u from User u where u.UDept=?1")
     List<User> gdeptList(Integer x);
 

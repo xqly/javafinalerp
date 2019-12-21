@@ -34,14 +34,14 @@ public class LoginController {
         String msg = "";
         if (exception != null) {
             if (UnknownAccountException.class.getName().equals(exception)) {
-                System.out.println("UnknownAccountException -- > 账号不存在：");
-                msg = "UnknownAccountException -- > 账号不存在：";
+                System.out.println("账号不存在：");
+                msg = "账号不存在：";
             } else if (IncorrectCredentialsException.class.getName().equals(exception)) {
-                System.out.println("IncorrectCredentialsException -- > 密码不正确：");
-                msg = "IncorrectCredentialsException -- > 密码不正确：";
+                System.out.println("密码不正确：");
+                msg = "密码不正确：";
             } else if ("kaptchaValidateFailed".equals(exception)) {
-                System.out.println("kaptchaValidateFailed -- > 验证码错误");
-                msg = "kaptchaValidateFailed -- > 验证码错误";
+                System.out.println("验证码错误");
+                msg = "验证码错误";
             } else {
                 msg = "else >> "+exception;
                 System.out.println("else -- >" + exception);
