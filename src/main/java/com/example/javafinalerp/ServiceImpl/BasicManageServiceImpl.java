@@ -3,9 +3,12 @@ package com.example.javafinalerp.ServiceImpl;
 import com.example.javafinalerp.Bean.*;
 import com.example.javafinalerp.Resitory.*;
 import com.example.javafinalerp.Service.BasicManageService;
+import com.example.javafinalerp.tempclass.Mhsname;
+import com.example.javafinalerp.tempfunc.Changefunc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,9 +74,14 @@ public class BasicManageServiceImpl implements BasicManageService {
     @Autowired
     MHStatusResitory mhStatusResitory;
 
+    @Resource
+    Changefunc changefunc;
+
     @Override
-    public List<MHStatus> gethslist() {
-        return mhStatusResitory.findAll();
+    public List<Mhsname> gethslist() {
+        List<MHStatus> list = mhStatusResitory.findAll();
+        List<Mhsname> answ = changefunc.MHS(list);
+        return answ;
     }
 
     @Override

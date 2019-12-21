@@ -1,6 +1,7 @@
 package com.example.javafinalerp.Service;
 
 import com.example.javafinalerp.Bean.*;
+import com.example.javafinalerp.tempclass.Mhsname;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface BasicManageService {
     void addmhouse(MHouse mhouse);
     void delmhousebyid(Integer x);
 
-    List<MHStatus> gethslist();
+    List<Mhsname> gethslist();
     List<MHStatus> getmhsbyhid(Integer x);
     List<MHStatus> getmhsbymid(Integer x);
     List<MHStatus> getmhsbypid(Integer x);
