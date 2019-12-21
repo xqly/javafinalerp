@@ -10,7 +10,7 @@ public interface LogService {
     List<WHouseLog> getWHLList();
     List<MaterialLogandname> getMHLListandname();
     List<WHouseLog> getWHLListByHID(Integer x);
-    List<MHouseLog> getMHLListByHID(Integer x);
-    List<MHouseLog> getMHLListByID(Integer x);
+    List<MaterialLogandname> getMHLListByHID(Integer x);
+    List<MaterialLogandname> getMHLListByID(Integer x);
     List<WHouseLog> getWHLListByID(Integer x);
 }

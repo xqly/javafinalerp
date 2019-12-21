@@ -32,7 +32,6 @@ public class ProductManageController {
         List<Materials> materials = basicManageService.getmaterlist();
         List<Goods> goods=basicManageService.getunmethodgoods();
         List<Planandname> lists = planService.getunplannamelist();  //这改一下 应该是配methodname
-
         model.addAttribute("materials",materials);
         model.addAttribute("goods",goods);
         model.addAttribute("lists",lists);

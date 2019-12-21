@@ -11,9 +11,12 @@ import com.example.javafinalerp.Resitory.OrdergoodsResitory;
 import com.example.javafinalerp.Service.OrderService;
 import com.example.javafinalerp.tempclass.OWname;
 import com.example.javafinalerp.tempclass.Orderandname;
+import com.example.javafinalerp.tempfunc.IDfunc;
+import com.example.javafinalerp.tempfunc.Myfunc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +34,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     GoodsResitory goodsResitory;
 
+    @Resource
+    Myfunc myfunc;
+
+    @Resource
+    IDfunc iDfunc;
+
     @Override
     public List<Orderandname> getorderlist() {
         List<Orderandname> lists = new ArrayList<>();
@@ -43,10 +52,42 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addOrder() {
-        //xqly
+    public void addOrder(String x) {
+        List<Goods> list = goodsResitory.findAll();
+        Map<String,Integer> m1= new HashMap<>();
+        for(int i=0;i<list.size();i++){
+            m1.put(list.get(i).getGName(),list.get(i).getG_ID());
+        }
+        JSONObject jsonObject = JSONObject.parseObject(x);
+        Integer cust = jsonObject.getInteger("customer");
+        Double discount = jsonObject.getDouble("discount");
+        String bz = jsonObject.getString("beizhu");
+        JSONArray jsonArray = jsonObject.getJSONArray("peiliao");
+        Ordergoods order = new Ordergoods();
+        if(discount!=null)
+            order.setDiscount(discount);
+        else order.setDiscount(1.0);
+        order.setCID(cust);
+        order.setOTime(myfunc.getDate());
+        order.setOMID(1);//xqly
+        order.setRemark(bz);
+        order.setOState(0);
+        order.setType(0);
+        ordergoodsResitory.save(order);
+        for(int i=0;i<jsonArray.size();i++){
+            JSONObject pl = jsonArray.getJSONObject(i);
+            String name = pl.getString("mname");
+            Integer num = pl.getInteger("mnum");
+            Integer gid = m1.get(name);
+            OW ow = new OW();
+            ow.setGID(gid);
+            ow.setNum(num);
+            ow.setState(1);
+            ow.setTnum(0);
+            ow.setOID(iDfunc.ordergoods());
+            owResitory.save(ow);
+        }
     }
-
     @Override
     public List<Ordergoods> getorderlistbyid(Integer x) {
         return ordergoodsResitory.findlistbyid(0,x);
@@ -70,8 +111,44 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addpreorder() {
-        //xqly
+    public void addpreorder(String x) {
+        System.out.println(x);
+        List<Goods> list = goodsResitory.findAll();
+        Map<String,Integer> m1= new HashMap<>();
+        for(int i=0;i<list.size();i++){
+            m1.put(list.get(i).getGName(),list.get(i).getG_ID());
+        }
+        JSONObject jsonObject = JSONObject.parseObject(x);
+        Integer cust = jsonObject.getInteger("customer");
+        Double discount = jsonObject.getDouble("discount");
+        String tihuo = jsonObject.getString("tihuo_time");
+        String bz = jsonObject.getString("beizhu");
+        JSONArray pl = jsonObject.getJSONArray("peiliao");
+        Ordergoods order = new Ordergoods();
+        if(discount!=null)
+            order.setDiscount(discount);
+        else order.setDiscount(1.0);
+        order.setCID(cust);
+        order.setOTime(myfunc.getDate());
+        order.setOLTime(tihuo);
+        order.setOMID(1);//xqly
+        order.setRemark(bz);
+        order.setOState(0);
+        order.setType(1);
+        ordergoodsResitory.save(order);
+        for(int i=0;i<pl.size();i++){
+            JSONObject ob = pl.getJSONObject(i);
+            String mname = ob.getString("mname");
+            Integer mnum = ob.getInteger("mnum");
+            Integer gid = m1.get(mname);
+            OW ow = new OW();
+            ow.setGID(gid);
+            ow.setNum(mnum);
+            ow.setState(1);
+            ow.setTnum(0);
+            ow.setOID(iDfunc.ordergoods());
+            owResitory.save(ow);
+        }
     }
 
     @Override
@@ -133,5 +210,30 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Ordergoods> getorderlistsbystate(Integer x) {
         return ordergoodsResitory.findlistsbytypeandstate(0,x);
+    }
+
+    @Override
+    public void tuiorder(String x) {
+        List<Goods> list = goodsResitory.findAll();
+        Map<String,Integer> m1= new HashMap<>();
+        for(int i=0;i<list.size();i++){
+            m1.put(list.get(i).getGName(),list.get(i).getG_ID());
+        }
+        JSONObject jsonObject = JSONObject.parseObject(x);
+        Integer oid = jsonObject.getInteger("dingdan");
+        JSONArray pl = jsonObject.getJSONArray("peiliao");
+        for(int i=0;i<pl.size();i++){
+            JSONObject ob = pl.getJSONObject(i);
+            String name = ob.getString("mname");
+            Integer num = ob.getInteger("mnum");
+            Integer gid = m1.get(name);
+            OW ow = owResitory.findbyoidandgid(oid,gid);
+            ow.setState(2);
+            ow.setTnum(ow.getTnum()+num);
+            if(ow.getTnum().intValue()>ow.getNum().intValue()){
+                ow.setTnum(ow.getNum());
+            }
+            owResitory.save(ow);
+        }
     }
 }

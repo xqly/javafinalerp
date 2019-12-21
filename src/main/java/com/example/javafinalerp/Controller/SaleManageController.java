@@ -12,11 +12,7 @@ import com.example.javafinalerp.Service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.example.javafinalerp.tempclass.Orderandname;
 import com.example.javafinalerp.tempclass.OWname;
 import javax.annotation.Resource;
@@ -123,23 +119,26 @@ public class SaleManageController {
     }
 
     @RequestMapping("add_realorders")
-    public String amt2(@RequestParam("orders_json") String x){
-        orderService.addOrder();
-        //xqly
+    @ResponseBody
+    public String amt2(@RequestBody String x){
+        System.out.println(x);
+        System.out.println(123);
+        orderService.addOrder(x);
         return "redirect:now__sale";
     }
 
     @RequestMapping("add_preorders")
-    public String amt(@RequestParam("preorders_json") String x){
-        orderService.addpreorder();
-        //xqly
+    @ResponseBody
+    public String amt(@RequestBody String x){
+        orderService.addpreorder(x);
         return "redirect:advance_sale";
     }
 
     @RequestMapping("re_orders")
-    public String amt12(@RequestParam("reo_json") String x){
-        //这里是退货的接口通过订单号
-        //xqly
+    @ResponseBody
+    public String amt12(@RequestBody String x){
+        System.out.println(x);
+
         return "redirect:re_goods";
     }
 

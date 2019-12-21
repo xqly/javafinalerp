@@ -35,7 +35,7 @@ class JavafinalerpApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println(orderService.getordergoodsjson(1).toString());
+        orderService.addOrder("{\"customer\":\"123\",\"discount\":\"\",\"beizhu\":\"yao\",\"peiliao\":[{\"mname\":\"料酒\",\"mnum\":\"10\"}]}");
     }
 
 }
