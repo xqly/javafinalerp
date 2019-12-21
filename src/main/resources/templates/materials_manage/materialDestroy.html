@@ -171,6 +171,9 @@
                             <a href="product_out_stock">商品出库</a>
                         </li>
                         <li>
+                            <a href="product_in_home">仓库存储信息</a>
+                        </li>
+                        <li>
                             <a href="productDestroy">商品销毁</a>
                         </li>
                     </ul>
@@ -206,7 +209,11 @@
                             <a href="money_out">退款出款单</a>
                         </li>
                         <li>
+                            <li>
                             <a href="money_in">收入单</a>
+                        </li>
+                        <li>
+                            <a href="account_wait">待处理订单</a>
                         </li>
                     </ul>
                 </li>
@@ -227,9 +234,7 @@
                         <li>
                             <a href="add_stock">仓库信息</a>
                         </li>
-                        <li>
-                            <a href="product_in_home">仓库存储信息</a>
-                        </li>
+
                         <li>
                             <a href="add_product_acre">生产车间信息</a>
                         </li>
@@ -375,7 +380,7 @@
                                 <th>#</th>
                                 <th>原料编号</th>
                                 <th>原料名称</th>
-                                <th>原料库编号</th>
+                                <th>原料库名称</th>
                                 <th>原料批次号</th>
                                 <th>生产日期</th>
                                 <th>保质期</th>
@@ -388,7 +393,7 @@
                                 <td scope="row" th:text="${listsStat.index+1}" id="xqly"></td>
                                 <td th:text="${lists.MID}"></td>
                                 <td  th:text="${lists.name}"></td>
-                                <td  th:text="${lists.MHID}"></td>
+                                <td  th:text="${lists.mhname}"></td>
                                 <td  th:text="${lists.MHPID}"></td>  <!--批次号-->
                                 <td  th:text="${lists.MHTime}"></td><!--生产日期-->
                                 <td  th:text="${lists.expdate}"></td><!--保质期-->

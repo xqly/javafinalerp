@@ -204,9 +204,14 @@
                             <a href="money_out">退款出款单</a>
                         </li>
                         <li>
+                            <li>
                             <a href="money_in">收入单</a>
                         </li>
+                        <li>
+                            <a href="account_wait">待处理订单</a>
+                        </li>
                     </ul>
+
                 </li>
                 <li>
                     <a href="#" class="waves-effect">
@@ -501,7 +506,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>原料库编号</th>
-                                <th>原料编号</th>
+                                <th>原料名称</th>
                                 <th>生产日期</th>
                                 <th>原料批次号</th>
                                 <th>数量(单位)</th>
@@ -512,7 +517,7 @@
                             <tr th:each="mh:${mhs}">
                                 <td th:text="${mhStat.index+1}"></td>
                                 <td th:text="${mh.getMHID()}"></td>
-                                <td th:text="${mh.getMID()}"></td>
+                                <td th:text="${mh.getMname()}"></td>
                                 <td th:text="${mh.getMHTime()}"></td>
                                 <td th:text="${mh.getMHPID()}"></td>
                                 <td th:text="${mh.getMHNum()}"></td>

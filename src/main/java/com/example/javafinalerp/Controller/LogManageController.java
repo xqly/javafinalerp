@@ -4,6 +4,7 @@ import com.example.javafinalerp.Bean.MHouseLog;
 import com.example.javafinalerp.Bean.WHouseLog;
 import com.example.javafinalerp.Service.LogService;
 import com.example.javafinalerp.tempclass.MaterialLogandname;
+import com.example.javafinalerp.tempclass.Mhlandname;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +35,7 @@ public class LogManageController {
     @RequestMapping("materialsLog")
     public String ac4(Model model)
     {
-        List<MaterialLogandname> logs = logService.getMHLListandname();
+        List<Mhlandname> logs = logService.getMHLListandname();
         model.addAttribute("logs",logs);
         return "log_manage/materialsLog";
     }

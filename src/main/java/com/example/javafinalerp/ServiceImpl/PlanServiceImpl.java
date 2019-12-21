@@ -108,4 +108,21 @@ public class PlanServiceImpl implements PlanService {
     public JSONArray getmethodjson(Integer gid) {
         return null;
     }
+
+    @Override
+    public List<Goods> getmethodgoods() {
+        List<Method> list = methodResitory.findAll();
+        List<Goods> gl = goodsResitory.findAll();
+        List<Goods> answ= new ArrayList<>();
+        for(int i=0;i<gl.size();i++){
+            Goods gs = gl.get(i);
+            for(int j=0;j<list.size();j++){
+                if(gs.getG_ID().equals(list.get(j).getGID())){
+                    answ.add(gs);
+                    break;
+                }
+            }
+        }
+        return answ;
+    }
 }

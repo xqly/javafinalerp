@@ -2,6 +2,7 @@
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -177,6 +178,7 @@
             var num1=document.getElementById("num").value;
             document.getElementById("price").value=danjia;
             document.getElementById("zong").value=danjia*num1;
+            alert(keyList)
         }
 
         function num_change() {
@@ -187,7 +189,12 @@
             //      document.getElementById("price").value=danjia;
             document.getElementById("zong").value=danjia*num1;
         }
+
+        var keyList = eval('${lists}');
+
     </script>
+
+
 </head>
 
 <body>
@@ -329,6 +336,9 @@
                             <a href="product_out_stock">商品出库</a>
                         </li>
                         <li>
+                            <a href="product_in_home">仓库存储信息</a>
+                        </li>
+                        <li>
                             <a href="productDestroy">商品销毁</a>
                         </li>
                     </ul>
@@ -364,9 +374,14 @@
                             <a href="money_out">退款出款单</a>
                         </li>
                         <li>
+                            <li>
                             <a href="money_in">收入单</a>
                         </li>
+                        <li>
+                            <a href="account_wait">待处理订单</a>
+                        </li>
                     </ul>
+
                 </li>
                 <li>
                     <a href="#" class="waves-effect">
@@ -386,9 +401,7 @@
                         <li>
                             <a href="add_stock">仓库信息</a>
                         </li>
-                        <li>
-                            <a href="product_in_home">仓库存储信息</a>
-                        </li>
+
                         <li>
                             <a href="add_product_acre">生产车间信息</a>
                         </li>

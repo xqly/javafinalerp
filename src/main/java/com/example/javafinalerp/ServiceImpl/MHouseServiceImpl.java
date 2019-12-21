@@ -13,6 +13,7 @@ import com.example.javafinalerp.Resitory.MHouseResitory;
 import com.example.javafinalerp.Resitory.MaterialsResitory;
 import com.example.javafinalerp.Service.MHouseService;
 import com.example.javafinalerp.tempclass.Materialsandname;
+import com.example.javafinalerp.tempfunc.Mapfunc;
 import com.example.javafinalerp.tempfunc.Materfunc;
 import com.example.javafinalerp.tempfunc.Myfunc;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class MHouseServiceImpl implements MHouseService {
 
     @Resource
     Materfunc materfunc;
+
+    @Resource
+    Mapfunc mapfunc;
 
     @Override
     public  List<MHouse> getmhouse()
@@ -98,12 +102,14 @@ public class MHouseServiceImpl implements MHouseService {
             m1.put(materials.getMID(),materials.getMName());
             m2.put(materials.getMID(),materials.getMExpDate());
         }
+        Map<Integer ,String> m3 = mapfunc.mhousesmap();
         Iterator<MHStatus> iter2 = mhs.iterator();
         while(iter2.hasNext()){
             temp = iter2.next();
             mhn = new Materialsandname(temp);
             mhn.setExpdate(m2.get(mhn.getMID()));
             mhn.setName(m1.get(mhn.getMID()));
+            mhn.setMhname(m3.get(mhn.getMHID()));
             if(!Myfunc.checkTime(mhn.getMHTime(),mhn.getExpdate()))
                 lists.add(mhn);
         }

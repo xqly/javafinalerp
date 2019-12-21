@@ -2,6 +2,7 @@ package com.example.javafinalerp.Controller;
 
 import com.example.javafinalerp.Bean.*;
 import com.example.javafinalerp.Service.BasicManageService;
+import com.example.javafinalerp.tempclass.Mhsname;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,7 +65,7 @@ public class BasicManageController {
 
     @RequestMapping("materials_in_home")
     public String ac9(Model model){
-        List<MHStatus> mhStatuses = basicManageService.gethslist();
+        List<Mhsname> mhStatuses = basicManageService.gethslist();
         model.addAttribute("mhs",mhStatuses);
         return "basic_manage/materials_in_home";
     }
@@ -202,7 +203,6 @@ public class BasicManageController {
         model.addAttribute("clients",clients);
         return "basic_manage/add_custom";
     }
-
 
 
 
