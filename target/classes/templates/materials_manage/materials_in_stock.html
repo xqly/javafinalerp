@@ -136,6 +136,25 @@
 
         }
 
+        function tian1() {
+            $.ajax({
+                type: "get", // 以get方式发起请求
+                url: "/xiala2", // 将你的请求参数以问号拼接到url中进行参数传递
+
+                success(data) {
+
+                    $("#eq_num1").empty();
+                    for(var i=0;i<data.length;i++){
+                        $(".selectpicker1").append('<option value="'+data[i].price+'">'+data[i].name+'</option>');
+                    }
+
+                    $("#eq_num1").selectpicker('refresh');
+                    $("#eq_num1").selectpicker('render');
+                    $(".pprice").value = data[i].price;
+                }
+            })
+
+        }
         function add1() {
             var tbl = document.all.ci2;
             var rows = tbl.rows.length;
@@ -152,12 +171,9 @@
             //     <option th:text="请选择原料"></option>\
             //     <option th:each="materials:${materials}" th:value="${materials.MPrice}" th:text="${materials.MName}" ></option>\
             //     </select>';
-            name.innerHTML ='<select class="selectpicker"  id="eq_num" name="eq_num"   onclick="tian()" >  </select>';
+            name.innerHTML ='<select class="selectpicker"  id="eq_num" name="eq_num"   onclick="tian()" >    <option >请选择原料</option> </select>';
             var tel = tr.insertCell(1);
-            tel.innerHTML = '<select  name="stu_profession" style="width:100%;">\n' +
-                '                   <option th:text="请选择原料库"></option>\n' +
-                '                   <option th:each="mhouse:${mhouse}" th:value="${mhouse.MHID}" th:text="${mhouse.MHName}" ></option>\n' +
-                '            </select>';
+            tel.innerHTML = '<select class="selectpicker1"  id="eq_num1" name="eq_num1"   onclick="tian1()" >    <option >请选择原料库</option> </select>';
             var rdo = tr.insertCell(2);
             rdo.innerHTML = '<input type="date" style="width:100%;">';
             var chk = tr.insertCell(3);
