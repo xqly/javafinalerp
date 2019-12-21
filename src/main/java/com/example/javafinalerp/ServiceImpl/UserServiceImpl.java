@@ -72,6 +72,7 @@ public class UserServiceImpl implements UserService {
         userInfo.setUsername(iDfunc.user().toString());
         userInfo.setPassword(Myfunc.md5("123456",userInfo.getUsername()+userInfo.getSalt()));
         userInfoResitory.save(userInfo);
+        Integer id = iDfunc.userinfo();
 
     }
 }
