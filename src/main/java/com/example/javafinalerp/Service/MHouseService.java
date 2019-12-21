@@ -1,5 +1,6 @@
 package com.example.javafinalerp.Service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.example.javafinalerp.Bean.MHouse;
 import com.example.javafinalerp.Bean.MHouseLog;
 import com.example.javafinalerp.tempclass.Materialsandname;
@@ -12,4 +13,5 @@ public interface MHouseService {
     void addMaterialsbyjson(String s);
     List<Materialsandname> getoutdatedmaterials();
     void Destroybymhsid(Integer x);
+    JSONArray getmaterials();
 }

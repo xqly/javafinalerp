@@ -1,19 +1,18 @@
 package com.example.javafinalerp.Controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.example.javafinalerp.Bean.*;
 import com.example.javafinalerp.Service.BasicManageService;
 import com.example.javafinalerp.Service.MHouseService;
 import com.example.javafinalerp.Service.PlanService;
 import com.example.javafinalerp.tempclass.Json1;
 import com.example.javafinalerp.tempclass.Materialsandname;
+import com.example.javafinalerp.tempclass.OWname;
 import com.example.javafinalerp.tempclass.Planandname;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +43,8 @@ public class MaterialsManageController {
         return "materials_manage/materials_in_stock";
     }
 
+
+
     @RequestMapping("add_realmaterials")
     @ResponseBody
     public String amt(@RequestBody String x){
@@ -56,6 +57,12 @@ public class MaterialsManageController {
         List<MHouseLog> lists=mHouseService.findinsertbyid(x);
         model.addAttribute("lists",lists);
         return "materials_manage/materials_in_stock";
+    }
+
+    @RequestMapping("xiala")
+    @ResponseBody
+    public JSONArray yourUrl(Model model) {
+        return mHouseService.getmaterials();
     }
 
     @RequestMapping("materials_out_stock")
