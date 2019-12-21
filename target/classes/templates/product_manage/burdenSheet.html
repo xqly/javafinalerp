@@ -33,22 +33,17 @@
 
                 success(data) {
                     // data为返回值
-                    // 成功后的回调方法
-                    //      alert(data[0].name);
                     alert(yourData1);
-                    // alert(data[0]);
-                    //  alert(data.length);
-                    alert(data.name);
-                    //   alert(data.length);
+                    alert(data[0].name);
                     var table=document.getElementById("ci");
-                    // for(var i=0;i<data.length;i++){
-                    var row=table.insertRow(table.rows.length);
-
-                    var c1=row.insertCell(0);
-                    c1.innerHTML=data.name;
-                    alert(c1.innerHTML);
-                    var c2=row.insertCell(1);
-                    c2.innerHTML=data.numm;
+                     for(var i=0;i<data.length;i++) {
+                         var row = table.insertRow(table.rows.length);
+                         var c1 = row.insertCell(0);
+                         c1.innerHTML = data[0].name;
+                         alert(c1.innerHTML);
+                         var c2 = row.insertCell(1);
+                         c2.innerHTML = data[0].num;
+                     }
                 }
             })
         }
@@ -69,7 +64,7 @@
                 if (inputs1.length > 0 && inputs2.length>0) {
                     result.push({
                         mid : inputs1[0].value,
-                        mdate : inputs2[0].value
+                        num : inputs2[0].value
 
                     });
                 }
@@ -293,9 +288,6 @@
                             <a href="product_out_stock">商品出库</a>
                         </li>
                         <li>
-                            <a href="product_in_home">仓库存储信息</a>
-                        </li>
-                        <li>
                             <a href="productDestroy">商品销毁</a>
                         </li>
                     </ul>
@@ -353,7 +345,9 @@
                         <li>
                             <a href="add_stock">仓库信息</a>
                         </li>
-
+                        <li>
+                            <a href="product_in_home">仓库存储信息</a>
+                        </li>
                         <li>
                             <a href="add_product_acre">生产车间信息</a>
                         </li>

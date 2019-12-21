@@ -1,6 +1,7 @@
 package com.example.javafinalerp.Controller;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.javafinalerp.Bean.*;
 import com.example.javafinalerp.Service.BasicManageService;
@@ -66,6 +67,7 @@ public class ProductManageController {
 
     @RequestMapping(value = "/alterplan" ,method = RequestMethod.POST)
     public String altplan10(@ModelAttribute  ProducePlan producePlan , HttpSession session){
+        producePlan.setPstate(1);
         planService.addplan(producePlan);
         return "redirect:producePlan";
     }
@@ -78,30 +80,26 @@ public class ProductManageController {
     }
 
     @RequestMapping("add_burdenSheet")
-    public String amtm(@RequestParam("burden") String x,Integer gid){
-        planService.addmethodbyjson(x,gid);
+    @ResponseBody
+    public String amtm(@RequestBody String x){
+        planService.addmethodbyjson(x);
         //xqly
         return "redirect:burdenSheet";
     }
 
 
-    @RequestMapping(value="/deluser1",method = RequestMethod.POST)
+    @RequestMapping(value="/deluser1",method = RequestMethod.POST)    //删除配料单
     public String delu(@RequestParam("uid") Integer x){
 
-    //    planService.delByID(x);
+       planService.delgoodsmethod(x);
         return "redirect:burdenSheet";
     }
 
+
     @RequestMapping("/yourUrl1/{yourDataName1}")
     @ResponseBody
-
-    public JSONObject yourUrl1(@PathVariable("yourDataName1") Integer yourData1, Model model) {
-        System.out.println(yourData1);
-//        List<OWname> goods1=planService.getlistbyoid(yourData1);
-//        System.out.println(goods1.size());
-//        model.addAttribute("goods1",goods1);
-//        return orderService.getajson();
-        JSONObject a=null;
-        return a;
-        }
+    public JSONArray yourUrl1(@PathVariable("yourDataName1") Integer yourData1, Model model) {
+         System.out.println(yourData1);
+        return planService.getmethodjson(yourData1);
+    }
 }

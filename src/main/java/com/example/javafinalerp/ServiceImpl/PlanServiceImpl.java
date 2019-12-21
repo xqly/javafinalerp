@@ -69,15 +69,15 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public void addmethodbyjson(String s,Integer gid) {
+    public void addmethodbyjson(String s) {
         JSONArray jsonArray = JSON.parseArray(s);
-        for(int i=0;i<jsonArray.size();i++){
+/*        for(int i=0;i<jsonArray.size();i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             Integer mid = jsonObject.getInteger("mid");
             Integer num = jsonObject.getInteger("num");
             Method method = new Method(gid,mid,num);
             methodResitory.save(method);
-        }
+        }*/
     }
     @Override
     public void addplan(ProducePlan plan) {
