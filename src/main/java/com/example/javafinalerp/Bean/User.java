@@ -18,6 +18,15 @@ public class User {
     private Double USal;
     private String UMail;
     private String UPicURL;
+    private String URole;
+
+    public String getURole() {
+        return URole;
+    }
+
+    public void setURole(String UName) {
+        this.URole = URole;
+    }
 
     public Integer getU_ID() {
         return U_ID;
