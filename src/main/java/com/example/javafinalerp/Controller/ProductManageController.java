@@ -83,7 +83,6 @@ public class ProductManageController {
     @ResponseBody
     public String amtm(@RequestBody String x){
         planService.addmethodbyjson(x);
-        //xqly
         return "redirect:burdenSheet";
     }
 
