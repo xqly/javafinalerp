@@ -32,10 +32,8 @@
             $("#sum5").attr("value",butt.getAttribute("data-after"));
             $("#require5").attr("value",butt.getAttribute("data-remark"));
             $("#div1").css("display","block");
-            //$("#ci tbody").remove();
             $("#ci tr:not(:first)").html("");
             $("#ci tr:not(:first)").empty("");
-
             $.ajax({
                     type: "get", // 以get方式发起请求
                     url: "/yourUrl/"+yourData, // 将你的请求参数以问号拼接到url中进行参数传递
@@ -561,7 +559,7 @@
                     <input type="text" placeholder="201700800607" class=" form-control-line"  name="customer5" id="customer5" >
 
                     <label style="margin-left: 100px">订单时间:</label>
-                    <input  type="date" class=" form-control-line" name="date_info5" placeholder="原料入库时间"  >
+                    <input  type="date" class=" form-control-line" name="date_info5" id="date_info5" placeholder="原料入库时间"  >
 
                     <label style="margin-left: 100px">原价总计:</label>
                     <input type="number" id="before5" name="before5" value="0" class=" form-control-line"  onchange="calend()" onfocus=this.blur()>

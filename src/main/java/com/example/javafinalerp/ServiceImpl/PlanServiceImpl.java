@@ -1,6 +1,5 @@
 package com.example.javafinalerp.ServiceImpl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.javafinalerp.Bean.Goods;
@@ -11,6 +10,7 @@ import com.example.javafinalerp.Resitory.MethodResitory;
 import com.example.javafinalerp.Resitory.ProducePlanResitory;
 import com.example.javafinalerp.Service.PlanService;
 import com.example.javafinalerp.tempclass.Planandname;
+import com.example.javafinalerp.tempfunc.Mapfunc;
 import com.example.javafinalerp.tempfunc.Materfunc;
 import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,9 +107,21 @@ public class PlanServiceImpl implements PlanService {
             }
         }
     }
+
+    @Resource
+    Mapfunc mapfunc;
     @Override
     public JSONArray getmethodjson(Integer gid) {
-        return null;
+        List<Method> list = methodResitory.getallmid(gid);
+        Map<Integer ,String > m1 =  mapfunc.materialsmap();
+        JSONArray jsonArray = new JSONArray();
+        for(int i=0;i<list.size();i++){
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("name",m1.get(list.get(i).getMID()));
+            jsonObject.put("num",list.get(i).getMNum());
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
     }
 
     @Override
